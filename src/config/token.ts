@@ -77,7 +77,7 @@ export const tokenConfig: TokenConfig = {
   telegramGroupUrl: null,
   telegramChannelUrl: null,
   docsUrl: null,
-  siteUrl: null,
+  siteUrl: 'https://nwdog.world',
   totalSupply: null,
   circulatingSupply: null,
   buyTaxPercent: null,

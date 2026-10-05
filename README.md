@@ -35,18 +35,20 @@ https://app.uniswap.org/#/swap?chain=ethereum&inputCurrency=ETH&outputCurrency=0
 
 `chainId` must stay `1`. A wrong chain, a different output token, a non-HTTPS link, or any host other than `app.uniswap.org` keeps the buy buttons off. The site will not invent a Uniswap link from an address, and it will not show a sample `0x` address.
 
-Leave unknown supply, tax, allocation, liquidity, ownership, admin, audit, chart, and social fields as `null`. Unknown tax is not zero. Set `siteUrl` to the real `https` production origin when you have one. That is the only switch that adds a canonical URL and `sitemap.xml`. Do not invent a domain.
+Leave unknown supply, tax, allocation, liquidity, ownership, admin, audit, chart, and social fields as `null`. Unknown tax is not zero. `siteUrl` is `https://nwdog.world`, which adds the canonical URL and `sitemap.xml`.
 
 ## Deploy
 
 This is a static site. No wallet, API key, or server is required.
+
+Pushes to `main` run `.github/workflows/pages.yml`, build `dist`, and publish it with GitHub Pages. The custom domain is `nwdog.world` (`public/CNAME`). The live site is [https://nwdog.world/](https://nwdog.world/).
 
 ```bash
 npm ci
 npm run build
 ```
 
-Upload the `dist` folder to any static host and serve `index.html` from the site root. Anchors stay on one page, so a single-page fallback is unnecessary for this release.
+`npm run preview` serves the same `dist` folder locally. Anchors stay on one page, so a single-page fallback is unnecessary.
 
 ## Art
 
@@ -77,5 +79,4 @@ Until the no-text mark exists, the header and favicon use the full badge scaled 
 - Total supply, circulating supply, buy tax, sell tax, and allocations
 - Liquidity, lock, burn, ownership, admin, and audit evidence URLs
 - `launchStatus: "live"` when trading should actually be offered
-- Production `siteUrl`
 - The two missing badge files above, if you want them
