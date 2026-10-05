@@ -29,6 +29,9 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          # Project site path. Set this to "/" after a custom domain is attached.
+          VITE_BASE: /SIINTERN/
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact

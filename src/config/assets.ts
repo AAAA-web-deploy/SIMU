@@ -1,19 +1,25 @@
+const base = import.meta.env.BASE_URL;
+
+function asset(file: string): string {
+  return `${base}assets/${file}`;
+}
+
 export const assets = {
-  logo: '/assets/siintern-logo-circular-transparent.png',
-  bannerWide: '/assets/siintern-banner-3x1.png',
-  bannerSocial: '/assets/siintern-banner-1100x520.png',
-  hero: '/assets/siintern-hero-character-transparent.png',
-  origin: '/assets/siintern-origin-story.png',
-  firstDay: '/assets/siintern-first-day.png',
-  taskList: '/assets/siintern-task-list.png',
-  missionGrid: '/assets/siintern-mission-grid.png',
-  aiLab: '/assets/siintern-ai-lab.png',
-  robotaxi: '/assets/siintern-robotaxi-mission.png',
-  rocket: '/assets/siintern-rocket-mission.png',
-  ethereum: '/assets/siintern-ethereum-mission.png',
-  army: '/assets/siintern-intern-army.png',
-  future: '/assets/siintern-to-the-future.png',
-  memeWall: '/assets/siintern-office-meme-wall.png',
+  logo: asset('siintern-logo-circular-transparent.png'),
+  bannerWide: asset('siintern-banner-3x1.png'),
+  bannerSocial: asset('siintern-banner-1100x520.png'),
+  hero: asset('siintern-hero-character-transparent.png'),
+  origin: asset('siintern-origin-story.png'),
+  firstDay: asset('siintern-first-day.png'),
+  taskList: asset('siintern-task-list.png'),
+  missionGrid: asset('siintern-mission-grid.png'),
+  aiLab: asset('siintern-ai-lab.png'),
+  robotaxi: asset('siintern-robotaxi-mission.png'),
+  rocket: asset('siintern-rocket-mission.png'),
+  ethereum: asset('siintern-ethereum-mission.png'),
+  army: asset('siintern-intern-army.png'),
+  future: asset('siintern-to-the-future.png'),
+  memeWall: asset('siintern-office-meme-wall.png'),
 } as const;
 
 export const assetSize = {
