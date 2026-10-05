@@ -1,4 +1,3 @@
-import { DISCLOSURE } from '../config/content.ts';
 import { logoFull } from '../config/assets.ts';
 import { useOnScreen } from '../lib/useOnScreen.ts';
 import { buildTokenView } from '../lib/view.ts';
@@ -17,17 +16,15 @@ export function Hero() {
           <p className="eyebrow">NIGHT WATCH DOG · $NWDOG</p>
           <h1 id="hero-title">SMALL DOG. BIG NIGHT SHIFT.</h1>
           <p className="lede">
-            Meet the self-appointed chief safety officer of the robotaxi future. Oversized goggles. Serious patrol
-            energy. An unreasonable number of snack breaks.
+            $NWDOG, The fictional watchdog of the robotaxi era. Inspired by Elon Musk’s discussion of Tesla’s nighttime
+            pet detection, this goggle-wearing Shiba brings AI-era humor to Ethereum. Small dog. Big night shift.
           </p>
-          <p className="support">An independent Ethereum meme project.</p>
           <div className="cta-row">
             <CtaLink cta={view.primaryCta} />
             <CtaLink cta={view.secondaryCta} className="button--ghost" />
           </div>
-          <ContractPanel contract={view.contract} network={view.networkLabel} />
+          <ContractPanel contract={view.contract} />
           {view.chainProblem ? <p className="support">{view.chainProblem}</p> : null}
-          <p className="disclosure">{DISCLOSURE}</p>
         </div>
         <div className="hero-art" ref={artRef} data-paused={artVisible ? 'false' : 'true'}>
           <div className="sky" aria-hidden="true">

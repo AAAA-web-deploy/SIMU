@@ -9,7 +9,6 @@ const NAV = [
   { href: '#story', label: 'Story' },
   { href: '#how-to-buy', label: 'How to Buy' },
   { href: '#tokenomics', label: 'Tokenomics' },
-  { href: '#roadmap', label: 'Roadmap' },
   { href: '#community', label: 'Community' },
 ] as const;
 

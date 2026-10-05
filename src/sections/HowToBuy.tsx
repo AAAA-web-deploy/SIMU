@@ -1,70 +1,52 @@
-import { buildTokenView } from '../lib/view.ts';
-import { TextLink } from '../components/TextLink.tsx';
-
 export function HowToBuy() {
-  const view = buildTokenView();
   return (
     <section className="section section--paper" id="how-to-buy" aria-labelledby="buy-title">
-      <div className="wrap buy-layout">
-        <div>
-          <p className="eyebrow eyebrow--ink">How to buy</p>
-          <h2 id="buy-title">YOUR FIRST PATROL</h2>
-          <p>
-            Trading, when it exists, happens on Uniswap. This website never connects a wallet, never asks for a seed
-            phrase, and never sends a swap.
-          </p>
-          {view.purchaseEnabled ? (
-            <p className="notice">
-              The official swap page is open.{' '}
-              <TextLink href={view.primaryCta.href} external>
-                Buy $NWDOG on Uniswap
-              </TextLink>
-            </p>
-          ) : (
-            <p className="notice">
-              Trading is not available yet. The steps below stay up so the route is clear later. There is no swap form
-              on this page.
-            </p>
-          )}
-          {view.configNote ? <p>{view.configNote}</p> : null}
-        </div>
+      <div className="wrap">
+        <p className="eyebrow eyebrow--ink">How to buy</p>
+        <h2 id="buy-title">YOUR FIRST PATROL</h2>
         <ol className="steps">
           <li>
-            <h3>Set up a wallet</h3>
-            <p>Set up an Ethereum-compatible wallet using its official website or app.</p>
-          </li>
-          <li>
-            <h3>Get ETH on Ethereum</h3>
-            <p>Obtain ETH on Ethereum mainnet and leave enough for transaction fees.</p>
-          </li>
-          <li>
-            <h3>Open Uniswap and check the contract</h3>
+            <h3>Create a Wallet</h3>
             <p>
-              Open the configured official Uniswap destination and verify the full token contract address.
-              {view.purchaseEnabled ? (
-                <>
-                  {' '}
-                  The published page is{' '}
-                  <TextLink href={view.primaryCta.href} external>
-                    Uniswap
-                  </TextLink>
-                  . Compare every character with the address on this site.
-                </>
-              ) : (
-                <> The official Uniswap link is not published yet, so there is nowhere on this site to trade.</>
-              )}
+              Download MetaMask or your wallet of choice from the App Store or Google Play Store for free. Desktop
+              users, download the Google Chrome extension by going to{' '}
+              <ExternalLink href="https://metamask.io">metamask.io</ExternalLink>.
             </p>
           </li>
           <li>
-            <h3>Read the quote, then decide</h3>
+            <h3>Get Some ETH</h3>
             <p>
-              Review the quote, fees, price impact, minimum received, and requested approvals before confirming in the
-              wallet. Slippage tolerance does not remove price or execution risk. Do not sign a transaction you do not
-              understand.
+              Have ETH in your wallet to switch to $NWDOG. If you don’t have any ETH, you can buy directly on MetaMask,
+              transfer from another wallet, or buy on another exchange and send it to your wallet.
+            </p>
+          </li>
+          <li>
+            <h3>Go to Uniswap</h3>
+            <p>
+              Connect to Uniswap. Go to <ExternalLink href="https://app.uniswap.org">app.uniswap.org</ExternalLink> in
+              Google Chrome or on the browser inside your MetaMask app. Connect your wallet. Paste the $NWDOG token
+              address into Uniswap, select $NWDOG, and confirm. When MetaMask prompts you for a wallet signature,
+              review the swap and sign only if it matches.
+            </p>
+          </li>
+          <li>
+            <h3>Switch ETH for $NWDOG</h3>
+            <p>
+              Switch ETH for $NWDOG. We have zero taxes, so you don’t need to worry about buying with a specific
+              slippage, although you may need to use slippage during times of market volatility.
             </p>
           </li>
         </ol>
       </div>
     </section>
+  );
+}
+
+function ExternalLink({ href, children }: { href: string; children: string }) {
+  return (
+    <a className="text-link" href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+      <span className="visually-hidden"> (opens in a new tab)</span>
+    </a>
   );
 }

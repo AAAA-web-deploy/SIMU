@@ -1,6 +1,3 @@
-import { buildTokenView } from '../lib/view.ts';
-import { TextLink } from '../components/TextLink.tsx';
-
 const PANELS = [
   {
     kicker: '01',
@@ -20,7 +17,6 @@ const PANELS = [
 ] as const;
 
 export function Story() {
-  const view = buildTokenView();
   return (
     <section className="section section--ink" id="story" aria-labelledby="story-title">
       <div className="wrap">
@@ -36,27 +32,6 @@ export function Story() {
             </article>
           ))}
         </div>
-        <details className="source-note">
-          <summary>What inspired the character?</summary>
-          <div>
-            <p>
-              On {view.source?.dateLabel ?? 'October 3, 2026'},{' '}
-              {view.source?.publisher ?? 'a news report'} wrote about Elon Musk discussing Tesla trying to stop
-              robotaxis from hitting cats at night. Night Watch Dog is a fictional character playing with that
-              headline. He is not Musk&apos;s dog, and he is not a Tesla product.
-            </p>
-            <p>This project does not operate robotaxis or provide road-safety technology.</p>
-            {view.source ? (
-              <p>
-                <TextLink href={view.source.href} external>
-                  {view.source.dateLabel} {view.source.publisher} article
-                </TextLink>
-              </p>
-            ) : (
-              <p>A source link is not published.</p>
-            )}
-          </div>
-        </details>
       </div>
     </section>
   );

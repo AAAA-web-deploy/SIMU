@@ -6,15 +6,11 @@ import { MobileBar } from './components/MobileBar.tsx';
 import { NightVisionProvider } from './components/NightVision.tsx';
 import { SkipLink } from './components/SkipLink.tsx';
 import { Community } from './sections/Community.tsx';
-import { Facts } from './sections/Facts.tsx';
-import { Faq } from './sections/Faq.tsx';
 import { Hero } from './sections/Hero.tsx';
 import { HowToBuy } from './sections/HowToBuy.tsx';
 import { Invitation } from './sections/Invitation.tsx';
-import { Roadmap } from './sections/Roadmap.tsx';
 import { Story } from './sections/Story.tsx';
 import { Tokenomics } from './sections/Tokenomics.tsx';
-import { Verification } from './sections/Verification.tsx';
 
 export default function App() {
   return (
@@ -35,14 +31,10 @@ function Shell() {
       <div inert={open ? true : undefined}>
         <main id="main" tabIndex={-1}>
           <Hero />
-          <Facts />
           <Story />
           <HowToBuy />
           <Tokenomics />
-          <Verification />
-          <Roadmap />
           <Community />
-          <Faq />
           <Invitation />
         </main>
         <Footer />

@@ -18,30 +18,29 @@ describe('contract copy', () => {
   it('copies the configured address exactly', async () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue(undefined);
-    render(<ContractPanel contract={published} network="Ethereum mainnet" />);
+    render(<ContractPanel contract={published} />);
 
-    await user.click(screen.getByRole('button', { name: 'Copy address' }));
+    await user.click(screen.getByRole('button', { name: 'Copy Address' }));
 
     expect(writeText).toHaveBeenCalledWith(ADDRESS);
     expect(await screen.findByText('Copied')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Etherscan/i })).toHaveAttribute('href', published.etherscanUrl);
   });
 
-  it('hides the copy control before a contract is published', () => {
+  it('shows Coming Soon and a disabled copy control before a contract is published', () => {
     render(
       <ContractPanel
         contract={{
           address: null,
           etherscanUrl: null,
-          message: 'Contract not published yet',
+          message: 'Coming Soon..',
           copyEnabled: false,
           availability: 'Not published',
         }}
-        network="Ethereum mainnet"
       />,
     );
-    expect(screen.getByText('Contract not published yet')).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /copy/i })).not.toBeInTheDocument();
+    expect(screen.getByText('Coming Soon..')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Copy Address' })).toBeDisabled();
     expect(screen.queryByText(/0x/i)).not.toBeInTheDocument();
   });
 });

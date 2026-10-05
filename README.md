@@ -75,8 +75,7 @@ Until the no-text mark exists, the header and favicon use the full badge scaled 
 
 - Final contract address
 - Confirmed Ethereum Uniswap swap URL
-- Official X and Telegram links
-- Total supply, circulating supply, buy tax, sell tax, and allocations
+- Circulating supply and allocations
 - Liquidity, lock, burn, ownership, admin, and audit evidence URLs
 - `launchStatus: "live"` when trading should actually be offered
 - The two missing badge files above, if you want them

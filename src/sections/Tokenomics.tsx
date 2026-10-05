@@ -1,44 +1,48 @@
-import { AllocationChart } from '../components/AllocationChart.tsx';
-import { TextLink } from '../components/TextLink.tsx';
+import { tokenConfig } from '../config/token.ts';
+import { CopyAddressButton } from '../components/ContractPanel.tsx';
 import { buildTokenView } from '../lib/view.ts';
 
 export function Tokenomics() {
   const view = buildTokenView();
+  const address = view.contract.copyEnabled ? view.contract.address : null;
+
   return (
     <section className="section section--ink" id="tokenomics" aria-labelledby="token-title">
       <div className="wrap">
         <p className="eyebrow">Tokenomics</p>
-        <h2 id="token-title">THE NUMBERS, IN PLAIN SIGHT.</h2>
-        <p className="lede">
-          What we can say is in this table. Unpublished cells stay blank on purpose. Taxes, burns, locks, and ownership
-          appear only when a value is published. Total supply and circulating supply are listed apart.
-        </p>
+        <h2 id="token-title">TOKENOMICS</h2>
         <div className="paper-sheet">
           <table className="fact-table">
-            <caption className="visually-hidden">Published token facts</caption>
+            <caption className="visually-hidden">Tokenomics for Night Watch Dog ($NWDOG)</caption>
             <tbody>
-              {view.tokenRows.map((row) => (
-                <tr key={row.label}>
-                  <th scope="row">{row.label}</th>
-                  <td>
-                    {row.href ? (
-                      <TextLink href={row.href} external>
-                        {row.value}
-                      </TextLink>
-                    ) : (
-                      row.value
-                    )}
-                  </td>
-                </tr>
-              ))}
+              <tr>
+                <th scope="row">Contract address</th>
+                <td>
+                  <span className="token-address">
+                    {address ? <span className="address">{address}</span> : <span>Coming Soon..</span>}
+                    <CopyAddressButton address={address} />
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Total supply</th>
+                <td>{tokenConfig.totalSupply ?? 'Not published'}</td>
+              </tr>
+              <tr>
+                <th scope="row">Buy tax</th>
+                <td>{view.buyTaxLabel}</td>
+              </tr>
+              <tr>
+                <th scope="row">Sell tax</th>
+                <td>{view.sellTaxLabel}</td>
+              </tr>
+              <tr>
+                <th scope="row">Ownership</th>
+                <td>{tokenConfig.ownershipDescription ?? 'Not published'}</td>
+              </tr>
             </tbody>
           </table>
-          {view.showAllocationChart ? <AllocationChart rows={view.allocations} /> : null}
         </div>
-        <p className="fine">
-          Buy tax: {view.buyTaxLabel}. Sell tax: {view.sellTaxLabel}. A tax that says “Not published” is not a tax of
-          zero. Liquidity burn, a liquidity lock, and contract ownership are separate rows.
-        </p>
       </div>
     </section>
   );

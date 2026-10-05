@@ -91,7 +91,7 @@ export function buildTokenView(config: TokenConfig = tokenConfig): TokenView {
     ? {
         address: null,
         etherscanUrl: null,
-        message: 'Contract not published yet',
+        message: 'Coming Soon..',
         copyEnabled: false,
         availability: NOT_PUBLISHED,
       }
@@ -118,7 +118,7 @@ export function buildTokenView(config: TokenConfig = tokenConfig): TokenView {
 
   const socials = [
     toSocial('X', config.xUrl),
-    toSocial('Telegram group', config.telegramGroupUrl),
+    toSocial('Telegram', config.telegramGroupUrl),
     toSocial('Telegram channel', config.telegramChannelUrl),
   ].filter((item): item is SocialLink => item !== null);
 

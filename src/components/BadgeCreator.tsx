@@ -173,7 +173,7 @@ export function BadgeCreator() {
         <button type="button" className="button" onClick={() => void onDownload()}>
           Download PNG
         </button>
-        <button type="button" className="button button--ghost" onClick={() => void onShare()}>
+        <button type="button" className="button button--share" onClick={() => void onShare()}>
           Share badge
         </button>
       </div>
