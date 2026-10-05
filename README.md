@@ -28,6 +28,4 @@ Edit `src/config/token.ts`. Unknown values stay as placeholders:
 
 Static site. No backend, wallet, or API key.
 
-Pushes to `main` build `dist` and publish with GitHub Pages (`.github/workflows/pages.yml`). The project site is [https://jackmiller825.github.io/SIINTERN/](https://jackmiller825.github.io/SIINTERN/).
-
-When you add a custom domain, set `VITE_BASE` in that workflow to `/` and add the domain in the repository Pages settings. Until then, leave `public/CNAME` out so the old domain is not attached.
+Pushes to `main` build `dist` and publish with GitHub Pages (`.github/workflows/pages.yml`). The public site is [https://siintern.site/](https://siintern.site/). `public/CNAME` is `siintern.site`, and the workflow builds with `VITE_BASE=/`.
