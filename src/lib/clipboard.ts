@@ -5,7 +5,7 @@ export async function copyExactText(value: string): Promise<boolean> {
       return true;
     }
   } catch {
-    // Fall through to the manual selection path.
+    // Fall through to the selection path for browsers that block the async API.
   }
 
   try {

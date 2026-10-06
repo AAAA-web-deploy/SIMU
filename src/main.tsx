@@ -6,9 +6,8 @@ import '@fontsource/space-grotesk/latin-700.css';
 import '@fontsource/manrope/latin-400.css';
 import '@fontsource/manrope/latin-500.css';
 import '@fontsource/manrope/latin-700.css';
-import '@fontsource/caveat/latin-500.css';
-import '@fontsource/caveat/latin-700.css';
-import './styles/site.css';
+import './styles/globals.css';
+import './styles/animations.css';
 import App from './App.tsx';
 
 createRoot(document.getElementById('root')!).render(

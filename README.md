@@ -1,8 +1,8 @@
-# Super Intelligence Intern
+# SI is Here
 
-Single-page site for Super Intelligence Intern ($SIINTERN), a fictional Ethereum meme-token about an enthusiastic intern who should not have production access.
+Single-page site for **SI is Here ($SIHERE)**, an independent Ethereum meme about the cultural shift from Artificial Intelligence to Super Intelligence.
 
-The character and story are entertainment. The project is not affiliated with Tesla, SpaceX, xAI, the Ethereum Foundation, or any person shown or referenced in the art.
+The project is not an AI company and is not affiliated with the Ethereum Foundation, any AI lab, or any public figure.
 
 ## Scripts
 
@@ -16,16 +16,16 @@ npm run typecheck
 npm test
 ```
 
-## Token facts
+## Editable values
 
-Edit `src/config/token.ts`. Unknown values stay as placeholders:
+Update `src/data/siteConfig.ts`. Bracketed values stay unpublished:
 
-- `contractAddress: 'COMING_SOON'` shows **Coming Soon..**. Do not put a sample address here.
-- Link fields set to `#` render as disabled **Coming soon** actions.
-- Liquidity, ownership, and tax strings are displayed exactly as written.
+- Trade buttons stay disabled until `contractAddress` is a real `0x` address and the matching URL is an `https` link.
+- `BUY $SIHERE` scrolls to How to Buy until the Uniswap link is live.
+- Social buttons stay visible and disabled until their URLs are real.
 
 ## Deploy
 
-Static site. No backend, wallet, or API key.
+Static site. No backend, wallet connection, or purchase flow.
 
-Pushes to `main` build `dist` and publish with GitHub Pages (`.github/workflows/pages.yml`). The public site is [https://siintern.site/](https://siintern.site/). `public/CNAME` is `siintern.site`, and the workflow builds with `VITE_BASE=/`.
+Pushes to `main` build `dist` and publish with GitHub Pages at `https://jackmiller825.github.io/SIHERE/`.
