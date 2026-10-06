@@ -1,16 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '@fontsource/archivo-black/latin-400.css';
-import '@fontsource/space-grotesk/latin-500.css';
-import '@fontsource/space-grotesk/latin-700.css';
-import '@fontsource/manrope/latin-400.css';
-import '@fontsource/manrope/latin-500.css';
-import '@fontsource/manrope/latin-700.css';
-import './styles/globals.css';
-import './styles/animations.css';
 import App from './App.tsx';
+import './styles.css';
 
-createRoot(document.getElementById('root')!).render(
+const root = document.getElementById('root');
+if (!root) throw new Error('Root element #root is missing');
+
+createRoot(root).render(
   <StrictMode>
     <App />
   </StrictMode>,

@@ -1,0 +1,80 @@
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
+import { token } from '../config/token.ts';
+import type { TokenConfig } from '../types/token.ts';
+import { TokenActions } from './TokenActions.tsx';
+
+const address = `0x${'ab'.repeat(20)}`;
+
+function withLaunch(overrides: Partial<TokenConfig> = {}): TokenConfig {
+  return { ...token, ...overrides };
+}
+
+describe('TokenActions', () => {
+  it('shows a pending contract and disabled actions when launch values are missing', () => {
+    render(<TokenActions token={token} />);
+    expect(screen.getByText(token.strings.contractPending)).toBeInTheDocument();
+    expect(screen.queryByText(/^0x/)).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: token.strings.copy })).toBeDisabled();
+    expect(screen.getByRole('button', { name: `${token.strings.buy} ${token.strings.comingSoon}` })).toBeDisabled();
+    expect(screen.getByRole('button', { name: `${token.strings.chart} ${token.strings.comingSoon}` })).toBeDisabled();
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    expect(document.body.innerHTML).not.toContain('href="#"');
+  });
+
+  it('hides an invalid address and keeps buy disabled', () => {
+    render(
+      <TokenActions
+        token={withLaunch({ contractAddress: '0x123', buyUrl: 'https://example.com/buy' })}
+      />,
+    );
+    expect(screen.getByText(token.strings.contractPending)).toBeInTheDocument();
+    expect(screen.queryByText('0x123')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: `${token.strings.buy} ${token.strings.comingSoon}` })).toBeDisabled();
+  });
+
+  it('copies the full address and restores the label', async () => {
+    const user = userEvent.setup();
+    const copyText = vi.fn(async () => true);
+    render(
+      <TokenActions
+        token={withLaunch({
+          contractAddress: address,
+          buyUrl: 'https://example.com/buy',
+          chartUrl: 'https://example.com/chart',
+        })}
+        copyText={copyText}
+        copiedDurationMs={40}
+      />,
+    );
+
+    expect(screen.getByText(address)).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: token.strings.copy }));
+    expect(copyText).toHaveBeenCalledWith(address);
+    expect(screen.getByRole('button', { name: token.strings.copied })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: token.strings.copy })).toBeInTheDocument();
+    });
+
+    const buy = screen.getByRole('link', { name: token.strings.buy });
+    const chart = screen.getByRole('link', { name: token.strings.chart });
+    expect(buy).toHaveAttribute('href', 'https://example.com/buy');
+    expect(chart).toHaveAttribute('href', 'https://example.com/chart');
+    expect(buy).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(buy).toHaveAttribute('target', '_blank');
+  });
+
+  it('keeps the address selectable when copying is rejected', async () => {
+    const user = userEvent.setup();
+    render(
+      <TokenActions
+        token={withLaunch({ contractAddress: address })}
+        copyText={async () => false}
+      />,
+    );
+    await user.click(screen.getByRole('button', { name: token.strings.copy }));
+    expect(screen.getByText(token.strings.copyFailed)).toBeInTheDocument();
+    expect(screen.getByText(address)).toBeInTheDocument();
+  });
+});
