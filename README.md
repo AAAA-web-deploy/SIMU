@@ -50,7 +50,7 @@ The site base is the `VITE_BASE` environment variable, read in [`vite.config.ts`
 
 Asset paths in the JSON start with `/assets/...`. The app strips that leading slash and joins `import.meta.env.BASE_URL` once. `siteUrl` is separate: it should already include the public path, and social image URLs are `siteUrl` plus the asset path.
 
-GitHub Pages publishes this repo from [`.github/workflows/pages.yml`](.github/workflows/pages.yml) with `VITE_BASE=/HSICHONK/`. `siteUrl` is `https://jackmiller825.github.io/HSICHONK`, which matches that path. Change both together if the repository path changes.
+GitHub Pages publishes this repo from [`.github/workflows/pages.yml`](.github/workflows/pages.yml). The custom domain `https://hsichonk.site` serves the site at the domain root, so the workflow sets `VITE_BASE=/`. `siteUrl` matches that address. `public/CNAME` keeps the custom domain on each deploy.
 
 ```bash
 # PowerShell

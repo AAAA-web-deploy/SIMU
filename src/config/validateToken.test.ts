@@ -25,7 +25,7 @@ describe('token config', () => {
     expect(token.chartUrl).toBeNull();
     expect(token.xUrl).toBeNull();
     expect(token.telegramUrl).toBeNull();
-    expect(token.siteUrl).toBe('https://jackmiller825.github.io/HSICHONK');
+    expect(token.siteUrl).toBe('https://hsichonk.site');
     expect(token.evolution).toHaveLength(7);
     expect(memeStatValue(token.memeStats[0]!, token.evolution.length)).toBe('7');
     expect(token.chainName).toBe('Ethereum');
