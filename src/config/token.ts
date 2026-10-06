@@ -13,12 +13,12 @@ export const token = {
   etherscanUrl: '#',
   dexscreenerUrl: '#',
   dextoolsUrl: '#',
-  telegramUrl: 'https://t.me/nigthwatchdog',
-  twitterUrl: '#',
-  liquidityStatus: 'Coming Soon',
-  ownershipStatus: 'Coming Soon',
-  buyTax: 'Coming Soon',
-  sellTax: 'Coming Soon',
+  telegramUrl: 'https://t.me/siintern_eth',
+  twitterUrl: 'https://x.com/siintern_eth',
+  liquidityStatus: 'Burnt',
+  ownershipStatus: 'Renounced',
+  buyTax: '0%',
+  sellTax: '0%',
 } as const;
 
 export type TokenConfig = typeof token;

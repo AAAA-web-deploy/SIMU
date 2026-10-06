@@ -1,13 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import { ContractAddress } from './TokenCard.tsx';
-import { TransparencyPanel } from './TransparencyPanel.tsx';
+import { ContractAddress, TokenCard } from './TokenCard.tsx';
 
 describe('contract address', () => {
   it('shows coming soon instead of a fake address', () => {
     render(<ContractAddress address="COMING_SOON" />);
-    expect(screen.getByText(/contract address: coming soon/i)).toBeInTheDocument();
+    expect(screen.getByText('Coming Soon..')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /copy/i })).not.toBeInTheDocument();
   });
 
@@ -23,10 +22,14 @@ describe('contract address', () => {
   });
 });
 
-describe('transparency panel', () => {
-  it('prints the configured placeholders', () => {
-    render(<TransparencyPanel />);
-    expect(screen.getByRole('heading', { name: /verify\. don't trust\./i })).toBeInTheDocument();
-    expect(screen.getAllByText('Coming Soon').length).toBeGreaterThanOrEqual(5);
+describe('tokenomics', () => {
+  it('shows the published token facts', () => {
+    render(<TokenCard />);
+    expect(screen.getByRole('heading', { name: 'Tokenomics' })).toBeInTheDocument();
+    expect(screen.getByText('Coming Soon..')).toBeInTheDocument();
+    expect(screen.getByText('Burnt')).toBeInTheDocument();
+    expect(screen.getByText('Renounced')).toBeInTheDocument();
+    expect(screen.getAllByText('0%')).toHaveLength(2);
+    expect(screen.queryByRole('heading', { name: /verify\. don't trust\./i })).not.toBeInTheDocument();
   });
 });

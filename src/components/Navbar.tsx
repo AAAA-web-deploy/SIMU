@@ -7,7 +7,7 @@ import { BuyLink, IconTelegram, IconX, SocialLink } from './Brand.tsx';
 const links = [
   { href: '#story', id: 'story', label: 'Story' },
   { href: '#missions', id: 'missions', label: 'Missions' },
-  { href: '#token', id: 'token', label: 'Token' },
+  { href: '#token', id: 'token', label: 'Tokenomics' },
   { href: '#performance', id: 'performance', label: 'Performance' },
   { href: '#future', id: 'future', label: 'Future' },
   { href: '#community', id: 'community', label: 'Community' },

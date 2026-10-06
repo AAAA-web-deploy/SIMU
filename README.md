@@ -20,9 +20,9 @@ npm test
 
 Edit `src/config/token.ts`. Unknown values stay as placeholders:
 
-- `contractAddress: 'COMING_SOON'` shows **Contract address: Coming soon**. Do not put a sample address here.
+- `contractAddress: 'COMING_SOON'` shows **Coming Soon..**. Do not put a sample address here.
 - Link fields set to `#` render as disabled **Coming soon** actions.
-- Liquidity, ownership, and tax strings are displayed exactly as written. Leave them as `Coming Soon` until they are real public facts.
+- Liquidity, ownership, and tax strings are displayed exactly as written.
 
 ## Deploy
 

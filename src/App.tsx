@@ -12,7 +12,6 @@ import { PerformanceReview } from './components/PerformanceReview.tsx';
 import { FirstDay, HiringMistake } from './components/StoryChapter.tsx';
 import { TaskList } from './components/TaskList.tsx';
 import { TokenCard } from './components/TokenCard.tsx';
-import { TransparencyPanel } from './components/TransparencyPanel.tsx';
 
 export default function App() {
   return (
@@ -31,7 +30,6 @@ export default function App() {
         <Missions />
         <MemeWall />
         <TokenCard />
-        <TransparencyPanel />
         <PerformanceReview />
         <Community />
         <Future />
