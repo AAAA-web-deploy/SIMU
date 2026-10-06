@@ -13,7 +13,7 @@ export const token = {
   etherscanUrl: '#',
   dexscreenerUrl: '#',
   dextoolsUrl: '#',
-  telegramUrl: '#',
+  telegramUrl: 'https://t.me/nigthwatchdog',
   twitterUrl: '#',
   liquidityStatus: 'Coming Soon',
   ownershipStatus: 'Coming Soon',
