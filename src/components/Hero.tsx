@@ -80,7 +80,6 @@ export function Hero() {
         </div>
 
         <div className="relative mx-auto w-full max-w-lg">
-          <div className="absolute inset-[8%] rounded-full bg-black blur-2xl" aria-hidden="true" />
           <div
             className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(54,167,255,0.45),transparent_62%)]"
             aria-hidden="true"
@@ -92,7 +91,7 @@ export function Hero() {
             height={assetSize.hero.height}
             fetchPriority="high"
             decoding="async"
-            className="relative z-10 mx-auto w-[86%] object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.45)]"
+            className="relative z-10 mx-auto w-[86%] object-contain"
             animate={reduce ? undefined : { y: [0, -14, 0], rotate: [0, 1.1, 0, -1.1, 0] }}
             transition={reduce ? undefined : { duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
