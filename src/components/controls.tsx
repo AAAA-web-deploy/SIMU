@@ -206,7 +206,7 @@ export function CopyButton({
   return (
     <button
       type="button"
-      className={className}
+      className={state === 'copied' ? `${className ?? ''} is-copied`.trim() : className}
       onClick={onCopy}
       disabled={!canCopy}
       aria-label={state === 'copied' ? 'Copied' : undefined}

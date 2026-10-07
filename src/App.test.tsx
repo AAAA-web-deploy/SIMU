@@ -15,13 +15,29 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /read the full story/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /simu details/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /musashi club/i })).toBeInTheDocument();
-    expect(screen.getAllByRole('button', { name: /chart/i }).length).toBeGreaterThan(0);
+    const chart = screen.getAllByRole('link', { name: /chart/i })[0]!;
+    expect(chart).toHaveAttribute('href', 'https://dexscreener.com/ethereum/');
+    expect(chart).toHaveAttribute('target', '_blank');
+    expect(screen.getAllByRole('link', { name: /telegram/i })[0]).toHaveAttribute('href', 'https://t.me/');
+    expect(screen.getAllByRole('link', { name: /x/i })[0]).toHaveAttribute('href', 'https://x.com/');
     expect(screen.getByText(/awaiting confirmation/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /simu details/i }));
     const details = screen.getByRole('dialog', { name: /token details/i });
     expect(details).toHaveAttribute('data-panel', 'details');
     expect(within(details).getByRole('heading', { name: /how to buy/i })).toBeInTheDocument();
+    expect(within(details).getByRole('link', { name: /dexscreener/i })).toHaveAttribute(
+      'href',
+      'https://dexscreener.com/ethereum/',
+    );
+    expect(within(details).getByRole('link', { name: /dextools/i })).toHaveAttribute(
+      'href',
+      'https://www.dextools.io/app/ether/pair-explorer/',
+    );
+    expect(within(details).getByRole('link', { name: /etherscan/i })).toHaveAttribute(
+      'href',
+      'https://etherscan.io/token/',
+    );
     expect(within(details).getAllByText('0%')).toHaveLength(2);
     const tokenTop = details.querySelector('.token-top');
     expect(tokenTop).not.toBeNull();
@@ -76,6 +92,8 @@ describe('App', () => {
     expect(screen.getByText(address)).toBeInTheDocument();
     await user.click(screen.getAllByRole('button', { name: /copy ca/i })[0]!);
     expect(copyText).toHaveBeenCalledWith(address);
+    const copied = screen.getAllByRole('button', { name: /^copied$/i })[0]!;
+    expect(copied.querySelector('path')?.getAttribute('d')).toContain('M5 13');
 
     const chartLink = screen.getAllByRole('link', { name: /chart/i })[0]!;
     expect(chartLink).toHaveAttribute('href', chart);

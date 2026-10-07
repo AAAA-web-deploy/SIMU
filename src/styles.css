@@ -43,6 +43,10 @@ button:disabled {
   opacity: 0.72;
 }
 
+.is-copied {
+  color: #7dffa8;
+}
+
 img {
   max-width: 100%;
 }
