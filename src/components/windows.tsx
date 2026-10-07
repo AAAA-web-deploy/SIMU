@@ -390,17 +390,17 @@ function ClubPanel({
             height={941}
             alt="Musashi Club. Same SuperIntelligence. Everyone swings differently. Orange asks what SI might be missing. Blue gives it limits first. Green is waiting on yesterday's best move. Violet says that deserves a meme. What's your style?"
           />
+          <div className="club-socials">
+            <ExternalControl href={token.telegramUrl} className="club-telegram">
+              <TelegramIcon />
+              <span className="sr-only">Telegram</span>
+            </ExternalControl>
+            <ExternalControl href={token.xUrl} className="club-x">
+              <XIcon />
+              <span className="sr-only">X</span>
+            </ExternalControl>
+          </div>
           <div className="club-actions">
-            <div className="club-socials">
-              <ExternalControl href={token.telegramUrl} className="club-telegram">
-                <TelegramIcon />
-                <span className="sr-only">Telegram</span>
-              </ExternalControl>
-              <ExternalControl href={token.xUrl} className="club-x">
-                <XIcon />
-                <span className="sr-only">X</span>
-              </ExternalControl>
-            </div>
             <div className="club-jumps">
               <button type="button" className="ghost-launch" onClick={() => onOpen('details')}>
                 ⚔️ SIMU Details
