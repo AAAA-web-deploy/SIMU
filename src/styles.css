@@ -98,6 +98,7 @@ html.overlay-open body {
 }
 
 .home-frame {
+  position: relative;
   width: 75vw;
   height: auto;
   margin: 0 auto;
@@ -125,16 +126,19 @@ html.overlay-open body {
 }
 
 .home-bar {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px 16px;
   flex: none;
-  padding: 8px 14px 6px;
-  background: #07101f;
+  padding: 10px 14px 6px;
+  background: transparent;
 }
 
 .home-brand {
@@ -292,11 +296,11 @@ html.overlay-open body {
 
 .home-compare-wrap .home-actions {
   position: absolute;
-  top: auto;
+  top: 87.5%;
   right: 10px;
-  bottom: 2px;
+  bottom: 2%;
   left: 10px;
-  height: 8%;
+  height: auto;
   z-index: 2;
   padding: 0;
 }
@@ -986,38 +990,8 @@ html.overlay-open body {
   }
 
   .home-frame {
-    width: 75vw;
-    height: 100dvh;
+    width: min(75vw, calc((100dvh - 3.5rem) * 2103 / 1496));
     max-height: 100dvh;
-  }
-
-  .home-stage {
-    flex: 1 1 auto;
-    min-height: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    container-type: size;
-  }
-
-  .home-art {
-    width: min(100cqw, calc(100cqh * 0.84 * 2103 / 1496));
-    height: min(calc(100cqh * 0.84), calc(100cqw * 1496 / 2103));
-  }
-
-  .home-banner,
-  .home-compare-wrap {
-    flex: 1 1 0;
-    min-height: 0;
-    width: 100%;
-  }
-
-  .home-banner,
-  .home-compare {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
   }
 
   .home-bar,
@@ -1066,6 +1040,11 @@ html.overlay-open body {
 }
 
 @media (max-width: 800px) {
+  .home-bar {
+    position: relative;
+    background: #07101f;
+  }
+
   .home-compare-wrap .home-actions {
     position: static;
     top: auto;
