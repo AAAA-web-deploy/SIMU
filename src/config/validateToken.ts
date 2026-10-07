@@ -232,6 +232,21 @@ function readTax(value: unknown, label: string): TaxDisplay {
   };
 }
 
+function readContractAddress(record: Record<string, unknown>, label: string): string | null {
+  const value = nullableString(record, 'contractAddress', label);
+  if (value === null) return null;
+  const address = value.trim();
+  if (!/^0x[0-9a-fA-F]{40}$/.test(address)) {
+    throw new Error(`${label} must be null or a 0x address with 40 hex characters`);
+  }
+  return address;
+}
+
+function readOptionalUrl(record: Record<string, unknown>, key: string, label: string): string | null {
+  if (!(key in record) || record[key] === null) return null;
+  return optionalHttps(nullableString(record, key, label), label);
+}
+
 function readMarkets(value: unknown): MarketLink[] {
   if (!Array.isArray(value) || value.length === 0) {
     throw new Error('markets must contain at least one link');
@@ -240,7 +255,7 @@ function readMarkets(value: unknown): MarketLink[] {
     const record = asRecord(item, `markets[${index}]`);
     return {
       name: requiredString(record, 'name', `markets[${index}].name`),
-      url: optionalHttps(nullableString(record, 'url', `markets[${index}].url`), `markets[${index}].url`),
+      url: readOptionalUrl(record, 'url', `markets[${index}].url`),
     };
   });
 }
@@ -298,6 +313,16 @@ export function validateTokenConfig(input: unknown): TokenConfig {
 
   const siteUrl = optionalHttps(nullableString(record, 'siteUrl', 'siteUrl'), 'siteUrl');
 
+  const chartUrl = optionalHttps(nullableString(record, 'chartUrl', 'chartUrl'), 'chartUrl');
+  const dextoolsUrl = readOptionalUrl(record, 'dextoolsUrl', 'dextoolsUrl');
+  const etherscanUrl = readOptionalUrl(record, 'etherscanUrl', 'etherscanUrl');
+  const markets = readMarkets(record.markets).map((market) => {
+    if (market.name === 'DEXScreener') return { ...market, url: chartUrl };
+    if (market.name === 'DEXTools') return { ...market, url: dextoolsUrl };
+    if (market.name === 'Etherscan') return { ...market, url: etherscanUrl };
+    return market;
+  });
+
   return {
     name: requiredString(record, 'name', 'name'),
     ticker: requiredString(record, 'ticker', 'ticker'),
@@ -306,11 +331,13 @@ export function validateTokenConfig(input: unknown): TokenConfig {
     interactionLabel: requiredString(record, 'interactionLabel', 'interactionLabel'),
     finalLabel: requiredString(record, 'finalLabel', 'finalLabel'),
     theme: readTheme(record.theme),
-    contractAddress: nullableString(record, 'contractAddress', 'contractAddress'),
+    contractAddress: readContractAddress(record, 'contractAddress'),
     buyUrl: nullableString(record, 'buyUrl', 'buyUrl'),
-    chartUrl: nullableString(record, 'chartUrl', 'chartUrl'),
-    xUrl: nullableString(record, 'xUrl', 'xUrl'),
-    telegramUrl: nullableString(record, 'telegramUrl', 'telegramUrl'),
+    chartUrl,
+    dextoolsUrl,
+    etherscanUrl,
+    xUrl: optionalHttps(nullableString(record, 'xUrl', 'xUrl'), 'xUrl'),
+    telegramUrl: optionalHttps(nullableString(record, 'telegramUrl', 'telegramUrl'), 'telegramUrl'),
     evolution: stages,
     logo: requiredString(record, 'logo', 'logo'),
     favicon: requiredString(record, 'favicon', 'favicon'),
@@ -325,7 +352,7 @@ export function validateTokenConfig(input: unknown): TokenConfig {
     ownership: readProof(record.ownership, 'ownership'),
     buyTax: readTax(record.buyTax, 'buyTax'),
     sellTax: readTax(record.sellTax, 'sellTax'),
-    markets: readMarkets(record.markets),
+    markets,
     proofNote: requiredString(record, 'proofNote', 'proofNote'),
     howToBuy: readHowToBuy(record.howToBuy),
     memeStats: readMemeStats(record.memeStats, stages.length),

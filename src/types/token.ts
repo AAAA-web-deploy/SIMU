@@ -108,6 +108,8 @@ export type TokenConfig = {
   contractAddress: string | null;
   buyUrl: string | null;
   chartUrl: string | null;
+  dextoolsUrl: string | null;
+  etherscanUrl: string | null;
   xUrl: string | null;
   telegramUrl: string | null;
   evolution: EvolutionStage[];

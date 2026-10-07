@@ -36,12 +36,14 @@ describe('token config', () => {
     expect(token.contractAddress).toBeNull();
     expect(token.buyUrl).toBeNull();
     expect(token.chartUrl).toBe('https://dexscreener.com/ethereum/');
+    expect(token.dextoolsUrl).toBe('https://www.dextools.io/app/ether/pair-explorer/');
+    expect(token.etherscanUrl).toBe('https://etherscan.io/token/');
     expect(token.xUrl).toBe('https://x.com/');
     expect(token.telegramUrl).toBe('https://t.me/');
     expect(token.markets.map((market) => market.url)).toEqual([
-      'https://dexscreener.com/ethereum/',
-      'https://www.dextools.io/app/ether/pair-explorer/',
-      'https://etherscan.io/token/',
+      token.chartUrl,
+      token.dextoolsUrl,
+      token.etherscanUrl,
     ]);
     expect(token.siteUrl).toBe('https://aaaa-web-deploy.github.io/SIMU');
     expect(token.buyTax.value).toBe('0%');
