@@ -3,6 +3,15 @@ import { describe, expect, it } from 'vitest';
 import { memeStatValue, validateTokenConfig } from './validateToken.ts';
 import { token } from './token.ts';
 
+const simuFiles = [
+  'home.png',
+  'token-background.png',
+  'club.png',
+  'portrait.png',
+  'banner.png',
+  'favicon.png',
+];
+
 const files = [
   'sichonk-evolution-01-cat.png',
   'sichonk-evolution-02-chonk.png',
@@ -17,17 +26,21 @@ const files = [
 ];
 
 describe('token config', () => {
-  it('publishes the launch contract and derives the stage-count stat', () => {
-    expect(token.contractAddress).toBe('0x01077653aec65865a196bedfa2da4f464d43fba2');
-    expect(token.buyUrl).toBe(
-      'https://www.dextools.io/app/ether/pair-explorer/0x01077653aec65865a196bedfa2da4f464d43fba2',
-    );
-    expect(token.chartUrl).toBe(
-      'https://dexscreener.com/ethereum/0x01077653aec65865a196bedfa2da4f464d43fba2',
-    );
-    expect(token.xUrl).toBe('https://x.com/si_chonk');
-    expect(token.telegramUrl).toBe('https://t.me/sichonk');
-    expect(token.siteUrl).toBe('https://hsichonk.site');
+  it('publishes SI Musashi with pending launch links and a derived stage-count stat', () => {
+    expect(token.name).toBe('SI Musashi');
+    expect(token.ticker).toBe('SIMU');
+    expect(token.contractAddress).toBeNull();
+    expect(token.buyUrl).toBeNull();
+    expect(token.chartUrl).toBeNull();
+    expect(token.xUrl).toBeNull();
+    expect(token.telegramUrl).toBeNull();
+    expect(token.siteUrl).toBe('https://aaaa-web-deploy.github.io/SIMU');
+    expect(token.buyTax.value).toBe('0%');
+    expect(token.sellTax.value).toBe('0%');
+    expect(token.lpBurn.status).toBe('pending');
+    expect(token.ownership.status).toBe('pending');
+    expect(token.lpBurn.url).toBeNull();
+    expect(token.ownership.url).toBeNull();
     expect(token.evolution).toHaveLength(6);
     expect(token.memeStats[0]?.deriveFrom).toBe('evolution.length');
     expect(memeStatValue(token.memeStats[0]!, token.evolution.length)).toBe('6');
@@ -38,6 +51,9 @@ describe('token config', () => {
   it('has the supplied image files on disk', () => {
     for (const file of files) {
       expect(existsSync(`public/assets/token/${file}`), file).toBe(true);
+    }
+    for (const file of simuFiles) {
+      expect(existsSync(`public/assets/simu/${file}`), file).toBe(true);
     }
     for (const stage of token.evolution) {
       expect(existsSync(`public${stage.image}`)).toBe(true);

@@ -21,10 +21,18 @@ function tokenMetaPlugin(base: string): Plugin {
         const raw: unknown = JSON.parse(readFileSync(join(root, 'src/config/token.json'), 'utf8'));
         const token = validateTokenConfig(raw);
         const paths = [
-          token.logo,
-          token.favicon,
-          token.socialPreview,
-          ...token.evolution.map((stage) => stage.image),
+          ...new Set([
+            token.logo,
+            token.favicon,
+            token.socialPreview,
+            token.assets.home,
+            token.assets.story,
+            token.assets.tokenBackground,
+            token.assets.club,
+            token.assets.portrait,
+            token.assets.banner,
+            ...token.evolution.map((stage) => stage.image),
+          ]),
         ];
         for (const assetPath of paths) {
           const relative = assetPath.replace(/^\/+/, '');

@@ -28,9 +28,14 @@ jobs:
       - name: Install
         run: npm ci
       - name: Build
-        run: npm run build
-        env:
-          VITE_BASE: /
+        run: |
+          if [ -f public/CNAME ]; then
+            echo "Custom domain found. Building at the domain root."
+            VITE_BASE=/ npm run build
+          else
+            echo "Building for GitHub Pages project path /${GITHUB_REPOSITORY#*/}/"
+            VITE_BASE="/${GITHUB_REPOSITORY#*/}/" npm run build
+          fi
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact

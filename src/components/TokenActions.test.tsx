@@ -13,12 +13,26 @@ function withLaunch(overrides: Partial<TokenConfig> = {}): TokenConfig {
 
 describe('TokenActions', () => {
   it('shows the contract address and opens the configured buy and chart links', () => {
-    render(<TokenActions token={token} />);
-    expect(screen.getByText(token.contractAddress!)).toBeInTheDocument();
+    render(
+      <TokenActions
+        token={withLaunch({
+          contractAddress: address,
+          buyUrl: 'https://example.com/buy',
+          chartUrl: 'https://example.com/chart',
+        })}
+      />,
+    );
+    expect(screen.getByText(address)).toBeInTheDocument();
     expect(screen.queryByText(token.strings.contractPending)).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: token.strings.copy })).toBeEnabled();
-    expect(screen.getByRole('link', { name: token.strings.buy })).toHaveAttribute('href', token.buyUrl);
-    expect(screen.getByRole('link', { name: token.strings.chart })).toHaveAttribute('href', token.chartUrl);
+    expect(screen.getByRole('link', { name: token.strings.buy })).toHaveAttribute(
+      'href',
+      'https://example.com/buy',
+    );
+    expect(screen.getByRole('link', { name: token.strings.chart })).toHaveAttribute(
+      'href',
+      'https://example.com/chart',
+    );
     expect(screen.queryByText(token.strings.comingSoon)).not.toBeInTheDocument();
     expect(document.body.innerHTML).not.toContain('href="#"');
   });

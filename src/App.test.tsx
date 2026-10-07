@@ -1,35 +1,95 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
 import App from './App.tsx';
 import { token } from './config/token.ts';
 
+const address = `0x${'ab'.repeat(20)}`;
+
 describe('App', () => {
-  it('renders the page sections in order without off-site banners', () => {
+  it('opens one content window at a time and restores the homepage', async () => {
+    const user = userEvent.setup();
     render(<App />);
-    const headings = screen.getAllByRole('heading').map((heading) => heading.textContent);
-    expect(headings.slice(0, 4)).toEqual([
-      token.name,
-      token.strings.contractHeading,
-      token.strings.statsHeading,
-      token.strings.howToBuyHeading,
-    ]);
-    expect(screen.getByText(token.tagline)).toBeInTheDocument();
-    expect(screen.getByText(token.description)).toBeInTheDocument();
-    for (const item of token.statusLines) {
-      expect(screen.getByText(item.label)).toBeInTheDocument();
-      expect(screen.getAllByText(item.value).length).toBeGreaterThan(0);
-    }
-    expect(screen.queryByText(token.strings.statsNote)).not.toBeInTheDocument();
-    expect(screen.queryByText(token.footerNote)).not.toBeInTheDocument();
-    expect(screen.queryByText('Intelligence and chonk values are fictional.')).not.toBeInTheDocument();
-    expect(screen.queryByText(token.chainName)).not.toBeInTheDocument();
-    const xLinks = screen.getAllByRole('link', { name: token.strings.socialX });
-    const telegramLinks = screen.getAllByRole('link', { name: token.strings.socialTelegram });
-    expect(xLinks[0]).toHaveAttribute('href', token.xUrl);
-    expect(telegramLinks[0]).toHaveAttribute('href', token.telegramUrl);
-    expect(xLinks[1]?.querySelector('svg')).toBeTruthy();
-    expect(telegramLinks[1]?.querySelector('svg')).toBeTruthy();
-    expect(document.body.innerHTML).not.toContain('sichonk-banner');
-    expect(document.body.innerHTML).not.toContain('sichonk-social-preview');
+
+    expect(screen.getByRole('img', { name: /same superintelligence/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /read the full story/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /token information/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /community/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /chart/i }).length).toBeGreaterThan(0);
+    expect(screen.getByText(/awaiting confirmation/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /token information/i }));
+    const details = screen.getByRole('dialog', { name: /token details/i });
+    expect(details).toHaveAttribute('data-panel', 'details');
+    expect(within(details).getByRole('heading', { name: /how to buy/i })).toBeInTheDocument();
+    expect(within(details).getAllByText('0%')).toHaveLength(2);
+    expect(within(details).getAllByText(/pending verification/i).length).toBeGreaterThan(0);
+
+    await user.click(within(details).getByRole('button', { name: /visit musashi club/i }));
+    const club = screen.getByRole('dialog', { name: /musashi club/i });
+    expect(screen.queryByRole('dialog', { name: /token details/i })).not.toBeInTheDocument();
+    expect(club).toHaveAttribute('data-panel', 'club');
+
+    await user.click(within(club).getByRole('button', { name: /read the full story/i }));
+    const story = screen.getByRole('dialog', { name: /full story/i });
+    expect(screen.queryByRole('dialog', { name: /musashi club/i })).not.toBeInTheDocument();
+    expect(within(story).getByRole('img', { name: /si musashi story/i })).toBeInTheDocument();
+    expect(document.documentElement).toHaveClass('overlay-open');
+    expect(document.body.style.position).toBe('fixed');
+
+    await user.keyboard('{Escape}');
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(document.documentElement).not.toHaveClass('overlay-open');
+    expect(document.body.style.position).toBe('');
+  });
+
+  it('copies the complete contract address and opens external links in a new tab', async () => {
+    const user = userEvent.setup();
+    const copyText = vi.fn(async () => true);
+    const chart = 'https://example.com/chart';
+    const telegram = 'https://example.com/telegram';
+    const x = 'https://example.com/x';
+    render(
+      <App
+        copyText={copyText}
+        config={{
+          ...token,
+          contractAddress: address,
+          chartUrl: chart,
+          telegramUrl: telegram,
+          xUrl: x,
+          buyUrl: 'https://example.com/swap',
+          markets: token.markets.map((market, index) =>
+            index === 2 ? { ...market, url: 'https://example.com/etherscan' } : market,
+          ),
+          lpBurn: { ...token.lpBurn, status: 'verified', url: 'https://example.com/burn' },
+        }}
+      />,
+    );
+
+    expect(screen.getByText(address)).toBeInTheDocument();
+    await user.click(screen.getAllByRole('button', { name: /copy ca/i })[0]!);
+    expect(copyText).toHaveBeenCalledWith(address);
+
+    const chartLink = screen.getAllByRole('link', { name: /chart/i })[0]!;
+    expect(chartLink).toHaveAttribute('href', chart);
+    expect(chartLink).toHaveAttribute('target', '_blank');
+    expect(chartLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+    await user.click(screen.getByRole('button', { name: /token information/i }));
+    const details = screen.getByRole('dialog', { name: /token details/i });
+    expect(within(details).getByText(address)).toBeInTheDocument();
+    expect(within(details).getByRole('link', { name: /view transaction/i })).toHaveAttribute(
+      'href',
+      'https://example.com/burn',
+    );
+    expect(within(details).getByRole('link', { name: /etherscan/i })).toHaveAttribute('target', '_blank');
+    expect(within(details).getByRole('link', { name: /swap on dex/i })).toHaveAttribute(
+      'href',
+      'https://example.com/swap',
+    );
+
+    await user.click(within(details).getByRole('button', { name: /close/i }));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 });

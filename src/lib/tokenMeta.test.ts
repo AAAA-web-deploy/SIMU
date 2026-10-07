@@ -13,8 +13,8 @@ describe('token metadata', () => {
     expect(html).not.toContain('rel="canonical"');
     expect(html).not.toContain('og:image');
     expect(html).not.toContain('og:url');
-    expect(html).toContain('href="/hsichonk/assets/token/sichonk-favicon.png"');
-    expect(html).toContain('content="#10071e"');
+    expect(html).toContain(`href="/hsichonk${token.favicon}"`);
+    expect(html).toContain(`content="${token.theme.background}"`);
     expect(html).toContain('/hsichonk/assets/token/sichonk-evolution-01-cat.png');
     expect(html).toContain('Set siteUrl');
   });
@@ -23,11 +23,11 @@ describe('token metadata', () => {
     const html = renderTokenHead({ ...token, siteUrl: 'https://example.com/hsichonk' }, '/');
     expect(html).toContain('rel="canonical" href="https://example.com/hsichonk"');
     expect(html).toContain(
-      'property="og:image" content="https://example.com/hsichonk/assets/token/sichonk-social-preview.png"',
+      `property="og:image" content="https://example.com/hsichonk${token.socialPreview}"`,
     );
     expect(html).toContain('twitter:image');
-    expect(publicAssetUrl('https://example.com/hsichonk/', '/assets/token/sichonk-social-preview.png')).toBe(
-      'https://example.com/hsichonk/assets/token/sichonk-social-preview.png',
+    expect(publicAssetUrl('https://example.com/hsichonk/', token.socialPreview)).toBe(
+      `https://example.com/hsichonk${token.socialPreview}`,
     );
   });
 

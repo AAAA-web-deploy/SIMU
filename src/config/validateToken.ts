@@ -3,7 +3,12 @@ import {
   type EvolutionStage,
   type EvolutionTransition,
   type HowToBuyStep,
+  type MarketLink,
   type MemeStat,
+  type OnChainProof,
+  type ProofStatus,
+  type SiteAssets,
+  type TaxDisplay,
   type TokenConfig,
   type TokenStrings,
   type TokenTheme,
@@ -185,6 +190,61 @@ function readMemeStats(value: unknown, stageCount: number): MemeStat[] {
   });
 }
 
+function assetPath(record: Record<string, unknown>, key: string): string {
+  const value = requiredString(record, key, `assets.${key}`);
+  if (!value.startsWith('/assets/')) {
+    throw new Error(`assets.${key} must be a root-relative /assets path`);
+  }
+  return value;
+}
+
+function readAssets(value: unknown): SiteAssets {
+  const assets = asRecord(value, 'assets');
+  return {
+    home: assetPath(assets, 'home'),
+    story: assetPath(assets, 'story'),
+    tokenBackground: assetPath(assets, 'tokenBackground'),
+    club: assetPath(assets, 'club'),
+    portrait: assetPath(assets, 'portrait'),
+    banner: assetPath(assets, 'banner'),
+  };
+}
+
+function readProof(value: unknown, label: string): OnChainProof {
+  const record = asRecord(value, label);
+  const status = requiredString(record, 'status', `${label}.status`);
+  if (status !== 'pending' && status !== 'verified') {
+    throw new Error(`${label}.status must be "pending" or "verified"`);
+  }
+  return {
+    label: requiredString(record, 'label', `${label}.label`),
+    status: status as ProofStatus,
+    url: optionalHttps(nullableString(record, 'url', `${label}.url`), `${label}.url`),
+  };
+}
+
+function readTax(value: unknown, label: string): TaxDisplay {
+  const record = asRecord(value, label);
+  return {
+    label: requiredString(record, 'label', `${label}.label`),
+    value: requiredString(record, 'value', `${label}.value`),
+    note: requiredString(record, 'note', `${label}.note`),
+  };
+}
+
+function readMarkets(value: unknown): MarketLink[] {
+  if (!Array.isArray(value) || value.length === 0) {
+    throw new Error('markets must contain at least one link');
+  }
+  return value.map((item, index) => {
+    const record = asRecord(item, `markets[${index}]`);
+    return {
+      name: requiredString(record, 'name', `markets[${index}].name`),
+      url: optionalHttps(nullableString(record, 'url', `markets[${index}].url`), `markets[${index}].url`),
+    };
+  });
+}
+
 function readStrings(value: unknown): TokenStrings {
   const record = asRecord(value, 'strings');
   const keys: (keyof TokenStrings)[] = [
@@ -260,6 +320,13 @@ export function validateTokenConfig(input: unknown): TokenConfig {
     pageTitle: requiredString(record, 'pageTitle', 'pageTitle'),
     metadataDescription: requiredString(record, 'metadataDescription', 'metadataDescription'),
     siteUrl,
+    assets: readAssets(record.assets),
+    lpBurn: readProof(record.lpBurn, 'lpBurn'),
+    ownership: readProof(record.ownership, 'ownership'),
+    buyTax: readTax(record.buyTax, 'buyTax'),
+    sellTax: readTax(record.sellTax, 'sellTax'),
+    markets: readMarkets(record.markets),
+    proofNote: requiredString(record, 'proofNote', 'proofNote'),
     howToBuy: readHowToBuy(record.howToBuy),
     memeStats: readMemeStats(record.memeStats, stages.length),
     statusLines: readStatusLines(record.statusLines),

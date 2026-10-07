@@ -44,6 +44,34 @@ export type TokenTheme = {
   muted: string;
 };
 
+export type ProofStatus = 'pending' | 'verified';
+
+export type OnChainProof = {
+  label: string;
+  status: ProofStatus;
+  url: string | null;
+};
+
+export type TaxDisplay = {
+  label: string;
+  value: string;
+  note: string;
+};
+
+export type MarketLink = {
+  name: string;
+  url: string | null;
+};
+
+export type SiteAssets = {
+  home: string;
+  story: string;
+  tokenBackground: string;
+  club: string;
+  portrait: string;
+  banner: string;
+};
+
 export type TokenStrings = {
   reset: string;
   copied: string;
@@ -91,6 +119,13 @@ export type TokenConfig = {
   pageTitle: string;
   metadataDescription: string;
   siteUrl: string | null;
+  assets: SiteAssets;
+  lpBurn: OnChainProof;
+  ownership: OnChainProof;
+  buyTax: TaxDisplay;
+  sellTax: TaxDisplay;
+  markets: MarketLink[];
+  proofNote: string;
   howToBuy: HowToBuyStep[];
   memeStats: MemeStat[];
   statusLines: StatusLine[];
