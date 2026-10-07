@@ -59,19 +59,20 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
         </nav>
       </header>
       <div className="home-stage">
-        <img
-          className="home-banner"
-          src={assetUrl(token.assets.banner)}
-          width={2172}
-          height={724}
-          alt={`${token.name} ${ticker}. Same SuperIntelligence. Different hands. The edge is how you use it.`}
-        />
-        <div className="home-compare-wrap">
+        <div className="home-art">
+          <img
+            className="home-banner"
+            src={assetUrl(token.assets.banner)}
+            width={2103}
+            height={748}
+            alt={`${token.name} ${ticker}. Same SuperIntelligence. Different hands. The edge is how you use it.`}
+          />
+          <div className="home-compare-wrap">
           <img
             className="home-compare"
             src={assetUrl(token.assets.home)}
-            width={2172}
-            height={724}
+            width={2103}
+            height={748}
             alt="Without SI Musashi guidance, the crowd copies the signal and leaves the judgment to SI. With SI Musashi guidance, they question the answer, add context, and make the decision. Same SuperIntelligence. Different hands."
           />
           <div className="home-actions">
@@ -102,6 +103,7 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
                 <ChartIcon /> Chart
               </ExternalControl>
             </span>
+          </div>
           </div>
         </div>
       </div>
