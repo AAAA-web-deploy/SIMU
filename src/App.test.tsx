@@ -85,10 +85,10 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: /token information/i }));
     const details = screen.getByRole('dialog', { name: /token details/i });
     expect(within(details).getByText(address)).toBeInTheDocument();
-    expect(within(details).getByRole('link', { name: /view transaction/i })).toHaveAttribute(
-      'href',
-      'https://example.com/burn',
-    );
+    expect(within(details).getByRole('heading', { name: /total supply/i })).toBeInTheDocument();
+    expect(within(details).getByRole('heading', { name: /contract verified/i })).toBeInTheDocument();
+    expect(within(details).queryByRole('link', { name: /view transaction/i })).not.toBeInTheDocument();
+    expect(within(details).queryByText(/provided by project/i)).not.toBeInTheDocument();
     expect(within(details).getByRole('link', { name: /etherscan/i })).toHaveAttribute('target', '_blank');
     expect(within(details).getByRole('link', { name: /swap on dex/i })).toHaveAttribute(
       'href',

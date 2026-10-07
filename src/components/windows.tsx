@@ -1,7 +1,7 @@
-import { useCallback, useLayoutEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
+import { useCallback, useLayoutEffect, useRef, useState, type RefObject } from 'react';
 import { assetUrl } from '../utils/assetUrl.ts';
 import { displayTicker } from '../lib/launch.ts';
-import type { MarketLink, OnChainProof, TokenConfig } from '../types/token.ts';
+import type { MarketLink, TokenConfig } from '../types/token.ts';
 import {
   BookIcon,
   ChartIcon,
@@ -9,9 +9,7 @@ import {
   CopyButton,
   ExternalControl,
   FittedText,
-  FlameIcon,
   HomeIcon,
-  LockIcon,
   PeopleIcon,
   SwapIcon,
   TelegramIcon,
@@ -280,17 +278,23 @@ function DetailsPanel({
               </div>
             </div>
             <div className="stat-grid">
-              <ProofCard proof={token.lpBurn} icon={<FlameIcon />} />
-              <ProofCard proof={token.ownership} icon={<LockIcon />} />
+              <StatCard src="/assets/simu/stats/lp-burn.png" label={token.lpBurn.label} />
+              <StatCard src="/assets/simu/stats/ownership.png" label={token.ownership.label} />
+              <StatCard src="/assets/simu/stats/total-supply.png" label="TOTAL SUPPLY" />
+              <StatCard src="/assets/simu/stats/contract-verified.png" label="CONTRACT VERIFIED" />
               <article className="tax tax-buy">
-                <p className="tax-kicker">% {token.buyTax.label}</p>
+                <p className="tax-kicker">
+                  <img className="stat-mark" src={assetUrl('/assets/simu/stats/tax-buy.png')} alt="" width={64} height={64} />
+                  {token.buyTax.label}
+                </p>
                 <p className="tax-value">{token.buyTax.value}</p>
-                <p className="tax-note">{token.buyTax.note}</p>
               </article>
               <article className="tax tax-sell">
-                <p className="tax-kicker">% {token.sellTax.label}</p>
+                <p className="tax-kicker">
+                  <img className="stat-mark" src={assetUrl('/assets/simu/stats/tax-sell.png')} alt="" width={64} height={64} />
+                  {token.sellTax.label}
+                </p>
                 <p className="tax-value">{token.sellTax.value}</p>
-                <p className="tax-note">{token.sellTax.note}</p>
               </article>
             </div>
           </div>
@@ -346,17 +350,13 @@ function MarketCard({ market }: { market: MarketLink }) {
   );
 }
 
-function ProofCard({ proof, icon }: { proof: OnChainProof; icon: ReactNode }) {
-  const verified = proof.status === 'verified';
+function StatCard({ src, label }: { src: string; label: string }) {
   return (
-    <article className={verified ? 'proof is-verified' : 'proof'}>
+    <article className="proof">
       <h3>
-        {icon} {proof.label}
+        <img className="stat-mark" src={assetUrl(src)} alt="" width={64} height={64} />
+        {label}
       </h3>
-      {verified ? <p>Verified</p> : null}
-      <ExternalControl href={proof.url} className="tx-link">
-        View transaction <span aria-hidden="true">↗</span>
-      </ExternalControl>
     </article>
   );
 }
