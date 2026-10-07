@@ -11,12 +11,10 @@ describe('launch guards', () => {
     expect(isEthereumAddress(null)).toBe(false);
   });
 
-  it('keeps buy disabled until the address and https link are both present', () => {
-    expect(canBuy(null, null)).toBe(false);
-    expect(canBuy(address, null)).toBe(false);
-    expect(canBuy(address, 'http://example.com/buy')).toBe(false);
-    expect(canBuy('0x123', 'https://example.com/buy')).toBe(false);
-    expect(canBuy(address, 'https://example.com/buy')).toBe(true);
+  it('opens buy for an https link without waiting for the contract address', () => {
+    expect(canBuy(null)).toBe(false);
+    expect(canBuy('http://example.com/buy')).toBe(false);
+    expect(canBuy('https://example.com/buy')).toBe(true);
   });
 
   it('opens a chart only for an https URL', () => {

@@ -30,7 +30,7 @@ function UnavailableAction({ label }: { label: string }) {
 
 export function TokenActions({ token, copyText = copyExactText, copiedDurationMs = 2000 }: Props) {
   const address = isEthereumAddress(token.contractAddress) ? token.contractAddress : null;
-  const buyHref = canBuy(token.contractAddress, token.buyUrl) ? token.buyUrl : null;
+  const buyHref = canBuy(token.buyUrl) ? token.buyUrl : null;
   const chartHref = canOpenChart(token.chartUrl) ? token.chartUrl : null;
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
 

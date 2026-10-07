@@ -12,19 +12,18 @@ function withLaunch(overrides: Partial<TokenConfig> = {}): TokenConfig {
 }
 
 describe('TokenActions', () => {
-  it('shows a pending contract and disabled actions when launch values are missing', () => {
+  it('shows a pending contract and opens the configured buy and chart links', () => {
     render(<TokenActions token={token} />);
     expect(screen.getByText(token.strings.contractPending)).toBeInTheDocument();
     expect(screen.queryByText(/^0x/)).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: token.strings.copy })).toBeDisabled();
-    expect(screen.getByRole('button', { name: token.strings.buy })).toBeDisabled();
-    expect(screen.getByRole('button', { name: token.strings.chart })).toBeDisabled();
+    expect(screen.getByRole('link', { name: token.strings.buy })).toHaveAttribute('href', token.buyUrl);
+    expect(screen.getByRole('link', { name: token.strings.chart })).toHaveAttribute('href', token.chartUrl);
     expect(screen.queryByText(token.strings.comingSoon)).not.toBeInTheDocument();
-    expect(screen.queryByRole('link')).not.toBeInTheDocument();
     expect(document.body.innerHTML).not.toContain('href="#"');
   });
 
-  it('hides an invalid address and keeps buy disabled', () => {
+  it('hides an invalid address and still opens a valid buy link', () => {
     render(
       <TokenActions
         token={withLaunch({ contractAddress: '0x123', buyUrl: 'https://example.com/buy' })}
@@ -32,7 +31,10 @@ describe('TokenActions', () => {
     );
     expect(screen.getByText(token.strings.contractPending)).toBeInTheDocument();
     expect(screen.queryByText('0x123')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: token.strings.buy })).toBeDisabled();
+    expect(screen.getByRole('link', { name: token.strings.buy })).toHaveAttribute(
+      'href',
+      'https://example.com/buy',
+    );
   });
 
   it('copies the full address and restores the label', async () => {

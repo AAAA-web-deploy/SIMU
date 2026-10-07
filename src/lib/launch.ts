@@ -14,8 +14,8 @@ export function isHttpsUrl(value: string | null | undefined): value is string {
   }
 }
 
-export function canBuy(address: string | null, buyUrl: string | null): boolean {
-  return isEthereumAddress(address) && isHttpsUrl(buyUrl);
+export function canBuy(buyUrl: string | null): boolean {
+  return isHttpsUrl(buyUrl);
 }
 
 export function canOpenChart(chartUrl: string | null): boolean {

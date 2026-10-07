@@ -19,8 +19,8 @@ const files = [
 describe('token config', () => {
   it('keeps launch links unset and derives the stage-count stat', () => {
     expect(token.contractAddress).toBeNull();
-    expect(token.buyUrl).toBeNull();
-    expect(token.chartUrl).toBeNull();
+    expect(token.buyUrl).toBe('https://www.dextools.io/app/ether/pair-explorer/');
+    expect(token.chartUrl).toBe('https://dexscreener.com/ethereum/');
     expect(token.xUrl).toBe('https://x.com/hsichonk_eth');
     expect(token.telegramUrl).toBe('https://t.me/sivitalik');
     expect(token.siteUrl).toBe('https://hsichonk.site');

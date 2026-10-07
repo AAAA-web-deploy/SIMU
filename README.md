@@ -23,13 +23,15 @@ All visible copy, colors, links, and image paths live in [`src/config/token.json
 
 Images live in [`public/assets/token/`](public/assets/token/). Keep the filenames already referenced by the config. The five evolution PNGs are full scenes; render them with `object-fit: contain` inside a fixed square so the small CAT is not cropped or zoomed. The logo and favicon are transparent outside the circular badge. `sichonk-banner-3x1.png` and `sichonk-banner-1100x520.png` are for off-site sharing and are not placed on the page.
 
-These launch values stay `null` until you have real ones:
+After launch, change these fields in that same file:
 
-- `contractAddress`
-- `buyUrl`
-- `chartUrl`
+- `contractAddress` — `0x` plus 40 hex characters. Until then the address box says “coming soon..”.
+- `buyUrl` — the BUY button. An `https` link opens it. The contract address is not required.
+- `chartUrl` — the VIEW CHART button.
+- `xUrl` — the X icon.
+- `telegramUrl` — the Telegram icon.
 
-Buy stays disabled until `contractAddress` is `0x` plus 40 hex characters and `buyUrl` is an `https` URL. Chart stays disabled until `chartUrl` is an `https` URL. Social links stay hidden until their URLs are `https`. An invalid address is not displayed. `xUrl` and `telegramUrl` are set, and the header shows them as icons.
+Social, buy, and chart links stay hidden until their URLs are `https`. An invalid address is not displayed.
 
 `siteUrl` is the public URL of this site. It is `https://hsichonk.site`, so the build can emit the canonical URL and absolute social image.
 
