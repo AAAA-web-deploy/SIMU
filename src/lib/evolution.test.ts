@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createEvolutionState, isFinalStage, reduceEvolution, type EvolutionState } from './evolution.ts';
 
-const captions = ['CAT', 'CHONK', 'TECH CHONK', 'AI CHONK', 'SI CHONK'];
+const captions = ['CAT', 'CHONK', 'TECH CHONK', 'AI CHONK', 'SI CHONK', 'UNKNOWN.'];
 
 function advance(state: EvolutionState, stageCount: number): EvolutionState {
   const loading = reduceEvolution(state, { type: 'tap' }, stageCount);

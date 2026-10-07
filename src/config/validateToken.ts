@@ -119,6 +119,19 @@ function readStage(value: unknown, index: number): EvolutionStage {
   };
 }
 
+function readStatusLines(value: unknown): { value: string; label: string }[] {
+  if (!Array.isArray(value) || value.length === 0) {
+    throw new Error('statusLines must contain at least one line');
+  }
+  return value.map((line, index) => {
+    const record = asRecord(line, `statusLines[${index}]`);
+    return {
+      value: requiredString(record, 'value', `statusLines[${index}].value`),
+      label: requiredString(record, 'label', `statusLines[${index}].label`),
+    };
+  });
+}
+
 function readHowToBuy(value: unknown): HowToBuyStep[] {
   if (!Array.isArray(value) || value.length === 0) {
     throw new Error('howToBuy must contain at least one step');
@@ -249,6 +262,7 @@ export function validateTokenConfig(input: unknown): TokenConfig {
     siteUrl,
     howToBuy: readHowToBuy(record.howToBuy),
     memeStats: readMemeStats(record.memeStats, stages.length),
+    statusLines: readStatusLines(record.statusLines),
     footerNote: requiredString(record, 'footerNote', 'footerNote'),
     strings: readStrings(record.strings),
   };

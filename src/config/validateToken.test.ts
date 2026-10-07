@@ -24,9 +24,9 @@ describe('token config', () => {
     expect(token.xUrl).toBe('https://x.com/hsichonk_eth');
     expect(token.telegramUrl).toBe('https://t.me/sivitalik');
     expect(token.siteUrl).toBe('https://hsichonk.site');
-    expect(token.evolution).toHaveLength(5);
+    expect(token.evolution).toHaveLength(6);
     expect(token.memeStats[0]?.deriveFrom).toBe('evolution.length');
-    expect(memeStatValue(token.memeStats[0]!, token.evolution.length)).toBe('5');
+    expect(memeStatValue(token.memeStats[0]!, token.evolution.length)).toBe('6');
     expect(token.chainName).toBe('Ethereum');
     expect(token.nativeSymbol).toBe('ETH');
   });

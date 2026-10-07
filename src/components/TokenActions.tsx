@@ -11,10 +11,19 @@ type Props = {
   copiedDurationMs?: number;
 };
 
-function UnavailableAction({ label, soon }: { label: string; soon: string }) {
+function CopyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <rect x="8" y="3" width="13" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <rect x="3" y="8" width="13" height="13" rx="2" fill="currentColor" fillOpacity="0.12" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function UnavailableAction({ label }: { label: string }) {
   return (
     <button type="button" className="action is-unavailable" disabled>
-      <span>{label}</span> <span className="soon">{soon}</span>
+      {label}
     </button>
   );
 }
@@ -40,22 +49,27 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
   return (
     <section className="panel" aria-labelledby="contract-heading">
       <h2 id="contract-heading">{token.strings.contractHeading}</h2>
-      {address ? (
-        <p id="contract-address" className="address">
-          {address}
-        </p>
-      ) : (
-        <p id="contract-note">{token.strings.contractPending}</p>
-      )}
-      <button
-        type="button"
-        className="copy"
-        onClick={() => void onCopy()}
-        disabled={!address}
-        aria-describedby={address ? undefined : 'contract-note'}
-      >
-        {copyState === 'copied' ? token.strings.copied : token.strings.copy}
-      </button>
+      <div className="contract-row">
+        {address ? (
+          <p id="contract-address" className="address">
+            {address}
+          </p>
+        ) : (
+          <p id="contract-note" className="address is-pending">
+            {token.strings.contractPending}
+          </p>
+        )}
+        <button
+          type="button"
+          className="copy"
+          onClick={() => void onCopy()}
+          disabled={!address}
+          aria-label={copyState === 'copied' ? token.strings.copied : token.strings.copy}
+          aria-describedby={address ? undefined : 'contract-note'}
+        >
+          <CopyIcon />
+        </button>
+      </div>
       <p className={copyState === 'failed' ? 'copy-status' : 'sr-only'} aria-live="polite">
         {copyState === 'copied'
           ? token.strings.copied
@@ -69,14 +83,14 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
             {token.strings.buy}
           </a>
         ) : (
-          <UnavailableAction label={token.strings.buy} soon={token.strings.comingSoon} />
+          <UnavailableAction label={token.strings.buy} />
         )}
         {chartHref ? (
           <a className="action action-chart" href={chartHref} target="_blank" rel="noopener noreferrer">
             {token.strings.chart}
           </a>
         ) : (
-          <UnavailableAction label={token.strings.chart} soon={token.strings.comingSoon} />
+          <UnavailableAction label={token.strings.chart} />
         )}
       </div>
     </section>

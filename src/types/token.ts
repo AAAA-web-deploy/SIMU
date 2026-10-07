@@ -24,6 +24,11 @@ export type HowToBuyStep = {
   body: string;
 };
 
+export type StatusLine = {
+  value: string;
+  label: string;
+};
+
 export type MemeStat = {
   label: string;
   value?: string;
@@ -88,6 +93,7 @@ export type TokenConfig = {
   siteUrl: string | null;
   howToBuy: HowToBuyStep[];
   memeStats: MemeStat[];
+  statusLines: StatusLine[];
   footerNote: string;
   strings: TokenStrings;
 };

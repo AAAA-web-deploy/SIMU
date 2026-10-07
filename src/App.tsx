@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import type { CSSProperties } from 'react';
 import { token as defaultToken } from './config/token.ts';
-import { memeStatValue } from './config/validateToken.ts';
 import { EvolutionHero } from './components/EvolutionHero.tsx';
 import { Header, SocialLinks } from './components/Header.tsx';
 import { HowToBuy } from './components/HowToBuy.tsx';
@@ -41,21 +40,19 @@ export default function App({ config = defaultToken }: { config?: TokenConfig })
         <TokenActions token={config} />
         <section className="stats" aria-labelledby="stats-heading">
           <h2 id="stats-heading">{config.strings.statsHeading}</h2>
-          <dl className="stat-row">
-            {config.memeStats.map((stat) => (
-              <div key={stat.label}>
-                <dt>{stat.label}</dt>
-                <dd>{memeStatValue(stat, config.evolution.length)}</dd>
+          <dl className="stat-row status-row">
+            {config.statusLines.map((item) => (
+              <div key={item.label}>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
               </div>
             ))}
           </dl>
-          <p className="stats-note">{config.strings.statsNote}</p>
         </section>
         <HowToBuy token={config} />
       </main>
       <footer className="footer">
-        <SocialLinks token={config} className="social social-footer" label="Footer social" />
-        <p>{config.footerNote}</p>
+        <SocialLinks token={config} className="social social-footer" label="Footer social" icons />
       </footer>
     </div>
   );

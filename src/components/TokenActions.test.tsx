@@ -17,8 +17,9 @@ describe('TokenActions', () => {
     expect(screen.getByText(token.strings.contractPending)).toBeInTheDocument();
     expect(screen.queryByText(/^0x/)).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: token.strings.copy })).toBeDisabled();
-    expect(screen.getByRole('button', { name: `${token.strings.buy} ${token.strings.comingSoon}` })).toBeDisabled();
-    expect(screen.getByRole('button', { name: `${token.strings.chart} ${token.strings.comingSoon}` })).toBeDisabled();
+    expect(screen.getByRole('button', { name: token.strings.buy })).toBeDisabled();
+    expect(screen.getByRole('button', { name: token.strings.chart })).toBeDisabled();
+    expect(screen.queryByText(token.strings.comingSoon)).not.toBeInTheDocument();
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
     expect(document.body.innerHTML).not.toContain('href="#"');
   });
@@ -31,7 +32,7 @@ describe('TokenActions', () => {
     );
     expect(screen.getByText(token.strings.contractPending)).toBeInTheDocument();
     expect(screen.queryByText('0x123')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: `${token.strings.buy} ${token.strings.comingSoon}` })).toBeDisabled();
+    expect(screen.getByRole('button', { name: token.strings.buy })).toBeDisabled();
   });
 
   it('copies the full address and restores the label', async () => {

@@ -139,8 +139,29 @@ img {
   color: var(--accent);
 }
 
-.social-header svg {
+.social-header svg,
+.social-footer svg {
   display: block;
+}
+
+.social-footer {
+  justify-content: center;
+  gap: 28px;
+}
+
+.social-footer a {
+  min-width: 56px;
+  min-height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--accent);
+}
+
+.social-footer svg {
+  width: 40px;
+  height: 40px;
 }
 
 main {
@@ -442,17 +463,34 @@ main {
   color: var(--accent);
 }
 
+.contract-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
 .address {
-  margin: 0 0 12px;
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
   font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace;
   font-size: 0.95rem;
   line-height: 1.4;
   overflow-wrap: anywhere;
   user-select: text;
+  display: flex;
+  align-items: center;
 }
 
-#contract-note {
-  margin: 0 0 12px;
+.address.is-pending {
+  color: var(--muted);
+  font-family: var(--font-body);
+  letter-spacing: 0.04em;
 }
 
 .copy,
@@ -467,20 +505,30 @@ main {
 }
 
 .copy {
-  width: 100%;
-  border: 0;
-  background: var(--accent);
-  color: #1a1024;
+  flex: 0 0 48px;
+  width: 48px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  background: transparent;
+  color: var(--accent);
 }
 
-.copy:disabled,
-.action:disabled,
-.is-unavailable {
-  flex-direction: column;
-  gap: 2px;
+.copy svg {
+  display: block;
+}
+
+.copy:disabled {
   border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
   background: transparent;
   color: var(--muted);
+  cursor: not-allowed;
+}
+
+.action:disabled,
+.is-unavailable {
+  border: 0;
+  background: none;
+  color: var(--text);
   cursor: not-allowed;
 }
 
@@ -513,20 +561,13 @@ main {
   color: var(--text);
 }
 
-.soon {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-}
-
 .stats {
   text-align: center;
 }
 
 .stat-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin: 0;
 }

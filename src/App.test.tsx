@@ -15,16 +15,20 @@ describe('App', () => {
     ]);
     expect(screen.getByText(token.tagline)).toBeInTheDocument();
     expect(screen.getByText(token.description)).toBeInTheDocument();
-    expect(screen.getByText(String(token.evolution.length))).toBeInTheDocument();
-    expect(screen.getByText('∞')).toBeInTheDocument();
-    expect(screen.getByText('MAX')).toBeInTheDocument();
-    expect(screen.getByText(token.strings.statsNote)).toBeInTheDocument();
-    expect(screen.getByText(token.footerNote)).toBeInTheDocument();
+    for (const item of token.statusLines) {
+      expect(screen.getByText(item.label)).toBeInTheDocument();
+      expect(screen.getAllByText(item.value).length).toBeGreaterThan(0);
+    }
+    expect(screen.queryByText(token.strings.statsNote)).not.toBeInTheDocument();
+    expect(screen.queryByText(token.footerNote)).not.toBeInTheDocument();
+    expect(screen.queryByText('Intelligence and chonk values are fictional.')).not.toBeInTheDocument();
     expect(screen.queryByText(token.chainName)).not.toBeInTheDocument();
     const xLinks = screen.getAllByRole('link', { name: token.strings.socialX });
     const telegramLinks = screen.getAllByRole('link', { name: token.strings.socialTelegram });
     expect(xLinks[0]).toHaveAttribute('href', 'https://x.com/hsichonk_eth');
     expect(telegramLinks[0]).toHaveAttribute('href', 'https://t.me/sivitalik');
+    expect(xLinks[1]?.querySelector('svg')).toBeTruthy();
+    expect(telegramLinks[1]?.querySelector('svg')).toBeTruthy();
     expect(document.body.innerHTML).not.toContain('sichonk-banner');
     expect(document.body.innerHTML).not.toContain('sichonk-social-preview');
   });
