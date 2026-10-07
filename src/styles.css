@@ -979,6 +979,16 @@ html.overlay-open body {
 }
 
 @media (min-width: 900px) {
+  .site {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .home-frame {
+    width: min(75vw, calc((100dvh - 7.75rem) * 2103 / 1496));
+    max-height: 100dvh;
+  }
+
   .home-bar,
   .home-nav,
   .home-actions,
