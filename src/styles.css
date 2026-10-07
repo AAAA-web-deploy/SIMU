@@ -782,7 +782,7 @@ html.overlay-open body {
 .token-top {
   position: relative;
   display: grid;
-  grid-template-columns: auto minmax(180px, 1.15fr) minmax(320px, 1fr);
+  grid-template-columns: auto minmax(180px, 1.15fr) minmax(250px, 284px);
   align-items: stretch;
   gap: 12px;
   margin-top: 8px;
@@ -906,7 +906,7 @@ html.overlay-open body {
 .stat-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
 }
 
@@ -914,9 +914,9 @@ html.overlay-open body {
 .tax {
   min-width: 0;
   height: 100%;
-  min-height: 118px;
+  min-height: 104px;
   margin: 0;
-  padding: 12px 8px;
+  padding: 8px 6px;
   border-radius: 14px;
   border: 1px solid rgba(90, 140, 220, 0.45);
   background: rgba(8, 16, 36, 0.88);
