@@ -782,7 +782,7 @@ html.overlay-open body {
 .token-top {
   position: relative;
   display: grid;
-  grid-template-columns: auto minmax(0, 1.4fr) minmax(250px, 0.9fr);
+  grid-template-columns: auto minmax(180px, 1.15fr) minmax(320px, 1fr);
   align-items: stretch;
   gap: 12px;
   margin-top: 8px;
@@ -913,8 +913,10 @@ html.overlay-open body {
 .proof,
 .tax {
   min-width: 0;
+  height: 100%;
+  min-height: 148px;
   margin: 0;
-  padding: 12px 8px;
+  padding: 14px 8px;
   border-radius: 14px;
   border: 1px solid rgba(90, 140, 220, 0.45);
   background: rgba(8, 16, 36, 0.88);
@@ -931,11 +933,13 @@ html.overlay-open body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 100%;
   gap: 8px;
   margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.15;
-  letter-spacing: 0.04em;
+  font-size: 1.32rem;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
   text-align: center;
 }
 
@@ -960,7 +964,8 @@ html.overlay-open body {
 .tax-value {
   font-family: var(--font-display);
   width: 100%;
-  font-size: 2.25rem;
+  margin-top: 8px;
+  font-size: 2.85rem;
   line-height: 1;
   text-align: center;
 }
