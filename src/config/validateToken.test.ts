@@ -21,8 +21,8 @@ describe('token config', () => {
     expect(token.contractAddress).toBeNull();
     expect(token.buyUrl).toBe('https://www.dextools.io/app/ether/pair-explorer/');
     expect(token.chartUrl).toBe('https://dexscreener.com/ethereum/');
-    expect(token.xUrl).toBe('https://x.com/hsichonk_eth');
-    expect(token.telegramUrl).toBe('https://t.me/sivitalik');
+    expect(token.xUrl).toBe('https://x.com/si_chonk');
+    expect(token.telegramUrl).toBe('https://t.me/sichonk');
     expect(token.siteUrl).toBe('https://hsichonk.site');
     expect(token.evolution).toHaveLength(6);
     expect(token.memeStats[0]?.deriveFrom).toBe('evolution.length');

@@ -1,28 +1,31 @@
-export async function copyExactText(value: string): Promise<boolean> {
+function copyWithSelection(value: string): boolean {
+  const area = document.createElement('textarea');
+  area.value = value;
+  area.setAttribute('readonly', '');
+  area.style.position = 'fixed';
+  area.style.top = '0';
+  area.style.left = '-9999px';
+  document.body.appendChild(area);
+  area.focus();
+  area.select();
+  area.setSelectionRange(0, value.length);
+  let copied = false;
   try {
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(value);
-      return true;
-    }
+    copied = document.execCommand('copy');
   } catch {
-    // Fall through to the selection path for browsers that block the async API.
+    copied = false;
   }
+  area.remove();
+  return copied;
+}
 
-  try {
-    const area = document.createElement('textarea');
-    area.value = value;
-    area.setAttribute('readonly', '');
-    area.style.position = 'fixed';
-    area.style.top = '0';
-    area.style.left = '0';
-    area.style.opacity = '0';
-    document.body.appendChild(area);
-    area.focus();
-    area.select();
-    const copied = document.execCommand('copy');
-    area.remove();
-    return copied;
-  } catch {
-    return false;
+export function copyExactText(value: string): Promise<boolean> {
+  if (copyWithSelection(value)) return Promise.resolve(true);
+  if (navigator.clipboard?.writeText && window.isSecureContext) {
+    return navigator.clipboard.writeText(value).then(
+      () => true,
+      () => false,
+    );
   }
+  return Promise.resolve(false);
 }

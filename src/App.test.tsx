@@ -25,8 +25,8 @@ describe('App', () => {
     expect(screen.queryByText(token.chainName)).not.toBeInTheDocument();
     const xLinks = screen.getAllByRole('link', { name: token.strings.socialX });
     const telegramLinks = screen.getAllByRole('link', { name: token.strings.socialTelegram });
-    expect(xLinks[0]).toHaveAttribute('href', 'https://x.com/hsichonk_eth');
-    expect(telegramLinks[0]).toHaveAttribute('href', 'https://t.me/sivitalik');
+    expect(xLinks[0]).toHaveAttribute('href', token.xUrl);
+    expect(telegramLinks[0]).toHaveAttribute('href', token.telegramUrl);
     expect(xLinks[1]?.querySelector('svg')).toBeTruthy();
     expect(telegramLinks[1]?.querySelector('svg')).toBeTruthy();
     expect(document.body.innerHTML).not.toContain('sichonk-banner');

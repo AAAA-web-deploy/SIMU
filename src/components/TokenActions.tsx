@@ -29,10 +29,11 @@ function UnavailableAction({ label }: { label: string }) {
 }
 
 export function TokenActions({ token, copyText = copyExactText, copiedDurationMs = 2000 }: Props) {
-  const address = isEthereumAddress(token.contractAddress) ? token.contractAddress : null;
+  const trimmedAddress = token.contractAddress?.trim() ?? '';
+  const address = isEthereumAddress(trimmedAddress) ? trimmedAddress : null;
   const buyHref = canBuy(token.buyUrl) ? token.buyUrl : null;
   const chartHref = canOpenChart(token.chartUrl) ? token.chartUrl : null;
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed' | 'empty'>('idle');
 
   useEffect(() => {
     if (copyState !== 'copied') return undefined;
@@ -41,7 +42,10 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
   }, [copyState, copiedDurationMs]);
 
   async function onCopy() {
-    if (!address) return;
+    if (!address) {
+      setCopyState('empty');
+      return;
+    }
     const ok = await copyText(address);
     setCopyState(ok ? 'copied' : 'failed');
   }
@@ -51,7 +55,7 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
       <h2 id="contract-heading">{token.strings.contractHeading}</h2>
       <div className="contract-row">
         {address ? (
-          <p id="contract-address" className="address">
+          <p id="contract-address" className="address" onClick={() => void onCopy()}>
             {address}
           </p>
         ) : (
@@ -63,7 +67,6 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
           type="button"
           className="copy"
           onClick={() => void onCopy()}
-          disabled={!address}
           aria-label={copyState === 'copied' ? token.strings.copied : token.strings.copy}
           aria-describedby={address ? undefined : 'contract-note'}
         >
@@ -75,7 +78,9 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
           ? token.strings.copied
           : copyState === 'failed'
             ? token.strings.copyFailed
-            : ''}
+            : copyState === 'empty'
+              ? token.strings.contractPending
+              : ''}
       </p>
       <div className="actions">
         {buyHref ? (
