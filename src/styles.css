@@ -564,8 +564,7 @@ html.overlay-open body {
 .text-launch,
 .zoom-controls button,
 .tx-link,
-.market-card,
-.swap-step {
+.market-card {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -821,6 +820,11 @@ html.overlay-open body {
   object-position: center;
 }
 
+.identity {
+  align-self: center;
+  min-width: 0;
+}
+
 .identity h2,
 .identity h3,
 .proof h3,
@@ -1026,18 +1030,17 @@ html.overlay-open body {
 
 .buy-row {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1.15fr 0.9fr;
-  gap: 8px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.buy-step,
-.swap-step {
+.buy-step {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-height: 64px;
+  gap: 10px;
+  min-height: 72px;
   margin: 0;
-  padding: 8px 10px;
+  padding: 10px 12px;
   border-radius: 12px;
   background: #10192e;
   text-align: left;
@@ -1056,17 +1059,13 @@ html.overlay-open body {
 .step-orange span { background: #ff7a1a; }
 .step-purple span { background: #a855f7; }
 .step-blue span { background: #3b82f6; }
+.step-green span { background: #22c55e; }
 
 .buy-step p {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 0.92rem;
   font-weight: 700;
-}
-
-.swap-step {
-  border-radius: 12px;
-  background: #3a4254;
-  color: #d5d8e2;
+  line-height: 1.25;
 }
 
 .sheet-actions {
@@ -1086,11 +1085,17 @@ html.overlay-open body {
 .sheet-club {
   width: 100%;
   min-height: 40px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding: 4px 16px;
   border-radius: 12px;
   font-size: 1.28rem;
   letter-spacing: 0.03em;
+}
+
+.sheet-mark {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex: none;
 }
 
 .sheet-club {

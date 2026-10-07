@@ -3,15 +3,12 @@ import { assetUrl } from '../utils/assetUrl.ts';
 import { displayTicker } from '../lib/launch.ts';
 import type { MarketLink, TokenConfig } from '../types/token.ts';
 import {
-  BookIcon,
   ChartIcon,
   CloseIcon,
   CopyButton,
   ExternalControl,
   FittedText,
   HomeIcon,
-  PeopleIcon,
-  SwapIcon,
   TelegramIcon,
   XIcon,
 } from './controls.tsx';
@@ -213,7 +210,11 @@ function DetailsPanel({
   closeRef: RefObject<HTMLButtonElement | null>;
 }) {
   const contractText = address ?? token.strings.contractPending;
-  const stepClass = ['step-orange', 'step-purple', 'step-blue'];
+  const buySteps = [
+    ...token.howToBuy,
+    { title: '4', body: 'Swap on DEX.' },
+  ];
+  const stepClass = ['step-orange', 'step-purple', 'step-blue', 'step-green'];
 
   return (
     <>
@@ -302,38 +303,29 @@ function DetailsPanel({
           <section className="how-to-buy" aria-labelledby="how-to-buy-heading">
             <h2 id="how-to-buy-heading">How to buy</h2>
             <div className="buy-row">
-              {token.howToBuy.map((step, index) => (
+              {buySteps.map((step, index) => (
                 <article key={step.body} className={`buy-step ${stepClass[index] ?? ''}`}>
                   <span>{step.title}</span>
                   <p>{step.body}</p>
                 </article>
               ))}
-              <ExternalControl href={token.buyUrl} className="swap-step">
-                <SwapIcon />
-                <span>
-                  Swap on DEX
-                  {livePending(token.buyUrl) ? ' (Pending)' : ''}
-                </span>
-              </ExternalControl>
             </div>
           </section>
           </div>
           <div className="sheet-actions">
             <button type="button" className="sheet-story" onClick={() => onOpen('story')}>
-              <BookIcon /> Read the full story <span aria-hidden="true">→</span>
+              <img className="sheet-mark" src={assetUrl('/assets/simu/story-book.png')} alt="" width={1024} height={1024} />
+              Read the full story <span aria-hidden="true">→</span>
             </button>
             <button type="button" className="sheet-club" onClick={() => onOpen('club')}>
-              <PeopleIcon /> Visit Musashi Club <span aria-hidden="true">→</span>
+              <img className="sheet-mark" src={assetUrl('/assets/simu/club-people.png')} alt="" width={1024} height={1024} />
+              Visit Musashi Club <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>
       </div>
     </>
   );
-}
-
-function livePending(url: string | null): boolean {
-  return !url || !/^https:\/\//i.test(url);
 }
 
 const marketMarks: Record<string, string> = {

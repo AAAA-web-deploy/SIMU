@@ -90,10 +90,8 @@ describe('App', () => {
     expect(within(details).queryByRole('link', { name: /view transaction/i })).not.toBeInTheDocument();
     expect(within(details).queryByText(/provided by project/i)).not.toBeInTheDocument();
     expect(within(details).getByRole('link', { name: /etherscan/i })).toHaveAttribute('target', '_blank');
-    expect(within(details).getByRole('link', { name: /swap on dex/i })).toHaveAttribute(
-      'href',
-      'https://example.com/swap',
-    );
+    expect(within(details).getByText(/swap on dex/i)).toBeInTheDocument();
+    expect(within(details).queryByRole('link', { name: /swap on dex/i })).not.toBeInTheDocument();
 
     await user.click(within(details).getByRole('button', { name: /close/i }));
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
