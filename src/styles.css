@@ -1259,6 +1259,21 @@ html.overlay-open body {
     flex-wrap: nowrap;
   }
 
+  .home-foot-links {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .foot-contract {
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .foot-icons {
+    margin-left: 0;
+  }
+
   .toolbar-club {
     position: absolute;
     top: 1.7%;
