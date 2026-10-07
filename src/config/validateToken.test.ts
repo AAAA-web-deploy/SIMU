@@ -5,6 +5,9 @@ import { token } from './token.ts';
 
 const simuFiles = [
   'home.png',
+  'home-banner.jpg',
+  'home-logo.jpg',
+  'home-compare.jpg',
   'story.jpg',
   'token-background.png',
   'club.png',

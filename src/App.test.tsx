@@ -11,7 +11,7 @@ describe('App', () => {
     const user = userEvent.setup();
     render(<App />);
 
-    expect(screen.getByRole('img', { name: /same superintelligence/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('img', { name: /same superintelligence/i })).toHaveLength(2);
     expect(screen.getByRole('button', { name: /read the full story/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /token information/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /community/i })).toBeInTheDocument();
