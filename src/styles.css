@@ -292,10 +292,11 @@ html.overlay-open body {
 
 .home-compare-wrap .home-actions {
   position: absolute;
-  top: 88%;
+  top: auto;
   right: 10px;
-  bottom: 1.2%;
+  bottom: 2px;
   left: 10px;
+  height: 8%;
   z-index: 2;
   padding: 0;
 }
@@ -994,14 +995,11 @@ html.overlay-open body {
     flex: 1 1 auto;
     min-height: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    container-type: size;
   }
 
   .home-art {
-    width: min(100cqw, calc(100cqh * 2103 / 1496));
-    height: min(100cqh, calc(100cqw * 1496 / 2103));
+    width: 100%;
+    height: 100%;
   }
 
   .home-banner,
@@ -1012,7 +1010,14 @@ html.overlay-open body {
 
   .home-banner,
   .home-compare {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .home-compare {
+    object-position: center 72%;
   }
 
   .home-bar,
@@ -1067,6 +1072,7 @@ html.overlay-open body {
     right: auto;
     bottom: auto;
     left: auto;
+    height: auto;
     padding: 8px 0 0;
   }
 
