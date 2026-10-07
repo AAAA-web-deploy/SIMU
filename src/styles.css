@@ -398,12 +398,12 @@ html.overlay-open body {
   height: auto;
   z-index: 2;
   padding: 0;
+  justify-content: center;
 }
 
 .home-compare-wrap .story-launch,
 .home-compare-wrap .ghost-launch,
 .home-compare-wrap .text-launch,
-.home-compare-wrap .action-chart,
 .home-compare-wrap .icon-chip {
   min-height: 0;
   max-height: 100%;
@@ -454,17 +454,6 @@ html.overlay-open body {
   letter-spacing: 0.05em;
 }
 
-.home-frame .action-chart {
-  min-height: 44px;
-  padding: 0 12px;
-  border: 1.5px solid transparent;
-  border-radius: 10px;
-  background:
-    linear-gradient(180deg, rgba(10, 16, 36, 0.72), rgba(8, 14, 30, 0.72)) padding-box,
-    linear-gradient(140deg, #8fd4ff, #7d78ff) border-box;
-  letter-spacing: 0.02em;
-}
-
 .home-frame .text-launch {
   min-height: 44px;
   border: 0;
@@ -488,13 +477,17 @@ html.overlay-open body {
 .home-compare-wrap .story-launch,
 .home-compare-wrap .ghost-launch,
 .home-compare-wrap .text-launch,
-.home-compare-wrap .action-chart {
+.home-compare-wrap .action-icons {
   height: 100%;
 }
 
-.home-compare-wrap .action-chart,
 .home-compare-wrap .text-launch {
   min-height: 0;
+}
+
+.home-compare-wrap .action-icons {
+  margin-left: 0;
+  align-items: center;
 }
 
 .home-compare-wrap .action-icons .icon-chip,
@@ -1148,8 +1141,8 @@ html.overlay-open body {
   .home-compare-wrap .story-launch,
   .home-compare-wrap .ghost-launch,
   .home-compare-wrap .text-launch,
-  .home-compare-wrap .action-chart,
   .home-compare-wrap .icon-chip,
+  .home-compare-wrap .action-icons,
   .home-frame .story-launch,
   .home-frame .ghost-launch {
     height: auto;

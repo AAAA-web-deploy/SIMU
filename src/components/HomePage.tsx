@@ -100,9 +100,6 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
                 <XIcon />
                 <span className="sr-only">X</span>
               </ExternalControl>
-              <ExternalControl href={token.chartUrl} className="action-chart">
-                <ChartIcon /> Chart
-              </ExternalControl>
             </span>
           </div>
           </div>
