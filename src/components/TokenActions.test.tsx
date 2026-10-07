@@ -16,7 +16,7 @@ describe('TokenActions', () => {
     render(<TokenActions token={token} />);
     expect(screen.getByText(token.strings.contractPending)).toBeInTheDocument();
     expect(screen.queryByText(/^0x/)).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: token.strings.copy })).toBeDisabled();
+    expect(screen.getByRole('button', { name: token.strings.copy })).toBeEnabled();
     expect(screen.getByRole('link', { name: token.strings.buy })).toHaveAttribute('href', token.buyUrl);
     expect(screen.getByRole('link', { name: token.strings.chart })).toHaveAttribute('href', token.chartUrl);
     expect(screen.queryByText(token.strings.comingSoon)).not.toBeInTheDocument();

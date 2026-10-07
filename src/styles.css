@@ -523,10 +523,10 @@ main {
 }
 
 .copy:disabled {
-  border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
   background: transparent;
-  color: var(--muted);
-  cursor: not-allowed;
+  color: var(--accent);
+  cursor: pointer;
 }
 
 .action:disabled,

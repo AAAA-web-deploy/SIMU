@@ -79,7 +79,6 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
           type="button"
           className={copyState === 'copied' ? 'copy is-copied' : 'copy'}
           onClick={() => void onCopy()}
-          disabled={!address}
           aria-label={copyState === 'copied' ? token.strings.copied : token.strings.copy}
           aria-describedby={address ? 'contract-address' : 'contract-note'}
         >
