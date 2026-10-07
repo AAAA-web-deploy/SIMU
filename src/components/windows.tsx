@@ -371,9 +371,6 @@ function ClubPanel({
   return (
     <>
       <div className="window-toolbar toolbar-club">
-        <button type="button" className="text-button" onClick={onClose}>
-          {displayTicker(token.ticker)}
-        </button>
         <LaunchLinks
           token={token}
           address={address}
@@ -397,27 +394,20 @@ function ClubPanel({
             <div className="club-socials">
               <ExternalControl href={token.telegramUrl} className="club-telegram">
                 <TelegramIcon />
-                <span>
-                  <strong>Telegram</strong>
-                  Join the conversation
-                </span>
-                <span aria-hidden="true">→</span>
+                <span className="sr-only">Telegram</span>
               </ExternalControl>
               <ExternalControl href={token.xUrl} className="club-x">
                 <XIcon />
-                <span>
-                  <strong>X</strong>
-                  Follow the updates
-                </span>
-                <span aria-hidden="true">→</span>
+                <span className="sr-only">X</span>
               </ExternalControl>
             </div>
             <div className="club-jumps">
-              <button type="button" onClick={() => onOpen('details')}>
-                {displayTicker(token.ticker)} Details
+              <button type="button" className="ghost-launch" onClick={() => onOpen('details')}>
+                ⚔️ SIMU Details
               </button>
-              <button type="button" onClick={() => onOpen('story')}>
-                Read the full story. <span aria-hidden="true">→</span>
+              <button type="button" className="sheet-story" onClick={() => onOpen('story')}>
+                <img className="sheet-mark" src={assetUrl('/assets/simu/story-book.png')} alt="" width={1024} height={1024} />
+                Read the full story <span aria-hidden="true">→</span>
               </button>
             </div>
           </div>

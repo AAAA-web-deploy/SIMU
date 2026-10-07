@@ -752,29 +752,39 @@ html.overlay-open body {
 
 .toolbar-details .chip,
 .toolbar-details .text-button,
-.toolbar-details .close-button {
+.toolbar-details .close-button,
+.toolbar-club .chip,
+.toolbar-club .text-button,
+.toolbar-club .close-button {
   border-radius: 10px;
   background: var(--chip);
 }
 
 .toolbar-details .icon-square,
-.toolbar-details .close-button {
+.toolbar-details .close-button,
+.toolbar-club .icon-square,
+.toolbar-club .close-button {
   position: relative;
   width: 44px;
   height: 44px;
   min-width: 44px;
   min-height: 44px;
   padding: 0;
+  flex: none;
 }
 
 .toolbar-details .icon-square svg,
-.toolbar-details .close-button svg {
+.toolbar-details .close-button svg,
+.toolbar-club .icon-square svg,
+.toolbar-club .close-button svg {
   width: 18px;
   height: 18px;
 }
 
 .toolbar-details .icon-square .toolbar-word,
-.toolbar-details .close-button .toolbar-word {
+.toolbar-details .close-button .toolbar-word,
+.toolbar-club .icon-square .toolbar-word,
+.toolbar-club .close-button .toolbar-word {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -1190,20 +1200,31 @@ html.overlay-open body {
   padding: 12px;
 }
 
-.club-socials,
+.club-socials {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .club-jumps {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 8px;
 }
 
 .club-telegram,
-.club-x,
-.club-jumps button {
-  width: 100%;
-  border-radius: 14px;
-  padding: 8px 12px;
-  text-align: left;
+.club-x {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 10px;
+  flex: none;
+}
+
+.club-telegram svg,
+.club-x svg {
+  width: 20px;
+  height: 20px;
 }
 
 .club-telegram {
@@ -1215,26 +1236,27 @@ html.overlay-open body {
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.club-telegram span,
-.club-x span {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-  font-size: 0.78rem;
-  font-weight: 600;
+.club-jumps .ghost-launch,
+.club-jumps .sheet-story {
+  width: auto;
+  min-height: 44px;
+  flex: none;
+  white-space: nowrap;
 }
 
-.club-jumps {
-  padding: 4px;
-  border-radius: 16px;
-  background: #ddd6ff;
+.club-art .sheet-mark {
+  width: 28px;
+  height: 28px;
 }
 
-.club-jumps button {
-  min-height: 42px;
-  background: transparent;
-  color: #24124d;
-  font-weight: 800;
+.club-jumps .ghost-launch {
+  border: 0;
+  border-radius: 12px;
+  padding: 0 16px;
+  background: linear-gradient(90deg, #3d7dff, #7a45f5);
+  color: #fff;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .zoom-controls button {
@@ -1281,34 +1303,24 @@ html.overlay-open body {
     right: 0.8%;
     left: auto;
     width: auto;
-    max-width: 56%;
+    max-width: none;
     padding: 0;
     background: transparent;
     flex-wrap: nowrap;
     justify-content: flex-end;
   }
 
-  .toolbar-club .chip,
-  .toolbar-club .text-button,
-  .toolbar-club .close-button {
-    min-height: 32px;
-    padding: 0 8px;
-    font-size: 0.74rem;
-  }
-
   .club-actions {
     position: absolute;
     right: 2.4%;
     bottom: 1.5%;
-    width: 32%;
+    width: auto;
     padding: 0;
   }
 
-  .club-telegram,
-  .club-x,
-  .club-jumps button {
-    min-height: 36px;
-    padding: 4px 8px;
+  .club-jumps .ghost-launch,
+  .club-jumps .sheet-story {
+    min-height: 40px;
   }
 }
 
