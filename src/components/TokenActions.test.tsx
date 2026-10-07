@@ -56,6 +56,7 @@ describe('TokenActions', () => {
     await user.click(screen.getByRole('button', { name: token.strings.copy }));
     expect(copyText).toHaveBeenCalledWith(address);
     expect(screen.getByRole('button', { name: token.strings.copied })).toBeInTheDocument();
+    expect(screen.getByText(token.strings.copied)).toBeInTheDocument();
     await waitFor(() => {
       expect(screen.getByRole('button', { name: token.strings.copy })).toBeInTheDocument();
     });

@@ -70,7 +70,7 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
           <CopyIcon />
         </button>
       </div>
-      <p className={copyState === 'failed' ? 'copy-status' : 'sr-only'} aria-live="polite">
+      <p className={copyState === 'idle' ? 'sr-only' : 'copy-status'} aria-live="polite">
         {copyState === 'copied'
           ? token.strings.copied
           : copyState === 'failed'
