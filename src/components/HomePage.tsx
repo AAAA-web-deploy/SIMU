@@ -107,33 +107,37 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
       </div>
       <footer className="home-foot">
         <div className="home-foot-links">
+          <span className="foot-icons">
+            <ExternalControl href={token.chartUrl} className="meta-link foot-icon">
+              <ChartIcon />
+              <span className="sr-only">Chart</span>
+            </ExternalControl>
+            <ExternalControl href={token.telegramUrl} className="meta-link foot-icon">
+              <TelegramIcon />
+              <span className="sr-only">Telegram</span>
+            </ExternalControl>
+            <ExternalControl href={token.xUrl} className="meta-link foot-icon">
+              <XIcon />
+              <span className="sr-only">X</span>
+            </ExternalControl>
+          </span>
+          <span className="v-rule" aria-hidden="true" />
           <p>
             <EthIcon /> {ticker} · {token.chainName}
           </p>
-          <span className="v-rule" aria-hidden="true" />
-          <p className="contract-line">
-            <span className="contract-label">Contract:</span>
-            <span className="contract-slot">
-              <FittedText text={contractText} />
-            </span>
-          </p>
-          <CopyButton canCopy={Boolean(address)} state={copyState} onCopy={onCopy} className="foot-copy">
-            <span className="sr-only">Copy contract address</span>
-          </CopyButton>
-          <span className="v-rule" aria-hidden="true" />
-          <ExternalControl href={token.chartUrl} className="meta-link">
-            <ChartIcon /> Chart
-          </ExternalControl>
-          <span className="v-rule" aria-hidden="true" />
-          <ExternalControl href={token.telegramUrl} className="meta-link">
-            <TelegramIcon /> Telegram
-          </ExternalControl>
-          <span className="v-rule" aria-hidden="true" />
-          <ExternalControl href={token.xUrl} className="meta-link">
-            <XIcon /> X
-          </ExternalControl>
+          <div className="foot-contract">
+            <span className="v-rule" aria-hidden="true" />
+            <p className="contract-line">
+              <span className="contract-label">Contract:</span>
+              <span className="contract-slot">
+                <FittedText text={contractText} />
+              </span>
+            </p>
+            <CopyButton canCopy={Boolean(address)} state={copyState} onCopy={onCopy} className="foot-copy">
+              <span className="sr-only">Copy contract address</span>
+            </CopyButton>
+          </div>
         </div>
-        <p className="home-note">Comparison from the fictional story.</p>
       </footer>
     </div>
   );
