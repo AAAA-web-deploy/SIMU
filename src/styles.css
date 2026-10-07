@@ -517,6 +517,11 @@ main {
   display: block;
 }
 
+.copy.is-copied {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 .copy:disabled {
   border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
   background: transparent;

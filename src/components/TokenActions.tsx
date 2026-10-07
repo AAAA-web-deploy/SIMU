@@ -20,6 +20,21 @@ function CopyIcon() {
   );
 }
 
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
+  );
+}
+
 function UnavailableAction({ label }: { label: string }) {
   return (
     <button type="button" className="action is-unavailable" disabled>
@@ -33,7 +48,7 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
   const address = isEthereumAddress(trimmedAddress) ? trimmedAddress : null;
   const buyHref = canBuy(token.buyUrl) ? token.buyUrl : null;
   const chartHref = canOpenChart(token.chartUrl) ? token.chartUrl : null;
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed' | 'empty'>('idle');
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
 
   useEffect(() => {
     if (copyState !== 'copied') return undefined;
@@ -42,10 +57,7 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
   }, [copyState, copiedDurationMs]);
 
   async function onCopy() {
-    if (!address) {
-      setCopyState('empty');
-      return;
-    }
+    if (!address) return;
     const ok = await copyText(address);
     setCopyState(ok ? 'copied' : 'failed');
   }
@@ -55,7 +67,7 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
       <h2 id="contract-heading">{token.strings.contractHeading}</h2>
       <div className="contract-row">
         {address ? (
-          <p id="contract-address" className="address" onClick={() => void onCopy()}>
+          <p id="contract-address" className="address">
             {address}
           </p>
         ) : (
@@ -65,22 +77,17 @@ export function TokenActions({ token, copyText = copyExactText, copiedDurationMs
         )}
         <button
           type="button"
-          className="copy"
+          className={copyState === 'copied' ? 'copy is-copied' : 'copy'}
           onClick={() => void onCopy()}
+          disabled={!address}
           aria-label={copyState === 'copied' ? token.strings.copied : token.strings.copy}
-          aria-describedby={address ? undefined : 'contract-note'}
+          aria-describedby={address ? 'contract-address' : 'contract-note'}
         >
-          <CopyIcon />
+          {copyState === 'copied' ? <CheckIcon /> : <CopyIcon />}
         </button>
       </div>
-      <p className={copyState === 'idle' ? 'sr-only' : 'copy-status'} aria-live="polite">
-        {copyState === 'copied'
-          ? token.strings.copied
-          : copyState === 'failed'
-            ? token.strings.copyFailed
-            : copyState === 'empty'
-              ? token.strings.contractPending
-              : ''}
+      <p className={copyState === 'failed' ? 'copy-status' : 'sr-only'} aria-live="polite">
+        {copyState === 'copied' ? token.strings.copied : copyState === 'failed' ? token.strings.copyFailed : ''}
       </p>
       <div className="actions">
         {buyHref ? (
