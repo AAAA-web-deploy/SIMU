@@ -32,6 +32,7 @@ export default function App({
   const address = isEthereumAddress(config.contractAddress?.trim() ?? '')
     ? config.contractAddress!.trim()
     : null;
+  const contractText = address ?? config.strings.contractPending;
 
   useEffect(() => {
     document.title = config.pageTitle;
@@ -83,8 +84,7 @@ export default function App({
   }, [locked]);
 
   async function onCopy() {
-    if (!address) return;
-    const ok = await copyText(address);
+    const ok = await copyText(contractText);
     setCopyState(ok ? 'copied' : 'failed');
   }
 
@@ -101,7 +101,7 @@ export default function App({
       <main id="main" inert={locked ? true : undefined}>
         <HomePage
           token={config}
-          address={address}
+          address={contractText}
           copyState={copyState}
           onCopy={() => void onCopy()}
           onOpen={openPanel}
@@ -116,7 +116,7 @@ export default function App({
             key={panel}
             token={config}
             panel={panel}
-            address={address}
+            address={contractText}
             copyState={copyState}
             onCopy={() => void onCopy()}
             onOpen={openPanel}

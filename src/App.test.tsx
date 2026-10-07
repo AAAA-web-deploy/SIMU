@@ -65,6 +65,29 @@ describe('App', () => {
     expect(document.body.style.position).toBe('');
   });
 
+  it('copies the exact contract text from Copy CA and the button beside the address', async () => {
+    const user = userEvent.setup();
+    const copyText = vi.fn(async () => true);
+    render(<App copyText={copyText} />);
+
+    const headerCopy = screen.getByRole('button', { name: /copy ca/i });
+    const footCopy = screen.getByRole('button', { name: /copy contract address/i });
+
+    await user.click(headerCopy);
+    expect(copyText).toHaveBeenCalledWith(token.strings.contractPending);
+    expect(headerCopy.querySelector('path')?.getAttribute('d')).toContain('M5 13');
+
+    await user.click(footCopy);
+    expect(copyText).toHaveBeenLastCalledWith(token.strings.contractPending);
+
+    await user.click(screen.getByRole('button', { name: /simu details/i }));
+    const details = screen.getByRole('dialog', { name: /token details/i });
+    const addressCopy = details.querySelector('.copy-mark');
+    expect(addressCopy).not.toBeNull();
+    await user.click(addressCopy as HTMLButtonElement);
+    expect(copyText).toHaveBeenLastCalledWith(token.strings.contractPending);
+  });
+
   it('copies the complete contract address and opens external links in a new tab', async () => {
     const user = userEvent.setup();
     const copyText = vi.fn(async () => true);
