@@ -76,7 +76,9 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
       </div>
       <div className="home-actions">
         <button type="button" className="story-launch" onClick={() => onOpen('story')}>
-          <img src={assetUrl(token.logo)} alt="" width={72} height={72} />
+          <span className="story-face">
+            <img src={assetUrl(token.logo)} alt="" width={72} height={72} />
+          </span>
           Read the full story
           <span aria-hidden="true">›</span>
         </button>
@@ -96,9 +98,8 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
             <XIcon />
             <span className="sr-only">X</span>
           </ExternalControl>
-          <ExternalControl href={token.chartUrl} className="icon-chip">
-            <ChartIcon />
-            <span className="sr-only">Chart</span>
+          <ExternalControl href={token.chartUrl} className="action-chart">
+            <ChartIcon /> Chart
           </ExternalControl>
         </span>
       </div>
