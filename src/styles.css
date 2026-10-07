@@ -914,9 +914,9 @@ html.overlay-open body {
 .tax {
   min-width: 0;
   height: 100%;
-  min-height: 148px;
+  min-height: 118px;
   margin: 0;
-  padding: 14px 8px;
+  padding: 12px 8px;
   border-radius: 14px;
   border: 1px solid rgba(90, 140, 220, 0.45);
   background: rgba(8, 16, 36, 0.88);
@@ -935,17 +935,17 @@ html.overlay-open body {
   justify-content: center;
   width: 100%;
   max-width: 100%;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
-  font-size: 1.32rem;
+  font-size: 1.05rem;
   line-height: 1.1;
   letter-spacing: 0.03em;
   text-align: center;
 }
 
 .stat-mark {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   flex: none;
 }
@@ -964,8 +964,8 @@ html.overlay-open body {
 .tax-value {
   font-family: var(--font-display);
   width: 100%;
-  margin-top: 8px;
-  font-size: 2.85rem;
+  margin-top: 6px;
+  font-size: 2.05rem;
   line-height: 1;
   text-align: center;
 }
