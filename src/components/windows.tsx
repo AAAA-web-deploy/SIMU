@@ -73,7 +73,7 @@ function CloseButton({
 }) {
   return (
     <button ref={buttonRef} type="button" className="close-button" onClick={onClose}>
-      <CloseIcon /> Close
+      <CloseIcon /> <span className="toolbar-word">Close</span>
     </button>
   );
 }
@@ -93,14 +93,14 @@ function LaunchLinks({
       <CopyButton canCopy={Boolean(address)} state={copyState} onCopy={onCopy} className="chip">
         Copy CA
       </CopyButton>
-      <ExternalControl href={token.telegramUrl} className="chip">
-        <TelegramIcon /> Telegram
+      <ExternalControl href={token.telegramUrl} className="chip icon-square">
+        <TelegramIcon /> <span className="toolbar-word">Telegram</span>
       </ExternalControl>
-      <ExternalControl href={token.xUrl} className="chip">
-        <XIcon /> X
+      <ExternalControl href={token.xUrl} className="chip icon-square">
+        <XIcon /> <span className="toolbar-word">X</span>
       </ExternalControl>
-      <button type="button" className="text-button" onClick={onClose}>
-        <HomeIcon /> Back to homepage
+      <button type="button" className="text-button icon-square" onClick={onClose}>
+        <HomeIcon /> <span className="toolbar-word">Back to homepage</span>
       </button>
     </>
   );
@@ -260,7 +260,7 @@ function DetailsPanel({
               <p className="identity-ticker">{displayTicker(token.ticker)}</p>
               <h3>Contract address</h3>
               <div className="address-row">
-                <div className="address-field" id="contract-address">
+                <div className="address-field edge-glow" id="contract-address">
                   <FittedText text={contractText} />
                 </div>
                 <CopyButton
@@ -280,8 +280,8 @@ function DetailsPanel({
               </div>
             </div>
             <div className="stat-grid">
-              <StatCard src="/assets/simu/stats/lp-burn.png" label={token.lpBurn.label} />
-              <StatCard src="/assets/simu/stats/ownership.png" label={token.ownership.label} />
+              <StatCard className="edge-glow" src="/assets/simu/stats/lp-burn.png" label={token.lpBurn.label} />
+              <StatCard className="edge-glow" src="/assets/simu/stats/ownership.png" label={token.ownership.label} />
               <StatCard src="/assets/simu/stats/total-supply.png" label="TOTAL SUPPLY" />
               <StatCard src="/assets/simu/stats/contract-verified.png" label="CONTRACT VERIFIED" />
               <article className="tax tax-buy">
@@ -344,9 +344,9 @@ function MarketCard({ market }: { market: MarketLink }) {
   );
 }
 
-function StatCard({ src, label }: { src: string; label: string }) {
+function StatCard({ src, label, className }: { src: string; label: string; className?: string }) {
   return (
-    <article className="proof">
+    <article className={className ? `proof ${className}` : 'proof'}>
       <h3>
         <img className="stat-mark" src={assetUrl(src)} alt="" width={64} height={64} />
         {label}
