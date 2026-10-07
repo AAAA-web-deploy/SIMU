@@ -780,17 +780,41 @@ html.overlay-open body {
 }
 
 .token-top {
+  position: relative;
   display: grid;
-  grid-template-columns: 200px minmax(0, 1.15fr) minmax(250px, 0.95fr);
+  grid-template-columns: auto minmax(0, 1.15fr) minmax(220px, 0.95fr);
+  align-items: stretch;
   gap: 12px;
-  align-items: start;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid rgba(90, 160, 255, 0.45);
+  border-radius: 16px;
+}
+
+.token-top::after,
+.sheet-actions::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 3px;
+  border-radius: 0 0 16px 16px;
+  background: linear-gradient(90deg, #1496ff, #5ad4ff 50%, #1496ff);
+  box-shadow: 0 0 12px #3ec8ff;
+  pointer-events: none;
 }
 
 .portrait {
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 0;
+  min-height: 100%;
+  aspect-ratio: 1;
   border-radius: 16px;
   background: #f4efe4;
+  object-fit: contain;
+  object-position: center;
 }
 
 .identity h2,
@@ -1002,16 +1026,23 @@ html.overlay-open body {
 }
 
 .sheet-actions {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-top: 12px;
+  padding: 12px;
+  border: 1px solid rgba(90, 160, 255, 0.45);
+  border-radius: 16px;
 }
 
 .sheet-story,
 .sheet-club {
   width: 100%;
+  min-height: 58px;
   border-radius: 12px;
+  font-size: 1.28rem;
+  letter-spacing: 0.03em;
 }
 
 .sheet-club {
@@ -1197,6 +1228,8 @@ html.overlay-open body {
 
   .portrait {
     width: min(240px, 72%);
+    height: auto;
+    min-height: 0;
     margin: 0 auto;
   }
 
