@@ -714,6 +714,10 @@ html.overlay-open body {
   background: #071433;
 }
 
+.window-details {
+  width: min(92vw, 1360px);
+}
+
 .window-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -767,16 +771,28 @@ html.overlay-open body {
 }
 
 .token-sheet {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 1536 / 1024;
   background-color: #071018;
   background-repeat: no-repeat;
   background-position: top center;
-  background-size: 100% auto;
-  padding: 0 14px 16px;
+  background-size: 100% 100%;
+  padding: 0 18px 2.4%;
 }
 
 .token-title-space {
+  flex: 1 1 auto;
   width: 100%;
-  padding-top: 17%;
+  min-height: 24%;
+}
+
+.token-sheet > .token-top,
+.token-sheet > .how-to-buy,
+.token-sheet > .sheet-actions {
+  flex: none;
 }
 
 .token-top {
@@ -1248,6 +1264,23 @@ html.overlay-open body {
     min-height: 44px;
     width: auto;
     border-radius: 10px;
+  }
+
+  .window-details {
+    width: min(96vw, 1100px);
+  }
+
+  .token-sheet {
+    display: block;
+    aspect-ratio: auto;
+    background-size: 100% auto;
+    padding: 0 14px 16px;
+  }
+
+  .token-title-space {
+    flex: none;
+    min-height: 0;
+    padding-top: 28%;
   }
 
   .token-top,
