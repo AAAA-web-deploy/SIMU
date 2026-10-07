@@ -192,8 +192,8 @@ function StoryPanel({
           ref={imgRef}
           className="story-image"
           src={assetUrl(token.assets.story)}
-          width={682}
-          height={1024}
+          width={1024}
+          height={1536}
           alt="SI Musashi story. A trader buys a SuperIntelligence tool, then the same signal becomes a crowded entry. Everyone has SI. Skill makes the difference. He asks why, adds his own context, and decides. Same SI. Different hands."
           draggable={false}
           onLoad={layout}

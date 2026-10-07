@@ -5,10 +5,10 @@ import { token } from './token.ts';
 
 const simuFiles = [
   'home.png',
-  'home-banner.jpg',
-  'home-logo.jpg',
-  'home-compare.jpg',
-  'story.jpg',
+  'home-banner.png',
+  'home-logo.png',
+  'home-compare.png',
+  'story.png',
   'token-background.png',
   'club.png',
   'portrait.png',
