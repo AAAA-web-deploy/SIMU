@@ -786,9 +786,11 @@ html.overlay-open body {
   align-items: stretch;
   gap: 12px;
   margin-top: 8px;
-  padding: 12px;
-  border: 1px solid rgba(90, 160, 255, 0.45);
-  border-radius: 16px;
+  padding: 12px 0 14px;
+  border: 0;
+  border-top: 3px solid #2eb8ff;
+  border-radius: 0;
+  box-shadow: 0 -1px 10px rgba(46, 184, 255, 0.35);
 }
 
 .token-top::after,
@@ -799,10 +801,10 @@ html.overlay-open body {
   bottom: 0;
   left: 0;
   z-index: 1;
-  height: 3px;
-  border-radius: 0 0 16px 16px;
+  height: 5px;
+  border-radius: 0;
   background: linear-gradient(90deg, #1496ff, #5ad4ff 50%, #1496ff);
-  box-shadow: 0 0 12px #3ec8ff;
+  box-shadow: 0 0 14px #3ec8ff;
   pointer-events: none;
 }
 
@@ -969,7 +971,8 @@ html.overlay-open body {
   margin-top: 12px;
   padding: 10px;
   border-radius: 16px;
-  border: 1px solid rgba(80, 140, 255, 0.45);
+  border: 3px solid #2eb8ff;
+  box-shadow: 0 0 12px rgba(46, 184, 255, 0.35);
   background: rgba(6, 12, 28, 0.78);
 }
 
@@ -1031,9 +1034,11 @@ html.overlay-open body {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-top: 12px;
-  padding: 12px;
-  border: 1px solid rgba(90, 160, 255, 0.45);
-  border-radius: 16px;
+  padding: 12px 0 14px;
+  border: 0;
+  border-top: 3px solid #2eb8ff;
+  border-radius: 0;
+  box-shadow: 0 -1px 10px rgba(46, 184, 255, 0.35);
 }
 
 .sheet-story,
