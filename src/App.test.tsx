@@ -23,7 +23,13 @@ describe('App', () => {
     expect(details).toHaveAttribute('data-panel', 'details');
     expect(within(details).getByRole('heading', { name: /how to buy/i })).toBeInTheDocument();
     expect(within(details).getAllByText('0%')).toHaveLength(2);
-    expect(within(details).getAllByText(/pending verification/i).length).toBeGreaterThan(0);
+    const tokenTop = details.querySelector('.token-top');
+    expect(tokenTop).not.toBeNull();
+    expect(within(tokenTop as HTMLElement).queryByText(/pending verification/i)).not.toBeInTheDocument();
+    expect(within(tokenTop as HTMLElement).queryByText(/\(pending\)/i)).not.toBeInTheDocument();
+    expect(within(tokenTop as HTMLElement).queryByText(/^pending$/i)).not.toBeInTheDocument();
+    expect(within(tokenTop as HTMLElement).queryByText(/on-chain proof/i)).not.toBeInTheDocument();
+    expect(within(tokenTop as HTMLElement).queryByText(/^ethereum$/i)).not.toBeInTheDocument();
 
     await user.click(within(details).getByRole('button', { name: /visit musashi club/i }));
     const club = screen.getByRole('dialog', { name: /musashi club/i });

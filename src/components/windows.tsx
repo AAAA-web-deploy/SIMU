@@ -7,8 +7,6 @@ import {
   ChartIcon,
   CloseIcon,
   CopyButton,
-  DocIcon,
-  EthIcon,
   ExternalControl,
   FittedText,
   FlameIcon,
@@ -260,9 +258,6 @@ function DetailsPanel({
             <div className="identity">
               <h2>{token.name}</h2>
               <p className="identity-ticker">{displayTicker(token.ticker)}</p>
-              <p className="chain">
-                <EthIcon /> {token.chainName}
-              </p>
               <h3>Contract address</h3>
               <div className="address-row">
                 <div className="address-field" id="contract-address">
@@ -272,20 +267,17 @@ function DetailsPanel({
                   canCopy={Boolean(address)}
                   state={copyState}
                   onCopy={onCopy}
-                  className="chip copy-field"
+                  className="copy-mark"
                 >
-                  Copy
+                  <span className="sr-only">Copy</span>
                 </CopyButton>
               </div>
-              <h3 className="market-heading">Market links {token.markets.some((item) => !item.url) ? '(pending)' : ''}</h3>
+              <h3 className="market-heading">Market links</h3>
               <div className="market-row">
                 {token.markets.map((market) => (
                   <MarketCard key={market.name} market={market} />
                 ))}
               </div>
-              {token.markets.some((item) => !item.url) || !token.lpBurn.url || !token.ownership.url ? (
-                <p className="proof-note">{token.proofNote}</p>
-              ) : null}
             </div>
             <div className="stat-grid">
               <ProofCard proof={token.lpBurn} icon={<FlameIcon />} />
@@ -338,12 +330,18 @@ function livePending(url: string | null): boolean {
   return !url || !/^https:\/\//i.test(url);
 }
 
+const marketMarks: Record<string, string> = {
+  DEXScreener: '/assets/simu/markets/dexscreener.png',
+  DEXTools: '/assets/simu/markets/dextools.png',
+  Etherscan: '/assets/simu/markets/etherscan.png',
+};
+
 function MarketCard({ market }: { market: MarketLink }) {
+  const mark = marketMarks[market.name];
   return (
     <ExternalControl href={market.url} className="market-card">
-      <DocIcon />
+      {mark ? <img className="market-mark" src={assetUrl(mark)} alt="" width={64} height={64} /> : null}
       <span>{market.name}</span>
-      <small>{market.url ? 'View' : 'Pending'}</small>
     </ExternalControl>
   );
 }
@@ -355,7 +353,7 @@ function ProofCard({ proof, icon }: { proof: OnChainProof; icon: ReactNode }) {
       <h3>
         {icon} {proof.label}
       </h3>
-      <p>{verified ? 'Verified' : 'Pending verification'}</p>
+      {verified ? <p>Verified</p> : null}
       <ExternalControl href={proof.url} className="tx-link">
         View transaction <span aria-hidden="true">↗</span>
       </ExternalControl>

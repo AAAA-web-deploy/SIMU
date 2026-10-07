@@ -782,7 +782,7 @@ html.overlay-open body {
 .token-top {
   position: relative;
   display: grid;
-  grid-template-columns: auto minmax(0, 1.15fr) minmax(220px, 0.95fr);
+  grid-template-columns: auto minmax(0, 1.4fr) minmax(250px, 0.9fr);
   align-items: stretch;
   gap: 12px;
   margin-top: 8px;
@@ -813,7 +813,7 @@ html.overlay-open body {
 
 .identity h2 {
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: 2.55rem;
   line-height: 1;
 }
 
@@ -858,8 +858,15 @@ html.overlay-open body {
   background: #0a1224;
 }
 
-.copy-field {
+.copy-mark {
   flex: none;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(130, 170, 230, 0.55);
+  background: #0a1224;
 }
 
 .market-row {
@@ -873,14 +880,16 @@ html.overlay-open body {
   min-height: 72px;
   border-radius: 12px;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
   padding: 8px;
   font-size: 0.78rem;
 }
 
-.market-card small {
-  color: #ff9a3c;
-  font-weight: 700;
+.market-mark {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  mix-blend-mode: screen;
 }
 
 .proof-note {
@@ -891,12 +900,14 @@ html.overlay-open body {
 
 .stat-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 8px;
+  min-width: 0;
 }
 
 .proof,
 .tax {
+  min-width: 0;
   margin: 0;
   padding: 10px;
   border-radius: 14px;
