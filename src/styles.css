@@ -103,23 +103,23 @@ html.overlay-open body {
 }
 
 .side-rail {
-  --side-gap: 16px;
   --card-width: min(75vw, calc((100dvh - 8rem) * 2103 / 1496));
+  --rail-width: calc(12.5vw - 36px);
   position: fixed;
   top: 0;
   bottom: 0;
   z-index: 0;
-  width: calc((100vw - var(--card-width)) / 2 - 2 * var(--side-gap));
+  width: var(--rail-width);
   overflow: hidden;
   pointer-events: none;
 }
 
 .side-rail-up {
-  left: var(--side-gap);
+  left: calc((100vw - var(--card-width)) / 4 - var(--rail-width) / 2);
 }
 
 .side-rail-down {
-  right: var(--side-gap);
+  right: calc((100vw - var(--card-width)) / 4 - var(--rail-width) / 2);
 }
 
 .side-track {
