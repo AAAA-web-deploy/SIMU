@@ -13,12 +13,12 @@ describe('App', () => {
 
     expect(screen.getAllByRole('img', { name: /same superintelligence/i })).toHaveLength(2);
     expect(screen.getByRole('button', { name: /read the full story/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /token information/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /community/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /simu details/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /musashi club/i })).toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: /chart/i }).length).toBeGreaterThan(0);
     expect(screen.getByText(/awaiting confirmation/i)).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: /token information/i }));
+    await user.click(screen.getByRole('button', { name: /simu details/i }));
     const details = screen.getByRole('dialog', { name: /token details/i });
     expect(details).toHaveAttribute('data-panel', 'details');
     expect(within(details).getByRole('heading', { name: /how to buy/i })).toBeInTheDocument();
@@ -82,7 +82,7 @@ describe('App', () => {
     expect(chartLink).toHaveAttribute('target', '_blank');
     expect(chartLink).toHaveAttribute('rel', 'noopener noreferrer');
 
-    await user.click(screen.getByRole('button', { name: /token information/i }));
+    await user.click(screen.getByRole('button', { name: /simu details/i }));
     const details = screen.getByRole('dialog', { name: /token details/i });
     expect(within(details).getByText(address)).toBeInTheDocument();
     expect(within(details).getByRole('heading', { name: /total supply/i })).toBeInTheDocument();

@@ -467,7 +467,8 @@ html.overlay-open body {
   border-radius: 12px;
   background: linear-gradient(90deg, #3d7dff, #7a45f5);
   color: #fff;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .home-frame .text-launch {
@@ -476,8 +477,8 @@ html.overlay-open body {
   border-radius: 0;
   background: transparent;
   padding: 0 8px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .home-frame .action-icons .icon-chip {

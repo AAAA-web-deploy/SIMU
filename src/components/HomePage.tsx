@@ -4,7 +4,6 @@ import type { TokenConfig } from '../types/token.ts';
 import {
   ChartIcon,
   CopyButton,
-  DocIcon,
   EthIcon,
   ExternalControl,
   FittedText,
@@ -85,11 +84,11 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
               <span aria-hidden="true">›</span>
             </button>
             <button type="button" className="ghost-launch" onClick={() => onOpen('details')}>
-              <DocIcon /> Token information
+              ⚔️ SIMU Details
             </button>
             <span className="v-rule" aria-hidden="true" />
             <button type="button" className="text-launch" onClick={() => onOpen('club')}>
-              Community
+              💬 Musashi Club
             </button>
             <span className="action-icons">
               <ExternalControl href={token.telegramUrl} className="icon-chip">
