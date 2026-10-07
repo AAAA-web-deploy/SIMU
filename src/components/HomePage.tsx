@@ -90,16 +90,6 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
             <button type="button" className="text-launch" onClick={() => onOpen('club')}>
               💬 Musashi Club
             </button>
-            <span className="action-icons">
-              <ExternalControl href={token.telegramUrl} className="icon-chip">
-                <TelegramIcon />
-                <span className="sr-only">Telegram</span>
-              </ExternalControl>
-              <ExternalControl href={token.xUrl} className="icon-chip">
-                <XIcon />
-                <span className="sr-only">X</span>
-              </ExternalControl>
-            </span>
           </div>
           </div>
         </div>
