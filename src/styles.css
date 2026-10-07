@@ -1181,6 +1181,7 @@ html.overlay-open body {
 
 .sheet-club {
   background: linear-gradient(90deg, #7a3cff, #a855f7);
+  text-transform: uppercase;
 }
 
 .club-art {
