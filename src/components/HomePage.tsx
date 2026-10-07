@@ -66,42 +66,44 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
           height={724}
           alt={`${token.name} ${ticker}. Same SuperIntelligence. Different hands. The edge is how you use it.`}
         />
-        <img
-          className="home-compare"
-          src={assetUrl(token.assets.home)}
-          width={2172}
-          height={724}
-          alt="Without SI Musashi guidance, the crowd copies the signal and leaves the judgment to SI. With SI Musashi guidance, they question the answer, add context, and make the decision. Same SuperIntelligence. Different hands."
-        />
-      </div>
-      <div className="home-actions">
-        <button type="button" className="story-launch" onClick={() => onOpen('story')}>
-          <span className="story-face">
-            <img src={assetUrl(token.logo)} alt="" width={72} height={72} />
-          </span>
-          Read the full story
-          <span aria-hidden="true">›</span>
-        </button>
-        <button type="button" className="ghost-launch" onClick={() => onOpen('details')}>
-          <DocIcon /> Token information
-        </button>
-        <span className="v-rule" aria-hidden="true" />
-        <button type="button" className="text-launch" onClick={() => onOpen('club')}>
-          Community
-        </button>
-        <span className="action-icons">
-          <ExternalControl href={token.telegramUrl} className="icon-chip">
-            <TelegramIcon />
-            <span className="sr-only">Telegram</span>
-          </ExternalControl>
-          <ExternalControl href={token.xUrl} className="icon-chip">
-            <XIcon />
-            <span className="sr-only">X</span>
-          </ExternalControl>
-          <ExternalControl href={token.chartUrl} className="action-chart">
-            <ChartIcon /> Chart
-          </ExternalControl>
-        </span>
+        <div className="home-compare-wrap">
+          <img
+            className="home-compare"
+            src={assetUrl(token.assets.home)}
+            width={2172}
+            height={724}
+            alt="Without SI Musashi guidance, the crowd copies the signal and leaves the judgment to SI. With SI Musashi guidance, they question the answer, add context, and make the decision. Same SuperIntelligence. Different hands."
+          />
+          <div className="home-actions">
+            <button type="button" className="story-launch" onClick={() => onOpen('story')}>
+              <span className="story-face">
+                <img src={assetUrl(token.logo)} alt="" width={1254} height={1254} />
+              </span>
+              Read the full story
+              <span aria-hidden="true">›</span>
+            </button>
+            <button type="button" className="ghost-launch" onClick={() => onOpen('details')}>
+              <DocIcon /> Token information
+            </button>
+            <span className="v-rule" aria-hidden="true" />
+            <button type="button" className="text-launch" onClick={() => onOpen('club')}>
+              Community
+            </button>
+            <span className="action-icons">
+              <ExternalControl href={token.telegramUrl} className="icon-chip">
+                <TelegramIcon />
+                <span className="sr-only">Telegram</span>
+              </ExternalControl>
+              <ExternalControl href={token.xUrl} className="icon-chip">
+                <XIcon />
+                <span className="sr-only">X</span>
+              </ExternalControl>
+              <ExternalControl href={token.chartUrl} className="action-chart">
+                <ChartIcon /> Chart
+              </ExternalControl>
+            </span>
+          </div>
+        </div>
       </div>
       <footer className="home-foot">
         <div className="home-foot-links">
