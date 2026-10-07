@@ -238,10 +238,11 @@ function DetailsPanel({
         </div>
       </div>
       <div className="window-body" ref={bodyRef}>
-        <div
-          className="token-sheet"
-          style={{ backgroundImage: `url("${assetUrl(token.assets.tokenBackground)}")` }}
-        >
+        <div className="token-sheet">
+          <div
+            className="token-hero"
+            style={{ backgroundImage: `url("${assetUrl(token.assets.tokenBackground)}")` }}
+          >
           <div className="token-title-space">
             <p className="sr-only">$SIMU details. Token information and how to buy.</p>
           </div>
@@ -316,6 +317,7 @@ function DetailsPanel({
               </ExternalControl>
             </div>
           </section>
+          </div>
           <div className="sheet-actions">
             <button type="button" className="sheet-story" onClick={() => onOpen('story')}>
               <BookIcon /> Read the full story <span aria-hidden="true">→</span>

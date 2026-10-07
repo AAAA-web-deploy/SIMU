@@ -714,10 +714,6 @@ html.overlay-open body {
   background: #071433;
 }
 
-.window-details {
-  width: min(92vw, 1360px);
-}
-
 .window-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -771,6 +767,12 @@ html.overlay-open body {
 }
 
 .token-sheet {
+  display: flex;
+  flex-direction: column;
+  background: #071018;
+}
+
+.token-hero {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -789,9 +791,8 @@ html.overlay-open body {
   min-height: 24%;
 }
 
-.token-sheet > .token-top,
-.token-sheet > .how-to-buy,
-.token-sheet > .sheet-actions {
+.token-hero > .token-top,
+.token-hero > .how-to-buy {
   flex: none;
 }
 
@@ -1073,7 +1074,7 @@ html.overlay-open body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: 12px;
+  margin: 14px 18px 16px;
   padding: 10px;
   border-radius: 16px;
   border: 3px solid #2eb8ff;
@@ -1266,11 +1267,7 @@ html.overlay-open body {
     border-radius: 10px;
   }
 
-  .window-details {
-    width: min(96vw, 1100px);
-  }
-
-  .token-sheet {
+  .token-hero {
     display: block;
     aspect-ratio: auto;
     background-size: 100% auto;
@@ -1281,6 +1278,11 @@ html.overlay-open body {
     flex: none;
     min-height: 0;
     padding-top: 28%;
+  }
+
+  .sheet-actions {
+    margin-right: 14px;
+    margin-left: 14px;
   }
 
   .token-top,
