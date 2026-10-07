@@ -200,7 +200,11 @@ export function EvolutionHero({
   const incoming = incomingIndex !== null ? stages[incomingIndex] : undefined;
   const transition = incoming?.transition;
   const statusText = state.status === 'loading' ? token.strings.imageLoading : (notice ?? '');
-  const frameClass = ['hero-frame', fading && transition ? `fx-${transition}` : '', reduced ? 'is-reduced' : '']
+  const frameClass = [
+    'hero-frame',
+    fading && transition && transition !== 'none' ? `fx-${transition}` : '',
+    reduced ? 'is-reduced' : '',
+  ]
     .filter(Boolean)
     .join(' ');
   const frameStyle = { '--fade': `${transitionMs}ms` } as CSSProperties;
@@ -262,6 +266,9 @@ export function EvolutionHero({
             />
           ) : null}
           <span className="fx-layer" aria-hidden="true" />
+          {fading && !reduced && incoming?.transitionLabel ? (
+            <p className="gain-label">{incoming.transitionLabel}</p>
+          ) : null}
         </div>
       </div>
       <p className="hero-status" role="status">
@@ -271,6 +278,9 @@ export function EvolutionHero({
         {token.strings.evolutionLevel}: <span>{stage.stage}</span>
       </p>
       <p className="caption">{stage.caption}</p>
+      <p className="added-chip">
+        {fillTemplate(token.strings.addedChip, { addition: stage.addition })}
+      </p>
       <ol className="marks" aria-hidden="true">
         {stages.map((item, index) => (
           <li key={item.stage} className={index <= state.index ? 'is-on' : undefined} />

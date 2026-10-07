@@ -91,12 +91,30 @@ function readStage(value: unknown, index: number): EvolutionStage {
   if (era !== undefined && (typeof era !== 'string' || era.trim() === '')) {
     throw new Error(`evolution[${index}].era must be a non-empty string when set`);
   }
+  const transitionLabel = stage.transitionLabel;
+  if (
+    transitionLabel !== undefined &&
+    transitionLabel !== '' &&
+    typeof transitionLabel !== 'string'
+  ) {
+    throw new Error(`evolution[${index}].transitionLabel must be a string when set`);
+  }
 
   return {
     stage: requiredString(stage, 'stage', `evolution[${index}].stage`),
     image: requiredString(stage, 'image', `evolution[${index}].image`),
     caption: requiredString(stage, 'caption', `evolution[${index}].caption`),
+    addition: requiredString(stage, 'addition', `evolution[${index}].addition`),
+    growthDescription: requiredString(
+      stage,
+      'growthDescription',
+      `evolution[${index}].growthDescription`,
+    ),
     era: typeof era === 'string' ? era : undefined,
+    transitionLabel:
+      typeof transitionLabel === 'string' && transitionLabel.trim() !== ''
+        ? transitionLabel
+        : undefined,
     transition,
   };
 }
@@ -122,20 +140,30 @@ function readMemeStats(value: unknown, stageCount: number): MemeStat[] {
     const record = asRecord(stat, `memeStats[${index}]`);
     const label = requiredString(record, 'label', `memeStats[${index}].label`);
     const source = record.source;
+    const deriveFrom = record.deriveFrom;
     if (source !== undefined && source !== 'stageCount') {
       throw new Error(`memeStats[${index}].source must be "stageCount" when set`);
+    }
+    if (deriveFrom !== undefined && deriveFrom !== 'evolution.length') {
+      throw new Error(`memeStats[${index}].deriveFrom must be "evolution.length" when set`);
     }
     const rawValue = record.value;
     if (rawValue !== undefined && (typeof rawValue !== 'string' || rawValue.trim() === '')) {
       throw new Error(`memeStats[${index}].value must be a non-empty string when set`);
     }
-    if (source === 'stageCount') {
+    const derived = source === 'stageCount' || deriveFrom === 'evolution.length';
+    if (derived) {
       if (typeof rawValue === 'string' && rawValue !== String(stageCount)) {
         throw new Error(
           `memeStats "${label}" says ${rawValue}, but evolution.length is ${stageCount}. The stage-count stat is derived from the stage list.`,
         );
       }
-      return { label, value: rawValue, source: 'stageCount' as const };
+      return {
+        label,
+        value: rawValue,
+        source: source === 'stageCount' ? ('stageCount' as const) : undefined,
+        deriveFrom: deriveFrom === 'evolution.length' ? ('evolution.length' as const) : undefined,
+      };
     }
     if (typeof rawValue !== 'string') {
       throw new Error(`memeStats[${index}].value is required`);
@@ -168,6 +196,7 @@ function readStrings(value: unknown): TokenStrings {
     'logoAlt',
     'socialX',
     'socialTelegram',
+    'addedChip',
   ];
   const strings = {} as TokenStrings;
   for (const key of keys) {
@@ -226,6 +255,6 @@ export function validateTokenConfig(input: unknown): TokenConfig {
 }
 
 export function memeStatValue(stat: MemeStat, stageCount: number): string {
-  if (stat.source === 'stageCount') return String(stageCount);
+  if (stat.deriveFrom === 'evolution.length' || stat.source === 'stageCount') return String(stageCount);
   return stat.value ?? '';
 }

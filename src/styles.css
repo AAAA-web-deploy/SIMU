@@ -112,24 +112,6 @@ img {
   color: var(--accent);
 }
 
-.header-side {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
-.chain-badge {
-  margin: 0;
-  padding: 6px 12px;
-  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  border-radius: 999px;
-  color: var(--accent);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .social {
   display: flex;
   gap: 8px;
@@ -149,6 +131,16 @@ img {
 
 .social a:hover {
   color: var(--accent);
+}
+
+.social-header a {
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  color: var(--accent);
+}
+
+.social-header svg {
+  display: block;
 }
 
 main {
@@ -245,7 +237,7 @@ main {
   opacity: 0;
 }
 
-.fx-flicker .fx-layer {
+.fx-pixel .fx-layer {
   background: repeating-linear-gradient(
     to bottom,
     rgba(120, 255, 170, 0.28) 0 1px,
@@ -262,25 +254,39 @@ main {
   animation: scan 380ms linear;
 }
 
-.fx-cyan .fx-layer {
+.fx-cyan-pulse .fx-layer {
   box-shadow: inset 0 0 48px rgba(90, 220, 255, 0.55);
   animation: pulse 400ms ease;
 }
 
-.fx-violet .fx-layer {
-  box-shadow: inset 0 0 52px rgba(153, 88, 255, 0.62);
-  animation: pulse 400ms ease;
-}
-
-.fx-glow .fx-layer {
-  box-shadow:
-    inset 0 0 46px rgba(230, 185, 88, 0.4),
-    inset 0 0 70px rgba(153, 88, 255, 0.35);
-  animation: pulse 420ms ease;
-}
-
-.fx-halo {
+.fx-cosmic-halo {
   animation: halo 420ms ease;
+}
+
+.gain-label {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.added-chip {
+  margin: 10px 0 0;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 @keyframes flicker {
@@ -617,7 +623,7 @@ main {
   .incoming,
   .fx-layer,
   .hero-frame,
-  .fx-halo {
+  .fx-cosmic-halo {
     animation: none !important;
     transition: none !important;
   }
@@ -625,7 +631,7 @@ main {
 
 .hero-frame.is-reduced .incoming,
 .hero-frame.is-reduced .fx-layer,
-.hero-frame.is-reduced.fx-halo {
+.hero-frame.is-reduced.fx-cosmic-halo {
   animation: none;
   transition: none;
 }

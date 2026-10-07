@@ -28,11 +28,13 @@ describe('EvolutionHero', () => {
 
     expect(caption(captions[0]!)).toBeInTheDocument();
     expect(screen.getByRole('img').getAttribute('src')).toContain(files[0]);
-    expect(document.querySelectorAll('.marks li')).toHaveLength(7);
+    expect(document.querySelectorAll('.marks li')).toHaveLength(captions.length);
+    expect(screen.getByText(`Added: ${token.evolution[0]!.addition}`)).toBeInTheDocument();
 
     for (let step = 1; step < captions.length; step += 1) {
       await user.click(screen.getByRole('button', { name: /Evolve to the next stage/ }));
       expect(await screen.findByText(captions[step]!, { selector: '.caption' })).toBeInTheDocument();
+      expect(screen.getByText(`Added: ${token.evolution[step]!.addition}`)).toBeInTheDocument();
       expect(screen.getByRole('img').getAttribute('src')).toContain(files[step]);
       expect(document.querySelectorAll('.marks li.is-on')).toHaveLength(step + 1);
     }
@@ -40,7 +42,7 @@ describe('EvolutionHero', () => {
     expect(screen.getByText(token.finalLabel)).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /Evolve to the next stage/ })).not.toBeInTheDocument();
     await user.click(screen.getByRole('img'));
-    expect(caption(captions[6]!)).toBeInTheDocument();
+    expect(caption(captions[captions.length - 1]!)).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: token.strings.reset }));
     expect(await screen.findByText(captions[0]!, { selector: '.caption' })).toBeInTheDocument();
@@ -76,13 +78,13 @@ describe('EvolutionHero', () => {
     const user = userEvent.setup();
     let failNext = true;
     const preload = vi.fn(async (url: string) => {
-      if (failNext && url.includes('hsichonk-evolution-02-chonk.png')) return false;
+      if (failNext && url.includes(files[1]!)) return false;
       return true;
     });
     render(<EvolutionHero token={token} preload={preload} transitionMs={0} reducedMotion={false} />);
 
     await user.click(screen.getByRole('button', { name: /Evolve to the next stage/ }));
-    expect(await screen.findByText('Artwork unavailable (hsichonk-evolution-02-chonk.png)')).toBeInTheDocument();
+    expect(await screen.findByText(`Artwork unavailable (${files[1]})`)).toBeInTheDocument();
     expect(caption(captions[0]!)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Evolve to the next stage/ })).toHaveAttribute('aria-busy', 'false');
 
@@ -95,7 +97,7 @@ describe('EvolutionHero', () => {
     render(<EvolutionHero token={token} preload={async () => true} transitionMs={0} reducedMotion={false} />);
     fireEvent.error(screen.getByRole('img'));
     expect(screen.getByText('Artwork unavailable')).toBeInTheDocument();
-    expect(screen.getByText('hsichonk-evolution-01-cat.png')).toBeInTheDocument();
+    expect(screen.getByText(files[0]!)).toBeInTheDocument();
     expect(document.querySelector('.hero-stage')).toBeTruthy();
   });
 
@@ -126,7 +128,7 @@ describe('EvolutionHero', () => {
     );
     await user.click(screen.getByRole('button', { name: /Evolve to the next stage/ }));
     expect(await screen.findByText(captions[1]!, { selector: '.caption' })).toBeInTheDocument();
-    expect(container.querySelector('.fx-flicker')).toBeNull();
+    expect(container.querySelector('.fx-pixel')).toBeNull();
     expect(container.querySelector('.is-reduced')).toBeTruthy();
   });
 

@@ -3,17 +3,17 @@ import { resolveAssetUrl } from './assetUrl.ts';
 
 describe('resolveAssetUrl', () => {
   it('strips a leading slash and joins the Vite base once', () => {
-    expect(resolveAssetUrl('/assets/token/hsichonk-evolution-01-cat.png', '/')).toBe(
-      '/assets/token/hsichonk-evolution-01-cat.png',
+    expect(resolveAssetUrl('/assets/token/sichonk-evolution-01-cat.png', '/')).toBe(
+      '/assets/token/sichonk-evolution-01-cat.png',
     );
-    expect(resolveAssetUrl('/assets/token/hsichonk-evolution-01-cat.png', '/hsichonk/')).toBe(
-      '/hsichonk/assets/token/hsichonk-evolution-01-cat.png',
+    expect(resolveAssetUrl('/assets/token/sichonk-evolution-01-cat.png', '/hsichonk/')).toBe(
+      '/hsichonk/assets/token/sichonk-evolution-01-cat.png',
     );
   });
 
   it('does not prepend the base twice', () => {
-    expect(resolveAssetUrl('/hsichonk/assets/token/hsichonk-favicon.png', '/hsichonk')).toBe(
-      '/hsichonk/assets/token/hsichonk-favicon.png',
+    expect(resolveAssetUrl('/hsichonk/assets/token/sichonk-favicon.png', '/hsichonk')).toBe(
+      '/hsichonk/assets/token/sichonk-favicon.png',
     );
   });
 });

@@ -1,10 +1,9 @@
 export const EVOLUTION_TRANSITIONS = [
-  'flicker',
+  'none',
+  'pixel',
   'scan',
-  'cyan',
-  'violet',
-  'glow',
-  'halo',
+  'cyan-pulse',
+  'cosmic-halo',
 ] as const;
 
 export type EvolutionTransition = (typeof EVOLUTION_TRANSITIONS)[number];
@@ -14,6 +13,9 @@ export type EvolutionStage = {
   image: string;
   caption: string;
   era?: string;
+  addition: string;
+  growthDescription: string;
+  transitionLabel?: string;
   transition?: EvolutionTransition | null;
 };
 
@@ -26,6 +28,7 @@ export type MemeStat = {
   label: string;
   value?: string;
   source?: 'stageCount';
+  deriveFrom?: 'evolution.length';
 };
 
 export type TokenTheme = {
@@ -58,6 +61,7 @@ export type TokenStrings = {
   logoAlt: string;
   socialX: string;
   socialTelegram: string;
+  addedChip: string;
 };
 
 export type TokenConfig = {

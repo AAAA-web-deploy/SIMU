@@ -4,18 +4,16 @@ import { memeStatValue, validateTokenConfig } from './validateToken.ts';
 import { token } from './token.ts';
 
 const files = [
-  'hsichonk-evolution-01-cat.png',
-  'hsichonk-evolution-02-chonk.png',
-  'hsichonk-evolution-03-tech-chonk.png',
-  'hsichonk-evolution-04-ai-chonk.png',
-  'hsichonk-evolution-05-agi-chonk.png',
-  'hsichonk-evolution-06-si-chonk.png',
-  'hsichonk-evolution-07-hefty-si-chonk.png',
-  'hsichonk-logo-transparent.png',
-  'hsichonk-favicon.png',
-  'hsichonk-social-preview.png',
-  'hsichonk-banner-3x1.png',
-  'hsichonk-banner-1100x520.png',
+  'sichonk-evolution-01-cat.png',
+  'sichonk-evolution-02-chonk.png',
+  'sichonk-evolution-03-tech-chonk.png',
+  'sichonk-evolution-04-ai-chonk.png',
+  'sichonk-evolution-05-si-chonk.png',
+  'sichonk-logo-transparent.png',
+  'sichonk-favicon.png',
+  'sichonk-social-preview.png',
+  'sichonk-banner-3x1.png',
+  'sichonk-banner-1100x520.png',
 ];
 
 describe('token config', () => {
@@ -23,11 +21,12 @@ describe('token config', () => {
     expect(token.contractAddress).toBeNull();
     expect(token.buyUrl).toBeNull();
     expect(token.chartUrl).toBeNull();
-    expect(token.xUrl).toBeNull();
-    expect(token.telegramUrl).toBeNull();
+    expect(token.xUrl).toBe('https://x.com/hsichonk_eth');
+    expect(token.telegramUrl).toBe('https://t.me/sivitalik');
     expect(token.siteUrl).toBe('https://hsichonk.site');
-    expect(token.evolution).toHaveLength(7);
-    expect(memeStatValue(token.memeStats[0]!, token.evolution.length)).toBe('7');
+    expect(token.evolution).toHaveLength(5);
+    expect(token.memeStats[0]?.deriveFrom).toBe('evolution.length');
+    expect(memeStatValue(token.memeStats[0]!, token.evolution.length)).toBe('5');
     expect(token.chainName).toBe('Ethereum');
     expect(token.nativeSymbol).toBe('ETH');
   });
@@ -54,7 +53,7 @@ describe('token config', () => {
     const single = validateTokenConfig({
       ...token,
       evolution: [token.evolution[0]],
-      memeStats: [{ label: 'Evolution Stages', source: 'stageCount', value: '1' }],
+      memeStats: [{ label: 'Evolution Stages', deriveFrom: 'evolution.length', value: '1' }],
     });
     expect(single.evolution).toHaveLength(1);
     expect(memeStatValue(single.memeStats[0]!, 1)).toBe('1');

@@ -1,15 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createEvolutionState, isFinalStage, reduceEvolution, type EvolutionState } from './evolution.ts';
 
-const captions = [
-  'CAT',
-  'CHONK',
-  'TECH CHONK',
-  'AI CHONK',
-  'AGI CHONK',
-  'SI CHONK',
-  'HEFTY SI CHONK',
-];
+const captions = ['CAT', 'CHONK', 'TECH CHONK', 'AI CHONK', 'SI CHONK'];
 
 function advance(state: EvolutionState, stageCount: number): EvolutionState {
   const loading = reduceEvolution(state, { type: 'tap' }, stageCount);
@@ -28,22 +20,25 @@ describe('evolution reducer', () => {
   });
 
   it('ignores taps while a transition is active and does not skip', () => {
-    const loading = reduceEvolution(createEvolutionState(), { type: 'tap' }, 7);
-    expect(reduceEvolution(loading, { type: 'tap' }, 7)).toEqual(loading);
-    const fading = reduceEvolution(loading, { type: 'load-success' }, 7);
-    expect(reduceEvolution(fading, { type: 'tap' }, 7)).toEqual(fading);
-    expect(reduceEvolution(fading, { type: 'transition-end' }, 7).index).toBe(1);
+    const count = captions.length;
+    const loading = reduceEvolution(createEvolutionState(), { type: 'tap' }, count);
+    expect(reduceEvolution(loading, { type: 'tap' }, count)).toEqual(loading);
+    const fading = reduceEvolution(loading, { type: 'load-success' }, count);
+    expect(reduceEvolution(fading, { type: 'tap' }, count)).toEqual(fading);
+    expect(reduceEvolution(fading, { type: 'transition-end' }, count).index).toBe(1);
   });
 
   it('stays on the final stage until reset', () => {
-    const final = { index: 6, status: 'idle' } as const;
-    expect(reduceEvolution(final, { type: 'tap' }, 7)).toEqual(final);
-    expect(reduceEvolution(final, { type: 'reset' }, 7)).toEqual({ index: 0, status: 'idle' });
+    const count = captions.length;
+    const final = { index: count - 1, status: 'idle' } as const;
+    expect(reduceEvolution(final, { type: 'tap' }, count)).toEqual(final);
+    expect(reduceEvolution(final, { type: 'reset' }, count)).toEqual({ index: 0, status: 'idle' });
   });
 
   it('returns to idle when the next asset fails', () => {
-    const loading = reduceEvolution(createEvolutionState(), { type: 'tap' }, 7);
-    expect(reduceEvolution(loading, { type: 'load-failure' }, 7)).toEqual({
+    const count = captions.length;
+    const loading = reduceEvolution(createEvolutionState(), { type: 'tap' }, count);
+    expect(reduceEvolution(loading, { type: 'load-failure' }, count)).toEqual({
       index: 0,
       status: 'idle',
     });

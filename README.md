@@ -1,6 +1,6 @@
-# HEFTY SUPERINTELLIGENT CHONK
+# SuperIntelligent Chonk
 
-Single-page site for **$HSICHONK**, an independent Ethereum meme. The page is a tap-to-evolve mascot plus a short token introduction. It does not connect a wallet, send transactions, or track visitors.
+Single-page site for **$SICHONK**, an independent Ethereum meme. The page is a tap-to-evolve mascot plus a short token introduction. It does not connect a wallet, send transactions, or track visitors.
 
 Superintelligence here is fictional lore. The project is not an AI company and is not affiliated with the Ethereum Foundation, any AI lab, or any public figure.
 
@@ -21,25 +21,23 @@ npm test
 
 All visible copy, colors, links, and image paths live in [`src/config/token.json`](src/config/token.json).
 
-Images live in [`public/assets/token/`](public/assets/token/). Keep the filenames already referenced by the config. The seven evolution PNGs are full scenes; render them with `object-fit: contain`. The logo and favicon are transparent outside the circular badge. `hsichonk-banner-3x1.png` and `hsichonk-banner-1100x520.png` are for off-site sharing and are not placed on the page.
+Images live in [`public/assets/token/`](public/assets/token/). Keep the filenames already referenced by the config. The five evolution PNGs are full scenes; render them with `object-fit: contain` inside a fixed square so the small CAT is not cropped or zoomed. The logo and favicon are transparent outside the circular badge. `sichonk-banner-3x1.png` and `sichonk-banner-1100x520.png` are for off-site sharing and are not placed on the page.
 
 These launch values stay `null` until you have real ones:
 
 - `contractAddress`
 - `buyUrl`
 - `chartUrl`
-- `xUrl`
-- `telegramUrl`
 
-Buy stays disabled until `contractAddress` is `0x` plus 40 hex characters and `buyUrl` is an `https` URL. Chart stays disabled until `chartUrl` is an `https` URL. Social links stay hidden until their URLs are `https`. An invalid address is not displayed.
+Buy stays disabled until `contractAddress` is `0x` plus 40 hex characters and `buyUrl` is an `https` URL. Chart stays disabled until `chartUrl` is an `https` URL. Social links stay hidden until their URLs are `https`. An invalid address is not displayed. `xUrl` and `telegramUrl` are set, and the header shows them as icons.
 
-`siteUrl` is the public URL of this site, including the repository subpath. It is set to the GitHub Pages address so the build can emit the canonical URL and absolute social image.
+`siteUrl` is the public URL of this site. It is `https://hsichonk.site`, so the build can emit the canonical URL and absolute social image.
 
-The Evolution Stages statistic uses `source: "stageCount"`. The page displays `evolution.length`. If `value` is also set, it must match that length. This token has 7 stages, so the stat is 7. Intelligence and Chonk are fictional labels stored in the same list.
+The Evolution Stages statistic uses `deriveFrom: "evolution.length"`. The page displays `evolution.length`. If `value` is also set, it must match that length. This token has 5 stages, so the stat is 5. Intelligence and Chonk are fictional labels stored in the same list.
 
-`chainName` is the header badge. `nativeSymbol` is the gas token (`ETH`) for whoever edits the how-to-buy copy.
+`chainName` and `nativeSymbol` record the network and gas token for whoever edits the how-to-buy copy. The header does not display them.
 
-Each evolution stage can set `era` and `transition`. Transitions are `flicker`, `scan`, `cyan`, `violet`, `glow`, and `halo`. The count of stages comes from `evolution.length`, including a token with one stage.
+Each evolution stage sets `addition`, `growthDescription`, `era`, and `transition`. Transitions are `none`, `pixel`, `scan`, `cyan-pulse`, and `cosmic-halo`. `transitionLabel` is the short `+FOOD` style text shown while that stage is arriving. The count of stages comes from `evolution.length`, including a token with one stage.
 
 ## Hosting and Vite base
 
