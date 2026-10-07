@@ -5,6 +5,7 @@ import { copyExactText } from './lib/clipboard.ts';
 import { isEthereumAddress } from './lib/launch.ts';
 import type { TokenConfig } from './types/token.ts';
 import { HomePage } from './components/HomePage.tsx';
+import { SideRails } from './components/SideRails.tsx';
 import { ContentWindow, type CopyState, type PanelId } from './components/windows.tsx';
 
 function themeStyle(config: TokenConfig): CSSProperties {
@@ -96,6 +97,7 @@ export default function App({
       <a className="skip-link" href="#main">
         Skip to content
       </a>
+      <SideRails />
       <main id="main" inert={locked ? true : undefined}>
         <HomePage
           token={config}

@@ -97,6 +97,88 @@ html.overlay-open body {
   background: var(--bg);
 }
 
+.site > main {
+  position: relative;
+  z-index: 1;
+}
+
+.side-rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  width: calc(12.5vw - 36px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.side-rail-up {
+  left: 12px;
+}
+
+.side-rail-down {
+  right: 12px;
+}
+
+.side-track {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: side-up 36s linear infinite;
+}
+
+.side-rail-down .side-track {
+  animation-name: side-down;
+}
+
+.side-tile {
+  display: block;
+  flex: none;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  opacity: 0.5;
+}
+
+.side-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes side-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes side-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .side-rail {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .side-track,
+  .side-rail-down .side-track {
+    animation: none;
+  }
+}
+
 .home-frame {
   position: relative;
   width: 75vw;
