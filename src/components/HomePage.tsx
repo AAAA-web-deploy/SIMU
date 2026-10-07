@@ -49,8 +49,9 @@ export function HomePage({ token, address, copyState, onCopy, onOpen }: Props) {
           <CopyButton canCopy={Boolean(address)} state={copyState} onCopy={onCopy} className="chip">
             Copy CA
           </CopyButton>
-          <ExternalControl href={token.telegramUrl} className="chip">
-            <TelegramIcon /> Telegram
+          <ExternalControl href={token.telegramUrl} className="chip round-chip">
+            <TelegramIcon />
+            <span className="sr-only">Telegram</span>
           </ExternalControl>
           <ExternalControl href={token.xUrl} className="chip round-chip">
             <XIcon />
