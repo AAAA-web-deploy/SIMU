@@ -914,25 +914,34 @@ html.overlay-open body {
 .tax {
   min-width: 0;
   margin: 0;
-  padding: 10px;
+  padding: 12px 8px;
   border-radius: 14px;
   border: 1px solid rgba(90, 140, 220, 0.45);
   background: rgba(8, 16, 36, 0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .proof h3,
 .tax-kicker {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
   margin: 0;
-  font-size: 0.78rem;
+  font-size: 1.05rem;
+  line-height: 1.15;
   letter-spacing: 0.04em;
+  text-align: center;
 }
 
 .stat-mark {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
   flex: none;
 }
@@ -950,8 +959,10 @@ html.overlay-open body {
 
 .tax-value {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  width: 100%;
+  font-size: 2.25rem;
   line-height: 1;
+  text-align: center;
 }
 
 .tax-buy {
