@@ -249,8 +249,8 @@ function DetailsPanel({
             <img
               className="portrait"
               src={assetUrl(token.assets.portrait)}
-              width={1254}
-              height={1254}
+              width={1024}
+              height={1024}
               alt="SI Musashi with two blades and an Ethereum diamond."
             />
             <div className="identity">
