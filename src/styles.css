@@ -126,10 +126,7 @@ html.overlay-open body {
 }
 
 .home-bar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
+  position: relative;
   z-index: 3;
   display: flex;
   flex-wrap: wrap;
@@ -137,8 +134,22 @@ html.overlay-open body {
   justify-content: space-between;
   gap: 8px 16px;
   flex: none;
-  padding: 10px 14px 6px;
-  background: transparent;
+  padding: 10px 14px 8px;
+  background: #07101f;
+}
+
+.home-bar::after,
+.home-compare-wrap::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  height: 3px;
+  background: linear-gradient(90deg, #1496ff, #5ad4ff 50%, #1496ff);
+  box-shadow: 0 0 12px #3ec8ff;
+  pointer-events: none;
 }
 
 .home-brand {
@@ -990,7 +1001,7 @@ html.overlay-open body {
   }
 
   .home-frame {
-    width: min(75vw, calc((100dvh - 3.5rem) * 2103 / 1496));
+    width: min(75vw, calc((100dvh - 8rem) * 2103 / 1496));
     max-height: 100dvh;
   }
 
@@ -1040,11 +1051,6 @@ html.overlay-open body {
 }
 
 @media (max-width: 800px) {
-  .home-bar {
-    position: relative;
-    background: #07101f;
-  }
-
   .home-compare-wrap .home-actions {
     position: static;
     top: auto;
