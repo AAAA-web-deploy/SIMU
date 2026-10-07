@@ -132,14 +132,15 @@ function StoryPanel({
     if (!frame || !img || !img.naturalWidth || frame.clientWidth < 20) return;
     const desktop = window.matchMedia('(min-width: 900px)').matches;
     const ratio = img.naturalWidth / img.naturalHeight;
+    const portrait = img.naturalHeight >= img.naturalWidth;
     const fitWidth = Math.max(frame.clientWidth, 1);
     const fitHeight = fitWidth / ratio;
     let width = fitWidth;
     let height = fitHeight;
-    if (mode === 'read' && desktop) {
+    if (mode === 'read' && !portrait && desktop) {
       height = Math.max(frame.clientHeight, 1) * 3;
       width = height * ratio;
-    } else if (mode === 'read') {
+    } else if (mode === 'read' && !portrait) {
       width = Math.max(fitWidth * 2.4, 880);
       height = width / ratio;
     }
@@ -191,9 +192,9 @@ function StoryPanel({
           ref={imgRef}
           className="story-image"
           src={assetUrl(token.assets.story)}
-          width={1536}
+          width={682}
           height={1024}
-          alt="SI Musashi story. Same SuperIntelligence. Different hands. Without guidance the crowd copies the signal and leaves the judgment to SI. With guidance they question the answer, add context, and make the decision."
+          alt="SI Musashi story. A trader buys a SuperIntelligence tool, then the same signal becomes a crowded entry. Everyone has SI. Skill makes the difference. He asks why, adds his own context, and decides. Same SI. Different hands."
           draggable={false}
           onLoad={layout}
         />
