@@ -315,6 +315,7 @@ html.overlay-open body {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 10px;
+  width: 100%;
   min-width: 0;
 }
 
@@ -328,7 +329,8 @@ html.overlay-open body {
 .foot-icons {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: 6px;
+  margin-left: auto;
 }
 
 .foot-contract {
