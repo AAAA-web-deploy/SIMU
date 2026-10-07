@@ -20,11 +20,17 @@ function copyWithSelection(value: string): boolean {
 }
 
 export function copyExactText(value: string): Promise<boolean> {
+  let clipboardWrite = Promise.resolve(false);
   if (navigator.clipboard?.writeText && window.isSecureContext) {
-    return navigator.clipboard.writeText(value).then(
-      () => true,
-      () => copyWithSelection(value),
-    );
+    try {
+      clipboardWrite = navigator.clipboard.writeText(value).then(
+        () => true,
+        () => false,
+      );
+    } catch {
+      clipboardWrite = Promise.resolve(false);
+    }
   }
-  return Promise.resolve(copyWithSelection(value));
+  const selected = copyWithSelection(value);
+  return clipboardWrite.then((wrote) => wrote || selected);
 }

@@ -12,10 +12,10 @@ function withLaunch(overrides: Partial<TokenConfig> = {}): TokenConfig {
 }
 
 describe('TokenActions', () => {
-  it('shows a pending contract and opens the configured buy and chart links', () => {
+  it('shows the contract address and opens the configured buy and chart links', () => {
     render(<TokenActions token={token} />);
-    expect(screen.getByText(token.strings.contractPending)).toBeInTheDocument();
-    expect(screen.queryByText(/^0x/)).not.toBeInTheDocument();
+    expect(screen.getByText(token.contractAddress!)).toBeInTheDocument();
+    expect(screen.queryByText(token.strings.contractPending)).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: token.strings.copy })).toBeEnabled();
     expect(screen.getByRole('link', { name: token.strings.buy })).toHaveAttribute('href', token.buyUrl);
     expect(screen.getByRole('link', { name: token.strings.chart })).toHaveAttribute('href', token.chartUrl);

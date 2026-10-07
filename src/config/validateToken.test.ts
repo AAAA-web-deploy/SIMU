@@ -17,10 +17,14 @@ const files = [
 ];
 
 describe('token config', () => {
-  it('keeps launch links unset and derives the stage-count stat', () => {
-    expect(token.contractAddress).toBeNull();
-    expect(token.buyUrl).toBe('https://www.dextools.io/app/ether/pair-explorer/');
-    expect(token.chartUrl).toBe('https://dexscreener.com/ethereum/');
+  it('publishes the launch contract and derives the stage-count stat', () => {
+    expect(token.contractAddress).toBe('0x01077653aec65865a196bedfa2da4f464d43fba2');
+    expect(token.buyUrl).toBe(
+      'https://www.dextools.io/app/ether/pair-explorer/0x01077653aec65865a196bedfa2da4f464d43fba2',
+    );
+    expect(token.chartUrl).toBe(
+      'https://dexscreener.com/ethereum/0x01077653aec65865a196bedfa2da4f464d43fba2',
+    );
     expect(token.xUrl).toBe('https://x.com/si_chonk');
     expect(token.telegramUrl).toBe('https://t.me/sichonk');
     expect(token.siteUrl).toBe('https://hsichonk.site');
