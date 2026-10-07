@@ -985,8 +985,34 @@ html.overlay-open body {
   }
 
   .home-frame {
-    width: min(75vw, calc((100dvh - 7.75rem) * 2103 / 1496));
+    width: 75vw;
+    height: 100dvh;
     max-height: 100dvh;
+  }
+
+  .home-stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    container-type: size;
+  }
+
+  .home-art {
+    width: min(100cqw, calc(100cqh * 2103 / 1496));
+    height: min(100cqh, calc(100cqw * 1496 / 2103));
+  }
+
+  .home-banner,
+  .home-compare-wrap {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+
+  .home-banner,
+  .home-compare {
+    height: 100%;
   }
 
   .home-bar,
