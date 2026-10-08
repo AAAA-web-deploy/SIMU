@@ -33,7 +33,7 @@ After launch, change these fields in that same file:
 
 Social, buy, and chart links stay hidden until their URLs are `https`. An invalid address is not displayed.
 
-`siteUrl` is the public URL of this site. It is `https://aaaa-web-deploy.github.io/SIMU`, so the build can emit the canonical URL and absolute social image.
+`siteUrl` is the public URL of this site. It is `https://simusashi.site`, so the build can emit the canonical URL and absolute social image.
 
 The Evolution Stages statistic uses `deriveFrom: "evolution.length"`. The page displays `evolution.length`. If `value` is also set, it must match that length. This token has 5 stages, so the stat is 5. Intelligence and Chonk are fictional labels stored in the same list.
 
@@ -50,7 +50,7 @@ The site base is the `VITE_BASE` environment variable, read in [`vite.config.ts`
 
 Asset paths in the JSON start with `/assets/...`. The app strips that leading slash and joins `import.meta.env.BASE_URL` once. `siteUrl` is separate: it should already include the public path, and social image URLs are `siteUrl` plus the asset path.
 
-GitHub Pages publishes this repo from [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on every push to `main`. Until a custom domain is added, the workflow builds with `VITE_BASE=/SIMU/`. To attach a domain later, put that hostname in `public/CNAME`, set `siteUrl` to `https://` plus that hostname, and push. The next deploy then builds at the domain root and keeps the domain on each publish.
+GitHub Pages publishes this repo from [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on every push to `main`. `public/CNAME` contains `simusashi.site`, so the workflow builds with `VITE_BASE=/` and the site is served at `https://simusashi.site`.
 
 ```bash
 # PowerShell

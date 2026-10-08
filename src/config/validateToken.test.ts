@@ -45,7 +45,7 @@ describe('token config', () => {
       token.dextoolsUrl,
       token.etherscanUrl,
     ]);
-    expect(token.siteUrl).toBe('https://aaaa-web-deploy.github.io/SIMU');
+    expect(token.siteUrl).toBe('https://simusashi.site');
     expect(token.buyTax.value).toBe('0%');
     expect(token.sellTax.value).toBe('0%');
     expect(token.lpBurn.status).toBe('pending');
