@@ -764,6 +764,14 @@ html.overlay-open body {
   background: var(--chip);
 }
 
+.toolbar-details .close-button,
+.toolbar-club .close-button,
+.toolbar-story .close-button {
+  background: #e11d2e;
+  border-color: #ff5a66;
+  color: #fff;
+}
+
 .toolbar-details .icon-square,
 .toolbar-details .close-button,
 .toolbar-club .icon-square,
