@@ -1,150 +1,129 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { hasSeenIntro, markIntroSeen } from './lib/preload';
-import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
-import { FloatNav } from './components/FloatNav';
-import { IntroStage } from './components/IntroStage';
-import { OceanHero } from './components/OceanHero';
-import { Descent } from './components/Descent';
-import { MoodSea } from './components/MoodSea';
-import { MemeWorkshop } from './components/MemeWorkshop';
-import { Hatch } from './components/Hatch';
-import { PostcardEnd } from './components/PostcardEnd';
-import { BagDrawer } from './components/BagDrawer';
-import { CrewDialog } from './components/CrewDialog';
-import { TailGuide } from './components/TailGuide';
+import { useEffect, useState } from 'react';
+import type { CSSProperties } from 'react';
+import { token as defaultToken } from './config/token.ts';
+import { copyExactText } from './lib/clipboard.ts';
+import { isEthereumAddress } from './lib/launch.ts';
+import type { TokenConfig } from './types/token.ts';
+import { HomePage } from './components/HomePage.tsx';
+import { SideRails } from './components/SideRails.tsx';
+import { ContentWindow, type CopyState, type PanelId } from './components/windows.tsx';
 
-type Overlay = 'bag' | 'crew' | null;
+function themeStyle(config: TokenConfig): CSSProperties {
+  return {
+    '--bg': config.theme.background,
+    '--accent': config.theme.accent,
+    '--secondary': config.theme.secondary,
+    '--text': config.theme.text,
+    '--muted': config.theme.muted,
+  } as CSSProperties;
+}
 
-export function App() {
-  const reduced = usePrefersReducedMotion();
-  const startQuiet = reduced || hasSeenIntro();
-  const [mode, setMode] = useState<'intro' | 'ready'>(startQuiet ? 'ready' : 'intro');
-  const [run, setRun] = useState(0);
-  const [introMounted, setIntroMounted] = useState(!startQuiet);
-  const [overlay, setOverlay] = useState<Overlay>(null);
-  const [moodId, setMoodId] = useState<string | null>(null);
-  const [spriteId, setSpriteId] = useState('costume');
-  const [whaleOn, setWhaleOn] = useState(false);
-  const [note, setNote] = useState('');
-  const finished = useRef(startQuiet);
+type CopyText = (value: string) => Promise<boolean>;
+
+export default function App({
+  config = defaultToken,
+  copyText = copyExactText,
+}: {
+  config?: TokenConfig;
+  copyText?: CopyText;
+}) {
+  const [panel, setPanel] = useState<PanelId | null>(null);
+  const [copyState, setCopyState] = useState<CopyState>('idle');
+  const address = isEthereumAddress(config.contractAddress?.trim() ?? '')
+    ? config.contractAddress!.trim()
+    : null;
+  const contractText = address ?? config.strings.contractPending;
 
   useEffect(() => {
-    if (startQuiet) markIntroSeen();
-  }, [startQuiet]);
-
-  const scrollLocked = mode === 'intro' || overlay !== null || moodId !== null;
+    document.title = config.pageTitle;
+  }, [config.pageTitle]);
 
   useEffect(() => {
-    document.body.style.overflow = scrollLocked ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
+    if (copyState !== 'copied') return undefined;
+    const timer = window.setTimeout(() => setCopyState('idle'), 1600);
+    return () => window.clearTimeout(timer);
+  }, [copyState]);
+
+  const locked = panel !== null;
+
+  useEffect(() => {
+    if (!locked) return undefined;
+    const y = window.scrollY;
+    const { style } = document.body;
+    const previous = {
+      position: style.position,
+      top: style.top,
+      left: style.left,
+      right: style.right,
+      width: style.width,
     };
-  }, [scrollLocked]);
+    style.position = 'fixed';
+    style.top = `-${y}px`;
+    style.left = '0';
+    style.right = '0';
+    style.width = '100%';
+    document.documentElement.classList.add('overlay-open');
+    return () => {
+      style.position = previous.position;
+      style.top = previous.top;
+      style.left = previous.left;
+      style.right = previous.right;
+      style.width = previous.width;
+      document.documentElement.classList.remove('overlay-open');
+      window.scrollTo(0, y);
+    };
+  }, [locked]);
 
   useEffect(() => {
-    if (mode === 'intro') {
-      setIntroMounted(true);
-      return;
-    }
-    const id = window.setTimeout(() => setIntroMounted(false), reduced ? 0 : 400);
-    return () => window.clearTimeout(id);
-  }, [mode, reduced, run]);
+    if (!locked) return undefined;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setPanel(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [locked]);
 
-  const finishIntro = useCallback(() => {
-    if (finished.current) return;
-    finished.current = true;
-    markIntroSeen();
-    setMode('ready');
-  }, []);
+  async function onCopy() {
+    const ok = await copyText(contractText);
+    setCopyState(ok ? 'copied' : 'failed');
+  }
 
-  const scrollToId = useCallback((id: string) => {
-    window.setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
-    }, 40);
-  }, [reduced]);
-
-  const openBag = () => {
-    finishIntro();
-    setMoodId(null);
-    setOverlay('bag');
-  };
-
-  const openCrew = () => {
-    finishIntro();
-    setMoodId(null);
-    setOverlay('crew');
-  };
-
-  const openWorkshop = (id?: string) => {
-    if (id) setSpriteId(id);
-    setMoodId(null);
-    setOverlay(null);
-    finishIntro();
-    window.setTimeout(() => {
-      document.getElementById('workshop')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
-      document.getElementById('caption')?.focus();
-    }, 50);
-  };
-
-  const replay = () => {
-    if (reduced) {
-      setNote('Reduced motion is on, so the intro stays still.');
-      scrollToId('dream');
-      return;
-    }
-    setOverlay(null);
-    setMoodId(null);
-    setNote('');
-    setWhaleOn(false);
-    finished.current = false;
-    window.scrollTo({ top: 0, behavior: 'auto' });
-    setRun((value) => value + 1);
-    setMode('intro');
-  };
+  function openPanel(next: PanelId) {
+    setPanel(next);
+  }
 
   return (
-    <>
-      <a
-        className="skip-link"
-        href="#content"
-        onClick={(event) => {
-          if (mode !== 'intro') return;
-          event.preventDefault();
-          finishIntro();
-          window.setTimeout(() => document.getElementById('content')?.focus(), 40);
-        }}
-      >
+    <div className="site" style={themeStyle(config)}>
+      <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <FloatNav
-        introActive={mode === 'intro'}
-        onSkip={finishIntro}
-        onCrew={openCrew}
-        onBag={openBag}
-        onMeme={() => openWorkshop()}
-      />
-      {introMounted && (
-        <IntroStage key={run} active={mode === 'intro'} fading={mode === 'ready'} onDone={finishIntro} />
-      )}
-      <main id="content" tabIndex={-1} aria-hidden={mode === 'intro' ? true : undefined}>
-        <OceanHero whaleOn={whaleOn} onWhale={setWhaleOn} />
-        <Descent />
-        <MoodSea
-          activeId={moodId}
-          onOpen={(id) => {
-            setOverlay(null);
-            setMoodId(id);
-          }}
-          onClose={() => setMoodId(null)}
-          onMake={(id) => openWorkshop(id)}
+      <SideRails />
+      <main id="main" inert={locked ? true : undefined}>
+        <HomePage
+          token={config}
+          address={contractText}
+          copyState={copyState}
+          onCopy={() => void onCopy()}
+          onOpen={openPanel}
         />
-        <MemeWorkshop spriteId={spriteId} onSprite={setSpriteId} />
-        <Hatch onOpen={openBag} />
-        <PostcardEnd onReplay={replay} note={note} />
       </main>
-      <TailGuide />
-      {overlay === 'bag' && <BagDrawer onClose={() => setOverlay(null)} />}
-      {overlay === 'crew' && <CrewDialog onClose={() => setOverlay(null)} />}
-    </>
+      <p className={copyState === 'failed' ? 'copy-error' : 'sr-only'} aria-live="polite">
+        {copyState === 'copied' ? config.strings.copied : copyState === 'failed' ? config.strings.copyFailed : ''}
+      </p>
+      {panel ? (
+        <div className="scrim">
+          <ContentWindow
+            key={panel}
+            token={config}
+            panel={panel}
+            address={contractText}
+            copyState={copyState}
+            onCopy={() => void onCopy()}
+            onOpen={openPanel}
+            onClose={() => setPanel(null)}
+          />
+        </div>
+      ) : null}
+    </div>
   );
 }
