@@ -1,0 +1,281 @@
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow: hidden;
+  background: #07060f;
+  color: #fff7e6;
+}
+
+.fading {
+  animation: fadeStage 0.38s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeStage {
+  to { opacity: 0; }
+}
+
+.void,
+.dreamBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.6s ease;
+}
+
+.void { opacity: 1; }
+.dreamBg { opacity: 0; }
+
+.dream .dreamBg,
+.suit .dreamBg { opacity: 1; }
+
+.suit .void { opacity: 0; }
+
+.spotlight,
+.dawn {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  pointer-events: none;
+}
+
+.spotlight {
+  background:
+    radial-gradient(ellipse 42% 48% at 50% 36%, rgba(255, 214, 170, 0.72), rgba(255, 196, 150, 0.08) 46%, transparent 70%);
+}
+
+.reveal .spotlight { opacity: 1; }
+
+.dawn {
+  background:
+    linear-gradient(180deg, rgba(126, 207, 255, 0.15) 0%, rgba(220, 245, 255, 0.2) 40%, rgba(47, 156, 207, 0.72) 100%);
+  transform: translateY(12%);
+}
+
+.suit .dawn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 0.8rem;
+  text-align: center;
+  z-index: 5;
+}
+
+.loader p {
+  margin: 0;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #efe6ff;
+}
+
+.tinyEyes {
+  width: 92px;
+}
+
+.track {
+  width: min(220px, 60vw);
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 247, 230, 0.16);
+  overflow: hidden;
+}
+
+.track span {
+  display: block;
+  height: 100%;
+  background: #baa1ea;
+  border-radius: inherit;
+  transition: width 0.12s linear;
+}
+
+.eyeLayer {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(34vw, 540px);
+  transform: translate(-50%, -58%);
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.eyes .eyeLayer,
+.loading .eyeLayer { opacity: 0; }
+
+.eyes .eyeLayer { opacity: 1; }
+
+.reveal .eyeLayer {
+  opacity: 0;
+}
+
+.bare,
+.suited {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: min(72vmin, 620px);
+  z-index: 3;
+  opacity: 0;
+  filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.38));
+  transform: translate(-50%, -42%);
+}
+
+.reveal .bare {
+  opacity: 1;
+  animation: popIn 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.dream .bare {
+  opacity: 1;
+  animation: none;
+  transform: translate(-88%, -20%) rotate(-8deg) scale(0.88);
+  transition: transform 0.7s ease, opacity 0.4s ease;
+}
+
+.suit .bare {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.suit .suited {
+  opacity: 1;
+  animation: settle 0.45s ease both;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: translate(-50%, -8%) scale(0.86, 1.08); }
+  58% { opacity: 1; transform: translate(-50%, -48%) scale(1.05, 0.94); }
+  100% { opacity: 1; transform: translate(-50%, -46%) scale(1); }
+}
+
+@keyframes settle {
+  0% { transform: translate(-50%, -40%) scale(0.96, 1.04); }
+  100% { transform: translate(-50%, -46%) scale(1); }
+}
+
+.thoughts {
+  position: absolute;
+  left: 18%;
+  top: 16%;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.dream .thoughts { opacity: 1; }
+
+.thoughts span,
+.thoughts img {
+  display: block;
+  background: rgba(255, 249, 255, 0.82);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.thoughts span:first-child {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+}
+
+.thoughts span:nth-child(2) {
+  width: 34px;
+  height: 34px;
+  margin: 8px 0 8px 28px;
+}
+
+.thoughts img {
+  width: 120px;
+  height: 78px;
+  object-fit: contain;
+  padding: 8px;
+  background: rgba(186, 220, 255, 0.55);
+}
+
+.splash {
+  position: absolute;
+  top: 18%;
+  left: 0;
+  width: 70vw;
+  height: 64vh;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(255, 255, 255, 0.85), transparent 42%),
+    linear-gradient(90deg, transparent, rgba(54, 155, 232, 0.2) 10%, #7fd4ff 40%, #1d7ec4 70%, transparent);
+  border-radius: 40% 50% 45% 55%;
+  transform: translateX(-130%) rotate(-8deg);
+}
+
+.splash img {
+  position: absolute;
+  width: 180px;
+  right: 12%;
+  top: 20%;
+  filter: drop-shadow(0 8px 0 rgba(255, 255, 255, 0.4));
+}
+
+.suit .splash {
+  opacity: 1;
+  animation: swoop 0.72s ease-in forwards;
+}
+
+@keyframes swoop {
+  0% { transform: translateX(-120%) rotate(-10deg); }
+  100% { transform: translateX(160%) rotate(8deg); }
+}
+
+.caption {
+  position: absolute;
+  z-index: 7;
+  left: 7vw;
+  bottom: 11vh;
+  margin: 0;
+  max-width: 16ch;
+  font-family: Fredoka, Nunito, "Segoe UI", sans-serif;
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  font-weight: 650;
+  line-height: 1.05;
+  color: #fff7e6;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.dream .caption {
+  color: #2a2144;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  left: 7vw;
+  right: auto;
+  bottom: 12vh;
+  max-width: 12ch;
+  text-align: left;
+}
+
+.suit .caption {
+  color: #17233f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  left: auto;
+  right: 8vw;
+}
+
+@media (max-width: 760px) {
+  .eyeLayer { width: min(86vw, 420px); top: 40%; }
+  .bare, .suited { width: min(88vw, 440px); top: 56%; }
+  .dream .bare { transform: translate(-62%, -18%) rotate(-6deg) scale(0.82); }
+  .caption { bottom: 8vh; left: 6vw; }
+  .thoughts { left: 8%; top: 10%; }
+  .thoughts img { width: 88px; }
+}

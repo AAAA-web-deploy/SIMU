@@ -1,0 +1,64 @@
+.hatch {
+  background: linear-gradient(180deg, #103e52, #0a2740 40%, #071525);
+  color: #fff7e6;
+  padding: 3rem 1rem 2rem;
+}
+
+.water {
+  width: min(640px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.buoy {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #fff7e6;
+  cursor: pointer;
+  display: grid;
+  justify-items: center;
+  gap: 0.8rem;
+  margin: 0 auto;
+  font-family: Fredoka, Nunito, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 650;
+}
+
+.float {
+  width: 92px;
+  height: 120px;
+  display: grid;
+  justify-items: center;
+  animation: bob 3.2s ease-in-out infinite;
+}
+
+.ring {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 6px solid #f4d35e;
+  box-shadow: inset 0 0 0 4px #17233f;
+}
+
+.body {
+  width: 74px;
+  height: 78px;
+  margin-top: -6px;
+  border-radius: 18px 18px 28px 28px;
+  background:
+    repeating-linear-gradient(180deg, #e85d4c 0 12px, #f4efe6 12px 24px);
+  border: 3px solid #17233f;
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.18);
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.water p {
+  margin: 0.4rem 0 0;
+  font-weight: 700;
+  color: #d5ecff;
+}

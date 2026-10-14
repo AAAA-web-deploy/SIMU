@@ -1,0 +1,28 @@
+.eyes {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 58%;
+  transition: transform 90ms linear;
+}
+
+.pupils {
+  transition: transform 220ms ease-out;
+}
+
+.pair {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 16%, 24%, 62%, 70%, 100% { transform: scaleY(1); }
+  20%, 66% { transform: scaleY(0.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pair { animation: none; }
+  .pupils { transition: none; }
+}

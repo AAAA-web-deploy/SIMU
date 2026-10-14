@@ -1,0 +1,202 @@
+.sea {
+  position: relative;
+  isolation: isolate;
+  padding: 5.5rem 1.1rem 4rem;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(144, 230, 241, 0.2), transparent 46%),
+    linear-gradient(180deg, #0e5f90 0%, #0b406d 42%, #091a33 100%);
+  color: #fff7e6;
+  overflow: hidden;
+}
+
+.depth {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.caustics {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(144, 230, 241, 0.16), transparent 18%),
+    radial-gradient(circle at 70% 60%, rgba(144, 230, 241, 0.12), transparent 16%),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.06), transparent 12%);
+}
+
+.head, .field { position: relative; z-index: 1; }
+
+.head {
+  width: min(720px, 100%);
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.head h2 {
+  margin: 0;
+  font-family: Fredoka, Nunito, sans-serif;
+  font-weight: 650;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+}
+
+.head p {
+  margin: 0.6rem 0 0;
+  color: #d7f4ff;
+  font-weight: 700;
+}
+
+.field {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  align-items: center;
+  padding: 0.5rem 0 1rem;
+}
+
+.slot { animation: drift 7s ease-in-out infinite; }
+
+.bubble {
+  width: 180px;
+  min-height: 72px;
+  border: 0;
+  padding: 0;
+  border-radius: 24px;
+  cursor: pointer;
+  color: #fff7e6;
+  background: transparent;
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+}
+
+.orb {
+  width: 158px;
+  height: 158px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), transparent 28%),
+    radial-gradient(circle at 50% 50%, rgba(198, 244, 255, 0.32), rgba(54, 155, 232, 0.2) 62%, rgba(9, 26, 51, 0.28));
+  box-shadow:
+    inset 0 0 0 3px rgba(220, 249, 255, 0.55),
+    0 12px 24px rgba(0, 0, 0, 0.22);
+}
+
+.bubble img {
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.28));
+}
+
+.name {
+  font-family: Fredoka, Nunito, sans-serif;
+  font-weight: 650;
+  font-size: 0.98rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.bubble:hover { transform: scale(1.04); }
+
+.slot:nth-child(odd) { align-self: flex-start; margin-left: 4vw; }
+.slot:nth-child(even) { align-self: flex-end; margin-right: 4vw; }
+
+@keyframes drift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+
+.moodPanel { width: min(720px, 100%); background: linear-gradient(180deg, #123056, #0b1c33); color: #fff7e6; border-color: #9fd4f2; }
+
+.mood {
+  display: grid;
+  gap: 1rem;
+}
+
+.mood img {
+  width: min(100%, 320px);
+  margin: 0 auto;
+  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.35));
+}
+
+.mood h3 {
+  margin: 0;
+  font-family: Fredoka, Nunito, sans-serif;
+  font-size: 1.6rem;
+}
+
+.joke {
+  margin: 0.6rem 0 1rem;
+  background: #fff7e6;
+  color: #1b1730;
+  border-radius: 18px;
+  padding: 0.85rem 1rem;
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+.make, .close {
+  appearance: none;
+  min-height: 48px;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.make {
+  border: 0;
+  background: #baa1ea;
+  color: #1a1330;
+}
+
+.close {
+  background: transparent;
+  color: #fff7e6;
+  border: 2px solid rgba(255, 247, 230, 0.5);
+}
+
+@media (max-width: 899px) {
+  .bubble { width: min(70vw, 240px); }
+  .orb { width: min(64vw, 220px); height: min(64vw, 220px); }
+}
+
+@media (min-width: 900px) {
+  .field {
+    display: block;
+    min-height: 920px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .slot {
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+  }
+
+  .slot:nth-child(odd),
+  .slot:nth-child(even) {
+    align-self: auto;
+    margin: 0;
+  }
+
+  .bubble { width: 180px; }
+
+  .mood {
+    grid-template-columns: 280px 1fr;
+    align-items: center;
+  }
+}

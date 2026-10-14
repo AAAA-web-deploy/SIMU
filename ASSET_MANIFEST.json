@@ -1,0 +1,351 @@
+{
+  "project": "MICRO PANIC / MIWO",
+  "files": [
+    {
+      "path": "assets/backgrounds/dream_sky_whale.svg",
+      "type": "svg",
+      "bytes": 1726,
+      "dimensions": null,
+      "transparent": null
+    },
+    {
+      "path": "assets/backgrounds/intro_void.svg",
+      "type": "svg",
+      "bytes": 411,
+      "dimensions": null,
+      "transparent": null
+    },
+    {
+      "path": "assets/backgrounds/ocean_depth.svg",
+      "type": "svg",
+      "bytes": 870,
+      "dimensions": null,
+      "transparent": null
+    },
+    {
+      "path": "assets/backgrounds/ocean_surface.svg",
+      "type": "svg",
+      "bytes": 1531,
+      "dimensions": null,
+      "transparent": null
+    },
+    {
+      "path": "assets/banner/MIWO_SOCIAL_BANNER_3x1_2880x960.jpg",
+      "type": "jpg",
+      "bytes": 333943,
+      "dimensions": [
+        2880,
+        960
+      ],
+      "transparent": false
+    },
+    {
+      "path": "assets/characters/miwo_original_nocostume.webp",
+      "type": "webp",
+      "bytes": 71064,
+      "dimensions": [
+        1050,
+        1050
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/characters/miwo_original_nocostume_MASTER.png",
+      "type": "png",
+      "bytes": 805856,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/characters/miwo_whale_costume.webp",
+      "type": "webp",
+      "bytes": 154542,
+      "dimensions": [
+        1050,
+        1050
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/characters/miwo_whale_costume_MASTER.png",
+      "type": "png",
+      "bytes": 1402610,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/effects/bubble.svg",
+      "type": "svg",
+      "bytes": 299,
+      "dimensions": null,
+      "transparent": null
+    },
+    {
+      "path": "assets/effects/eyes_only.svg",
+      "type": "svg",
+      "bytes": 493,
+      "dimensions": null,
+      "transparent": null
+    },
+    {
+      "path": "assets/effects/wave_foreground.svg",
+      "type": "svg",
+      "bytes": 424,
+      "dimensions": null,
+      "transparent": null
+    },
+    {
+      "path": "assets/effects/whale_tail.svg",
+      "type": "svg",
+      "bytes": 287,
+      "dimensions": null,
+      "transparent": null
+    },
+    {
+      "path": "assets/logo/miwo_logo_no_text_selected.png",
+      "type": "png",
+      "bytes": 223843,
+      "dimensions": [
+        369,
+        377
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/logo/miwo_logo_no_text_upscaled.png",
+      "type": "png",
+      "bytes": 852820,
+      "dimensions": [
+        900,
+        920
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/posters/panic_at_charts_reference.webp",
+      "type": "webp",
+      "bytes": 40068,
+      "dimensions": [
+        350,
+        510
+      ],
+      "transparent": false
+    },
+    {
+      "path": "assets/posters/selected_banner_reference.webp",
+      "type": "webp",
+      "bytes": 140540,
+      "dimensions": [
+        1092,
+        416
+      ],
+      "transparent": false
+    },
+    {
+      "path": "assets/posters/small_wallet_big_dreams_reference.webp",
+      "type": "webp",
+      "bytes": 50970,
+      "dimensions": [
+        381,
+        509
+      ],
+      "transparent": false
+    },
+    {
+      "path": "assets/posters/someday_ill_be_a_whale_reference.webp",
+      "type": "webp",
+      "bytes": 63194,
+      "dimensions": [
+        325,
+        506
+      ],
+      "transparent": false
+    },
+    {
+      "path": "assets/posters/whale_sized_feelings_poster_optional.webp",
+      "type": "webp",
+      "bytes": 316538,
+      "dimensions": [
+        1008,
+        1260
+      ],
+      "transparent": false
+    },
+    {
+      "path": "assets/posters/whale_strategy_meme_optional.webp",
+      "type": "webp",
+      "bytes": 284830,
+      "dimensions": [
+        1130,
+        1130
+      ],
+      "transparent": false
+    },
+    {
+      "path": "assets/reactions/calm_confidence.webp",
+      "type": "webp",
+      "bytes": 53272,
+      "dimensions": [
+        800,
+        800
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/calm_confidence_MASTER.png",
+      "type": "png",
+      "bytes": 1458204,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/delight.webp",
+      "type": "webp",
+      "bytes": 49220,
+      "dimensions": [
+        800,
+        800
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/delight_MASTER.png",
+      "type": "png",
+      "bytes": 1540929,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/embarrassment.webp",
+      "type": "webp",
+      "bytes": 58950,
+      "dimensions": [
+        800,
+        800
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/embarrassment_MASTER.png",
+      "type": "png",
+      "bytes": 1598125,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/exaggerated_focus.webp",
+      "type": "webp",
+      "bytes": 61996,
+      "dimensions": [
+        800,
+        800
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/exaggerated_focus_MASTER.png",
+      "type": "png",
+      "bytes": 1704636,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/patience.webp",
+      "type": "webp",
+      "bytes": 65338,
+      "dimensions": [
+        800,
+        800
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/patience_MASTER.png",
+      "type": "png",
+      "bytes": 1721098,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/relief.webp",
+      "type": "webp",
+      "bytes": 53392,
+      "dimensions": [
+        800,
+        800
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/relief_MASTER.png",
+      "type": "png",
+      "bytes": 1469715,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/suspicion.webp",
+      "type": "webp",
+      "bytes": 62482,
+      "dimensions": [
+        800,
+        800
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/suspicion_MASTER.png",
+      "type": "png",
+      "bytes": 1696944,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/temptation.webp",
+      "type": "webp",
+      "bytes": 52202,
+      "dimensions": [
+        800,
+        800
+      ],
+      "transparent": true
+    },
+    {
+      "path": "assets/reactions/temptation_MASTER.png",
+      "type": "png",
+      "bytes": 1435812,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true
+    }
+  ]
+}

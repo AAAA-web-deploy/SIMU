@@ -1,0 +1,46 @@
+.crew h2 {
+  margin: 0;
+  font-family: Fredoka, Nunito, sans-serif;
+  font-size: 2rem;
+  color: #14233b;
+}
+
+.crew p { font-weight: 700; }
+
+.link, .quiet, .close {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 52px;
+  margin-top: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 16px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.link {
+  background: #17233f;
+  color: #fff7e6;
+}
+
+.quiet {
+  border: 0;
+  background: #d5e2ee;
+  color: #3c4d63;
+  cursor: not-allowed;
+}
+
+.quiet span {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+.close {
+  border: 2px solid #17233f;
+  background: transparent;
+  color: #17233f;
+  cursor: pointer;
+  justify-content: center;
+}

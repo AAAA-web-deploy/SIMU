@@ -1,0 +1,88 @@
+.bar {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  padding: max(0.55rem, env(safe-area-inset-top)) 0.7rem 0.45rem;
+  pointer-events: none;
+}
+
+.bar > * { pointer-events: auto; }
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 247, 230, 0.8);
+  box-shadow: 0 6px 16px rgba(8, 18, 36, 0.28);
+  background: #d7f1ff;
+  flex: none;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nav {
+  margin-left: auto;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.nav button,
+.skip {
+  appearance: none;
+  border-radius: 999px;
+  min-height: 44px;
+  padding: 0.45rem 0.8rem;
+  font-family: Fredoka, Nunito, sans-serif;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.nav button {
+  border: 1px solid rgba(255, 247, 230, 0.32);
+  background: rgba(9, 18, 40, 0.82);
+  color: #fff7e6;
+}
+
+.nav button:hover { background: rgba(20, 36, 68, 0.92); }
+
+.skip {
+  border: 0;
+  background: #baa1ea;
+  color: #1a1330;
+}
+
+.skip:hover { filter: brightness(1.05); }
+
+@media (max-width: 760px) {
+  .withSkip {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "logo skip"
+      "nav nav";
+  }
+
+  .withSkip .logo { grid-area: logo; }
+  .withSkip .skip { grid-area: skip; justify-self: end; }
+  .withSkip .nav {
+    grid-area: nav;
+    margin-left: 0;
+  }
+
+  .nav { width: 100%; }
+  .nav button { flex: 1; }
+}

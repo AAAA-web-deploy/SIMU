@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+<defs><radialGradient id="halo"><stop offset="0" stop-color="#1c1733"/><stop offset=".55" stop-color="#090d1f"/><stop offset="1" stop-color="#02040d"/></radialGradient></defs>
+<rect width="1920" height="1080" fill="url(#halo)"/><ellipse cx="960" cy="940" rx="640" ry="70" fill="#241c38" opacity=".25"/>
+</svg>
